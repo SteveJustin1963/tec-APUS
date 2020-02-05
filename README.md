@@ -140,6 +140,8 @@ right, yeah I probably could have save some effort by reading some of those. The
 
 This article seems pretty good, needs to be converted to Z80 from 6502 https://github.com/SteveJustin1963/tec-APUS/blob/master/Compute!%20The%20Journal%20of%20Progressive%20Computing%20-%20Nov%20Dec%201980%20124-129.pdf
 
+there are a few useful things here. the basic listing seems all you need to know. port numbers vary . i think its going to take a few goes to get this right.
 
- 
+yep its not too hard. it'll mainly be about waiting until the chip is ready before reading or writing to it. ie check the busy flag of the status port
+
 
