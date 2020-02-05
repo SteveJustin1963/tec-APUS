@@ -131,13 +131,8 @@ example code to program a 9511
 example code to program a 9511. GitHub Gist: instantly share code, notes, and snippets.
 gist.github.com
 
-thankyou John
-
 
 I wll hurry to make the changes in hw and try ur code. i have also put alot of docs in my git as well
-
-thankyou John
-
 
 
 right, yeah I probably could have save some effort by reading some of those. There seems to be a shortage of good code listings for the Z80. I noticed some for the 6502
