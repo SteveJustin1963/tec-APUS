@@ -135,3 +135,16 @@ thankyou John
 
 
 I wll hurry to make the changes in hw and try ur code. i have also put alot of docs in my git as well
+
+thankyou John
+
+
+
+right, yeah I probably could have save some effort by reading some of those. There seems to be a shortage of good code listings for the Z80. I noticed some for the 6502
+
+
+This article seems pretty good, needs to be converted to Z80 from 6502 https://github.com/SteveJustin1963/tec-APUS/blob/master/Compute!%20The%20Journal%20of%20Progressive%20Computing%20-%20Nov%20Dec%201980%20124-129.pdf
+
+
+ 
+
