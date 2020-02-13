@@ -48,63 +48,7 @@ It works like a stack machine, like Forth. We need to know when the operation is
 
 No idea if this will work but here's a start
 
-DATA_PORT equ $10
-COMMAND_PORT equ $11
-STATUS_PORT equ $12
-
-BUSY equ $80
-SIGN equ $40
-ZERO equ $20
-ERROR equ $1E    ; mask for error
-CARRY equ $01
-
-SADD equ $6C
-
-        org $800
-start:
-        ld HL, 1
-        ld DE, 1
-
-        call pushData
-        ex DE,HL
-        call pushData
-        ld A, SADD
-        call pushCommand
-        call awaitResult    
-        call popData        
-        ld (RESULT), HL
-        halt                ;wait here
-        jp start            ;restarts if keypress
-
-RESULT: dw 0
-    
-pushData:
-        ld A,L
-        out (DATA_PORT),A
-        ld A,H
-        out (DATA_PORT),A
-        ret
-    
-popData:
-        in A,(DATA_PORT)
-        ld H,A
-        in A,(DATA_PORT)
-        ld L,A
-        ret
-    
-pushCommand:
-        ld A,L
-        out (COMMAND_PORT),A
-        ld A,H
-        out (DATA_PORT),A
-        ret
-
-awaitResult:
-        in A,(STATUS_PORT)
-        ld B, A
-        and BUSY
-        jr nz, awaitResult
-        ret
+xxx
 
 
 
