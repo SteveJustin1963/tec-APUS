@@ -48,20 +48,15 @@ It works like a stack machine, like Forth. We need to know when the operation is
 
 No idea if this will work but here's a start
 
-xxx
-
-
+https://github.com/SteveJustin1963/tec-APUS/blob/master/9511.asm
 
 you'll need to work out what the ports should be. I just made them up
 
-
 also I just polled the chip to see if it was not busy. i.e. didn't use an interrupt
-
 
 Don't expect this code to work 😉 it's just a starting point for thinking about how to use this chip. I used this datasheet https://datasheet.octopart.com/C8231A-Intel-datasheet-38975267.pdf and this one https://www.hartetechnologies.com/manuals/AMD/AMD%209511%20FPU.pdf
 datasheet.octopart.com
 datasheet.octopart.com
-
 
 This might clearer plus I can edit it to fix bugs
 
