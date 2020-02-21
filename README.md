@@ -14,4 +14,7 @@ https://gist.github.com/jhlagado/1e13592eb960ebf51b1f03d92b513d65?fbclid=IwAR3TM
 3. run hantek logic analyser
 4. report
 
+## Chat
+https://docs.google.com/spreadsheets/d/196W4LSZB3WT3BBj0CI_23vvdlKwxeybq7q1GpcKLlhA/edit#gid=286958434
+
 
