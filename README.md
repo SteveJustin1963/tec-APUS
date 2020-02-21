@@ -10,7 +10,7 @@ https://gist.github.com/jhlagado/1e13592eb960ebf51b1f03d92b513d65?fbclid=IwAR3TM
 
 ## next step
 1. check missing lines, breadboard, smoke test
-2. load code thru hex pad or tec-ROM-EM-BG
+2. load code thru hex pad or thru https://github.com/SteveJustin1963/tec-ROM-EM-BG
 3. run hantek logic analyser
 4. report
 
