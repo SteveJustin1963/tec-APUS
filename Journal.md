@@ -1,9 +1,12 @@
 ## circuit
 https://easyeda.com/editor#id=6a84959be4ed48d0b693eae5d268a4dd|931a6b1ace9941d0b3c049926cddb5ca
 
-1. check missing lines in , comlpete
+1. check missing lines in , done
 
 2. breadboard 
+
+1.3.2020
+
 
 3. smoke test
 
