@@ -29,6 +29,8 @@ last update: march 2 2020
 5. test johns code.
 * load thru https://github.com/SteveJustin1963/tec-ROM-EM-BG
 * looking at what "intel hex" files are. when compiling firth at asm80.com, it creates 
+  * http://www.keil.com/support/docs/1584/
+  
 * main.z80.lst
 * main.z80.hex
 * q; do i need to convert to binary to burn into rom ?
