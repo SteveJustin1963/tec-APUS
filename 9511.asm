@@ -1,4 +1,4 @@
-;https://gist.github.com/jhlagado/1e13592eb960ebf51b1f03d92b513d65
+; https://gist.github.com/jhlagado/1e13592eb960ebf51b1f03d92b513d65
 ; https://datasheet.octopart.com/C8231A-Intel-datasheet-38975267.pdf 
 ; https://www.hartetechnologies.com/manuals/AMD/AMD%209511%20FPU.pdf
 
