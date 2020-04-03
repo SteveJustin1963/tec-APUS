@@ -8,8 +8,12 @@ https://easyeda.com/editor#id=6a84959be4ed48d0b693eae5d268a4dd|931a6b1ace9941d0b
 project notes https://github.com/SteveJustin1963/tec-APUS/wiki
 
 
+## Inspiration
 
+Grant Searl 
 
+https://github.com/feilipu/yaz180
 
+and others
 
  
