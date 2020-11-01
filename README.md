@@ -72,3 +72,54 @@ MIPS of <, >, less, greater, compare asm code vs forth code vs APU
 Problem, what will be the time base to measure against? how is this coded ?
 
 
+4. test serial 
+5. 9511 test
+6. Speed Test
+
+## Report, figures, tables
+7. Speed Test
+* ASM math < Forth math < Forth + 9511 
+* Code cycles; ASM math > Forth math > Forth + 9511 
+* Code length; ASM math > Forth math > Forth + 9511 
+ 
+## Results
+* ASM math < Forth math < Forth + 9511 
+* Code cycles; ASM math > Forth math > Forth + 9511 
+* Code length; ASM math > Forth math > Forth + 9511 
+ 
+## Discuss objectively, scientific significance
+ 
+## Conclusion
+ 
+## Acknowledgements
+ 
+## References
+https://en.wikipedia.org/wiki/Instructions_per_second
+
+https://retrocomputing.stackexchange.com/questions/6835/why-did-ti-8x-calculator-series-use-the-z80-processor
+
+https://archive.is/2015.07.14-173053/http://sgate.emt.bme.hu/patai/publications/z80guide/part4.html
+
+http://www.andreadrian.de/oldcpu/Z80_number_cruncher.html
+
+http://www.cpushack.com/2010/09/23/arithmetic-processors-then-and-now/
+
+https://sourceforge.net/projects/realterm/files/Realterm/2.0.0.70/
+
+https://feilipu.me/2017/02/22/characterising-am9511a-1-apu/
+
+https://github.com/z88dk/z88dk/tree/master/libsrc/_DEVELOPMENT/target/yaz180/device/am9511a
+
+https://github.com/SteveJustin1963/z88dk/tree/master/libsrc/_DEVELOPMENT/target/yaz180/device/am9511a
+
+## Iterate, new hypotheses or predictions
+* The 9511 runs extremely hot, alternatives ?
+* try qubit, p-bit or stochastic processing 
+  * https://github.com/SteveJustin1963/tec-QUBIT
+  * https://github.com/SteveJustin1963/tec-STOCH
+
+ 
+## Software
+https://gist.github.com/jhlagado/1e13592eb960ebf51b1f03d92b513d65?fbclid=IwAR3TMQrLdt7XEVX5LBaR_A39m542dwm0wIp5AXCRv4Ern9mq87VFVXVwxx0
+
+
