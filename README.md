@@ -29,8 +29,7 @@ The TEC-1 needs a serial port especialy when Forth runs, adding maths support ma
 Options for serial are 
 bitbang serial without hardware
 https://github.com/SteveJustin1963/tec-BANG 
-
-or use a dedicated serial chip, in this case the MC6850. Description; its a "a classic Motorola chips ...old and simple" with up to 1.0 Mbps transmission, with a 7.3728 xtal can run 115,200 bps (/64) or 460,800 bps (/16). the old AM9511 APU - Arithmetic Processing Unit...has 32 bit floating point operations...still available and cheap” and runs so hot (2 watts) u can cook a hotdog. am going to try that. or a thermocouple to get some power back ?
+or use a dedicated serial or other SIA or IO chip or IO, in this case thewill try the MC6850. Description; its a "a classic Motorola chips ...old and simple" with up to 1.0 Mbps transmission, with a 7.3728 xtal can run 115,200 bps (/64) or 460,800 bps (/16). the old AM9511 APU - Arithmetic Processing Unit...has 32 bit floating point operations...still available and cheap” and runs so hot (2 watts) u can cook a hotdog. am going to try that. or a thermocouple to get some power back ?
 
 ## Observe and Question
 The TEC-1 need to expand on its basic displays LED /LCD, maybe https://github.com/SteveJustin1963/tec-Vectrex or https://github.com/SteveJustin1963/tec-VGA later, adding serial port to terminal becomes a nice ascii display and used by forth. Adding the APU could improve math speed, maybe. 
