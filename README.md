@@ -32,7 +32,8 @@ https://github.com/SteveJustin1963/tec-BANG
 or use a dedicated serial or other SIA or IO chip or IO, in this case thewill try the MC6850. Description; its a "a classic Motorola chips ...old and simple" with up to 1.0 Mbps transmission, with a 7.3728 xtal can run 115,200 bps (/64) or 460,800 bps (/16). the old AM9511 APU - Arithmetic Processing Unit...has 32 bit floating point operations...still available and cheap” and runs so hot (2 watts) u can cook a hotdog. am going to try that. or a thermocouple to get some power back ?
 
 ## Observe and Question
-The TEC-1 need to expand on its basic displays LED /LCD, maybe https://github.com/SteveJustin1963/tec-Vectrex or https://github.com/SteveJustin1963/tec-VGA later, adding serial port to terminal becomes a nice ascii display and used by forth. Adding the APU could improve math speed, maybe. 
+The TEC-1 can expand its IO with serial IO, not only for data transfer but also as ASCII display. 
+The other displays already on the TEC1 is the LCD from the tec-DAT. Further projects can add https://github.com/SteveJustin1963/tec-Vectrex or https://github.com/SteveJustin1963/tec-VGA  adding serial port to terminal becomes a  display and used by forth. Adding the APU could improve math speed, maybe. 
 
 * Comparisons of CPU
 - published spec Z80, 0.580 MIPS at 4.000 MHz, will use 7.3728 MHz clk so uart is in spec, 
