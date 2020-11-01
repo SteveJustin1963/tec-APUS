@@ -1,13 +1,10 @@
 # tec-APUS
 Welcome to the 16.3-tec-APUS wiki!
-The tecAPUS Arithmetic and UART addon for the TEC-1.
+
+The tecAPUS addon; Arithmetic Processing Unit AM9511 and UART Serial-IO 6850 for the TEC-1.
     
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/mc6850.png)
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
-
-
- 
-Add on for TEC-1 to access Arithmetic Processing Unit; AM9511 and Serial-IO 6850.
 
 ## Circuit
 
