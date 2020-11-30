@@ -1,8 +1,8 @@
 # tec-APUS
 
-APU = Arithmetic Processing Unit, aka the old AM9511
+APU = Arithmetic Processing Unit ; AM9511
 
-S = Serial-IO MC6850 UART
+S   = Serial-IO                  ; MC6850
  
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/mc6850.png)
