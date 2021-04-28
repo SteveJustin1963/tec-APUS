@@ -4,9 +4,9 @@
 SERIAL
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
 
-
+a serial port an maths mpu add on
  
-use MC6850 add serial to TEC-1 with circuit from Grant Searls  https://github.com/jhlagado/firth . design and got https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+the MC6850 provides serial to TEC-1 with circuit from Grant Searls  https://github.com/jhlagado/firth . design and got https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
  this chip can do up to 1.0 Mbps transmission. eg with 7.3728 Mhz crystal we can derive 115,200 baud (set to /64 in code, set the control register) or 460,800 baud (/16). but make sure your tec-1 can handle 7.3728 Mhz, most cant. then drop down to next baud rate crystal, ie 3.6864 Mhz (almost 4Mhz like most tec-1s now), so /64 get 57600 baud.
 getting the serial to work just proves we can get values into and out of buffer. that does not mean its integrated into the monitor or into forth.  
 
