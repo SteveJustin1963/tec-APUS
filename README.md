@@ -1,9 +1,6 @@
 # tec-APUS
 
-AM9511 Arithmetic Processing Unit APU 
-MC6850 Serial-IO                  S
-======================================
-                                  APUS
+AM9511 Arithmetic Processing Unit+MC6850 Serial-IO = APUS
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/mc6850.png)
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
