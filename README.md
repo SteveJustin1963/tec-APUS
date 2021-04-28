@@ -11,7 +11,7 @@ The TEC-1 has existing IO options like
 * https://github.com/SteveJustin1963/tec-SERIAL-BG (2 select line operation)
 * https://github.com/SteveJustin1963/tec-SIO-BC
 
-and now another ...tec-APUS, serial + maths, with forth in mind. 
+and now another ...tec-APUS, serial + maths, with Forth in mind. 
  
 The MC6850 serial is wired per https://github.com/jhlagado/firth. adding 9511 we get https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/x1.jpg)
