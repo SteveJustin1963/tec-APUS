@@ -4,16 +4,11 @@
 SERIAL
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
 
-## Circuit
-https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 
  
- 
- ## Intro 
-use MC6850 add serial to TEC-1 
-* up to 1.0 Mbps transmission 
-* 7.3728 xtal can run 115,200 bps (/64) or 460,800 bps (/16). 
-
+use MC6850 add serial to TEC-1 with circuit from Grant Searls  https://github.com/jhlagado/firth . design and got https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+ this chip can do up to 1.0 Mbps transmission. eg with 7.3728 xtal, we can derive 115,200 bps (set to /64 in code, set the control register) or 460,800 bps (/16). 
+getting the serial to work 
 and AM9511 to do math
 * 32 bit floating point operations
 * still available and cheap
@@ -26,7 +21,6 @@ and now another ...tec-APUS serial with maths
 we want to see if 9511 adds maths improvement, and if can use with forth and also tec-Forth-SCIENTIFIC 
  
 ## Method
-* copy Grant Searls circuit for 6850  https://github.com/jhlagado/firth 
 * use https://github.com/SteveJustin1963/tec-EMU-BG 
 * test JH “echo-Z80” 
 * dev circuit for 9511 and code test
