@@ -7,7 +7,7 @@ SERIAL
 
  
 use MC6850 add serial to TEC-1 with circuit from Grant Searls  https://github.com/jhlagado/firth . design and got https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
- this chip can do up to 1.0 Mbps transmission. eg with 7.3728 xtal, we can derive 115,200 bps (set to /64 in code, set the control register) or 460,800 bps (/16). 
+ this chip can do up to 1.0 Mbps transmission. eg with 7.3728 Mhz crystal we can derive 115,200 baud (set to /64 in code, set the control register) or 460,800 baud (/16). but make sure your tec-1 can handle 7.3728 Mhz, most cant. then drop down to next baud rate crystal, ie
 getting the serial to work 
 and AM9511 to do math
 * 32 bit floating point operations
