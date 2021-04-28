@@ -4,7 +4,7 @@
 SERIAL
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
 
-The TEC-1 has existing IO optios like 
+The TEC-1 has existing IO options like 
 * https://github.com/SteveJustin1963/tec-IO
 * https://github.com/SteveJustin1963/tec-RELAY
 * https://github.com/SteveJustin1963/tec-DAT (buff serial in + bitbang out)
