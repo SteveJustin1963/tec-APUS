@@ -4,7 +4,13 @@
 SERIAL
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
 
-The TEC-1 has existing IO optios like tec-IO, tec-RELAY, tec-DAT (buff serial in + bitbang out), tec-SERIAL-BG (2 select line operation), tec-SIO-BC
+The TEC-1 has existing IO optios like 
+* https://github.com/SteveJustin1963/tec-IO
+* https://github.com/SteveJustin1963/tec-RELAY
+* https://github.com/SteveJustin1963/tec-DAT (buff serial in + bitbang out)
+* https://github.com/SteveJustin1963/tec-SERIAL-BG (2 select line operation)
+* https://github.com/SteveJustin1963/tec-SIO-BC
+
 and now another ...tec-APUS, serial + maths, with forth in mind. 
  
 The MC6850 serial is wired per https://github.com/jhlagado/firth. adding 9511 we get https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
