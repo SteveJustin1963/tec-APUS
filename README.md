@@ -6,8 +6,6 @@
 AM9511 Arithmetic Processing Unit+MC6850 Serial-IO = APUS
 
 ## Circuit
-use cct in https://github.com/jhlagado/firth for MC6850
-
 https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 
  
