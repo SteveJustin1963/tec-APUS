@@ -4,7 +4,8 @@
 SERIAL
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
 
-a serial port an maths mpu add on
+The TEC-1 has existing IO optios like tec-IO, tec-RELAY, tec-DAT with serial, tec-SERIAL-BG, tec-SIO-BC
+and now another ...tec-APUS serial with maths, serial for apps and forth and 9511  maths for apps and forth 
  
 the MC6850 provides serial to TEC-1 with circuit from Grant Searls  https://github.com/jhlagado/firth . design and got https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
  this chip can do up to 1.0 Mbps transmission. eg with 7.3728 Mhz crystal we can derive 115,200 baud (set to /64 in code, set the control register) or 460,800 baud (/16). but make sure your tec-1 can handle 7.3728 Mhz, most cant. then drop down to next baud rate crystal, ie 3.6864 Mhz (almost 4Mhz like most tec-1s now), so /64 get 57600 baud.
@@ -12,11 +13,6 @@ getting the serial to work just proves we can get values into and out of buffer.
 
 the other part is adding a AM9511 math chip on the same pcb, it can do 32 bit floating point operations, its still available and cheap but runs hot (2 watts) and needs +5v and +12v. 
 
-The TEC-1 has existing IO addons such as; tec-IO, tec-RELAY, tec-DAT with serial, tec-SERIAL-BG, tec-SIO-BC
-
-and now another ...tec-APUS serial with maths 
-
-we want to see if 9511 adds maths improvement, and if can use with forth and also tec-Forth-SCIENTIFIC 
  
 ## Method
 * use https://github.com/SteveJustin1963/tec-EMU-BG 
