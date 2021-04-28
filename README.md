@@ -4,14 +4,11 @@
 SERIAL
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
 
-The TEC-1 has existing IO optios like tec-IO, tec-RELAY, tec-DAT with serial, tec-SERIAL-BG, tec-SIO-BC
-and now another ...tec-APUS serial with maths, serial for apps and forth and 9511  maths for apps and forth 
+The TEC-1 has existing IO optios like tec-IO, tec-RELAY, tec-DAT (buff serial in + bitbang out), tec-SERIAL-BG (2 select line operation), tec-SIO-BC
+and now another ...tec-APUS, serial + maths, with forth in mind. 
  
-the MC6850 provides serial to TEC-1 with circuit from Grant Searls  https://github.com/jhlagado/firth . design and got https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
- this chip can do up to 1.0 Mbps transmission. eg with 7.3728 Mhz crystal we can derive 115,200 baud (set to /64 in code, set the control register) or 460,800 baud (/16). but make sure your tec-1 can handle 7.3728 Mhz, most cant. then drop down to next baud rate crystal, ie 3.6864 Mhz (almost 4Mhz like most tec-1s now), so /64 get 57600 baud.
-getting the serial to work just proves we can get values into and out of buffer. that does not mean its integrated into the monitor or into forth.  
-
-the other part is adding a AM9511 math chip on the same pcb, it can do 32 bit floating point operations, its still available and cheap but runs hot (2 watts) and needs +5v and +12v. 
+The MC6850 serial is wired per https://github.com/jhlagado/firth. adding 9511 we get https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+This chip can do up to 1.0 Mbps transmission. eg with 7.3728 Mhz /64 in code, set the control register =115,200 baud or (/16) = 460,800 baud, but make sure tec-1 can handle 7.3728 Mhz speed, some cant. or drop down to next baud rate crystal, ie 3.6864 Mhz /64 = 57600 baud. proving serial works is only to buffer space, that does not mean its integrated into the monitor or into forth. adding the AM9511 math chip on the same pcb is with Forth in mind, it can do 32 bit floating point operations, it runs hot at 2 watts and needs +5v and +12v. 
 
  
 ## Method
