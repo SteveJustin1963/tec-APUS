@@ -11,20 +11,23 @@ The TEC-1 has existing IO options like
 * https://github.com/SteveJustin1963/tec-SERIAL-BG (2 select line operation)
 * https://github.com/SteveJustin1963/tec-SIO-BC
 
-and now another ...tec-APUS, serial + maths, with Forth in mind. 
-there are two seperate system on the one pcb.
-we make cct for the MC6850 per https://github.com/jhlagado/firth. and make cct for 9511 from ref in doc folder and we get https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+## tec-APUS, serial + maths, with Forth in mind. 
+there are two separate system on the one pcb and the project is split into 2 stages. 
+we combine https://github.com/jhlagado/firth and ref from doc folder and we get https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 
-the 6850 can do up to 1.0 Mbps transmission. Baud rate is set by xtal and divisor. with a 7.3728 Mhz crstal and /64 in code set via control register we get 115,200 baud or (/16) 460,800 baud, but make sure the rest of tec-1 can handle 7.3728 Mhz speed ie the ram and rom chips, some cant. or drop down to next baud rate crystal, ie 3.6864 Mhz /64 = 57600 baud. we want to test serial works up  to the buffer space in ram, integrating into the monitor or into forth is more work. adding the AM9511 math chip on the same pcb is with Forth in mind, it can do 32 bit floating point operations. 
+image
+
+
+the 6850 can do up to 1.0 Mbps transmission. Baud rate is set by xtal and divisor. with a 7.3728 Mhz crystal and /64 in code set via control register we get 115,200 baud or (/16) 460,800 baud, but make sure the rest of tec-1 can handle 7.3728 Mhz speed ie the ram and rom chips, some can't. or drop down to next baud rate crystal, ie 3.6864 Mhz /64 = 57600 baud. we want to test serial works up  to the buffer space in ram, integrating into the monitor or into forth is more work. adding the AM9511 math chip on the same pcb is with Forth in mind, it can do 32 bit floating point operations. 
 
 ## 6850
 we want to get an echo back from buffer and a message out from buffer. code is compile from .org 0000
-pcb is plugged into expansion socket, jumper cable is attache also.
-emu board is in rom socket, code is upload to emu via another usb cable.
+pcb is plugged into the expansion socket, jumper cable is attached also.
+emu board is in rom socket, code is uploaded to emu via another usb cable.
 
 run terminal app on pc https://www.putty.org/    https://www.chiark.greenend.org.uk/~sgtatham/putty/ .
 connect USB-TTL cable from pc-usb to RX TX and GND on tec-apus.
-there is a FT232R or PL2303TA chip inside cable moulding it converts usb to ttl serial, anther chips would be needed to turn it to rs232 voltages which are mch higher but needed herer as ttl 5v will do. a driver will auto load in windows activated by pnp that will present a virtual serial port to the pc end. the cable end has Red=+5V, Black=GND, White=RXD, Green=TXD, but RTS, CTS, DSR are presented on the cheap cable i used. for safety current limit resistors can be added but for ttl-ttl they are not needed. 
+there is a FT232R or PL2303TA chip inside cable moulding it converts usb to ttl serial, another chips would be needed to turn it to rs232 voltages which are mch higher but needed here as ttl 5v will do. a driver will auto load in windows activated by pnp that will present a virtual serial port to the pc end. the cable end has Red=+5V, Black=GND, White=RXD, Green=TXD, but RTS, CTS, DSR are presented on the cheap cable i used. for safety current limit resistors can be added but for ttl-ttl they are not needed. 
 plug cable into pc usb then pnp auto loads drivers, message COMxx appears, eg COM11. can also check port number on pc, run C:\cmd then C:\mode
 do loopback test on cable, short TX to RX (white green), typing anything.. character should echo back
 
@@ -738,5 +741,6 @@ https://github.com/SteveJustin1963/z88dk/tree/master/libsrc/_DEVELOPMENT/target/
 https://github.com/SteveJustin1963/tec-BANG 
 
  
+
 
 
