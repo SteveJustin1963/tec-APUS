@@ -28,9 +28,8 @@ there is a FT232R or PL2303TA chip inside cable moulding it converts usb to ttl 
 plug cable into pc usb then pnp auto loads drivers, message COMxx appears, eg COM11. can also check port number on pc, run C:\cmd then C:\mode
 do loopback test on cable, short TX to RX (white green), typing anything.. character should echo back
 
-- disconnect USB, connect TX RX, 5V ,GND to breadboard 6850. 
-- compiled echo-Z80 https://github.com/jhlagado/echo-Z80 with SERIALMODE equ 6850
-- compile creates .lst and .hex file ,presume is intel, http://www.keil.com/support/docs/1584/ 
+compiled thr test program https://github.com/jhlagado/echo-Z80 with SERIALMODE equ 6850.
+compile creates .lst and .hex file, its intel format, http://www.keil.com/support/docs/1584/ 
 - need .bin file, select Download BIN, then file "main.z80.bin" downloads to pc, must white list the site asm80.com
 - powerup EMU
 
