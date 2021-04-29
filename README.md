@@ -22,6 +22,7 @@ This chip can do up to 1.0 Mbps transmission. eg with 7.3728 Mhz /64 in code, se
 6850 first, 9511 second
 
 6850
+i dont know clock rating of chip version
 for standard baud rates need baurd rate crystal. 
 The receiver is interrupt driven and output will be as fast as possible. 
 Baud rate is set by xtal and divisor 
@@ -699,6 +700,13 @@ asked fb group if ok to hang multiple things off the one /iorq line
 thinking ill test serial by running firth...ask jh how to run firth in ram from 800-3000, 6 stacked 2k ram chips. what is the correct config for constants.z80 file ? 
 
 JH; Hi Stephen I have a series of constants declared in a file. I guess it could be moved up into ram but there's still the serial communicated. Right now that's expecting a routine at 38h because of interrupt mode 1. Forth is written to start at 0 because that's where reset puts the PC but if you can jump to 800 then the code could be moved there. I can test all this but what about the interrupt vector problem? There are ways around then but interrupt mode 2 is fairly complicated.
+
+
+9511
+
+i dont know clock rating of chip version i have
+
+
 
 
 
