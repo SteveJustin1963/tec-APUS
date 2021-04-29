@@ -12,17 +12,13 @@ The TEC-1 has existing IO options like
 * https://github.com/SteveJustin1963/tec-SIO-BC
 
 and now another ...tec-APUS, serial + maths, with Forth in mind. 
- 
-The MC6850 serial is wired per https://github.com/jhlagado/firth. adding 9511 we get https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
-![](xx)
+there are two seperate system on the one pcb.
+we make cct for the MC6850 per https://github.com/jhlagado/firth. and make cct for 9511 from ref in doc folder and we get https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+
 
 This chip can do up to 1.0 Mbps transmission. eg with 7.3728 Mhz /64 in code, set the control register =115,200 baud or (/16) = 460,800 baud, but make sure tec-1 can handle 7.3728 Mhz speed, some cant. or drop down to next baud rate crystal, ie 3.6864 Mhz /64 = 57600 baud. proving serial works is only to buffer space, that does not mean its integrated into the monitor or into forth. adding the AM9511 math chip on the same pcb is with Forth in mind, it can do 32 bit floating point operations, it runs hot at 2 watts and needs +5v and +12v. 
 
- ##  Journal
-6850 first, 9511 second
-
 ## 6850
-### method. 
 we want to get an echo back from buffer and a message out from buffer.
 pcb is plugged into expansion socket, jumper cable is attache also
 emu board is in rom socket, code is upload to emu cia usb
