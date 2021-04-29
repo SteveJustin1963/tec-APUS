@@ -12,13 +12,18 @@ The TEC-1 has existing IO options like
 * https://github.com/SteveJustin1963/tec-SIO-BC
 
 ## tec-APUS, serial + maths, with Forth in mind. 
-there are two separate system on the one pcb and the project is split into 2 stages. 
+goal is to run two separate system on the one pcb. we will deal with each separately. 
+the 6850 can do up to 1.0 Mbps transmission. Baud rate is set by xtal and divisor. with a 7.3728 Mhz crystal and /64 in code set via control register we get 115,200 baud or (/16) 460,800 baud, but make sure the rest of tec-1 can handle 7.3728 Mhz speed ie the ram and rom chips, some can't. or drop down to next baud rate crystal, ie 3.6864 Mhz /64 = 57600 baud. we want to test serial works up  to the buffer space in ram, integrating into the monitor or into forth is more work. adding the AM9511 math chip on the same pcb is with Forth in mind, it can do 32 bit floating point operations. 
+
+
+
+
+
 we combine https://github.com/jhlagado/firth and ref from doc folder and we get https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 
 image
 
 
-the 6850 can do up to 1.0 Mbps transmission. Baud rate is set by xtal and divisor. with a 7.3728 Mhz crystal and /64 in code set via control register we get 115,200 baud or (/16) 460,800 baud, but make sure the rest of tec-1 can handle 7.3728 Mhz speed ie the ram and rom chips, some can't. or drop down to next baud rate crystal, ie 3.6864 Mhz /64 = 57600 baud. we want to test serial works up  to the buffer space in ram, integrating into the monitor or into forth is more work. adding the AM9511 math chip on the same pcb is with Forth in mind, it can do 32 bit floating point operations. 
 
 ## 6850
 we want to get an echo back from buffer and a message out from buffer. code is compile from .org 0000
