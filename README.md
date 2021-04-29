@@ -1,12 +1,6 @@
+# draft doc
+
 # tec-APUS
-
-draft
-
-
-
-
-
-
 
 
 
@@ -22,9 +16,17 @@ The TEC-1 has existing IO options like
 * https://github.com/SteveJustin1963/tec-SIO-BC
 
 ## tec-APUS, serial + maths, with Forth in mind. 
-goal to run two separate systems on one pcb. the serial part uses a 6850 chip that can do up to 1.0 Mbps serial transmission, we only need a fraction of that, with a baud rated 7.3728 Mhz crystal and setting the divisor in software to /64 in results in 115,200 baud or /16 to 460,800 baud. running this high clock rate wont work with the 9511 unless we divide down or drop down to next crystal at 3.6864 Mhz /64 = 57600 baud. to test serial works either echo to a buffer or write out from .db. later integrate into the monitor or into forth. 
+goal to run two separate systems on one pcb. 
+the serial part uses a 6850 chip that can do up to 1.0 Mbps serial transmission, 
+we only need a fraction of that, with a baud rated 7.3728 Mhz crystal and setting the divisor in software to /64 in results in 115,200 baud 
+or /16 to 460,800 baud. 
+running this high clock rate wont work with the 9511 unless we divide down or drop down to a slower crystal at 3.6864 Mhz /64 = 57600 baud. 
+to test serial works either echo to a buffer or write out from .db. 
+later integrate into apps or into forth. 
 
-the AM9511 math chip was added with Forth in mind, it can do 32 bit floating point operations and transcendental function, eg sin(x), sqrt(x).  
+the AM9511 math chip was added with Forth in mind, 
+it can do 32 bit floating point operations and transcendental function, eg sin(x), sqrt(x). 
+its speed is questionable.
 
 
 
