@@ -21,18 +21,12 @@ This chip can do up to 1.0 Mbps transmission. eg with 7.3728 Mhz /64 in code, se
  ##  Journal
 
 
-- need 4049 to invert /IORQ to E of 6850 and /RESET to RESET of 9511
-- original tec1 cct using 4049 has 2 free, xtal board has none, "you can solder a 4049 to my board and lift the gates you need (dip metal legs). keep all outputs and all unused lifted too either soldered to the board or vcc/gnd. or its easy with a BC547 and two resistors (BG).
-- tried breadboard, push all the parts and wire in
-- there's no /IORQ and CLK jumper pin on tec1, soldered leads to back of PCB
-- need to route more wires off tec1 onto breadboard, so added 2 x12 rows jumper pins to top of emu
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/IMG_4209.jpg)
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/IMG_4217.jpg)
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/IMG_4218.jpg)
 
-- my 4049 clock is too low at 24khz, and the 4mhz xtl is not a standard baud rate speed, so dividing it with /64 etc wont give the right number for a terminal to work. 
-- "the code doesn't specify clk speed. The receiver is interrupt driven and output will be as fast as possible. Are you using the xtal clock? I think 4 MHz should be able to achieve 56k baud. Check Grant Searle pages, eg his MS Basic ROM which has similar code" (JH). 
+for standard baud rates need baur rate crstal 
+The receiver is interrupt driven 
+and output will be as fast as possible. 
 - "Baud rate is set by xtal and divisor" (BG) 
+
 - use USB-TTL cable (FT232R or PL2303TA inside cable) from ebay. has 4 wires, Red=+5V, Black=GND, White=RXD, Green=TXD (ignores RTS, CTS, DSR), ignore current limit resistors. plug into pc usb then pnp auto loads drivers, message COMxx appears, mine says COM11. check device manager if listed. yes. Run C:\cmd then C:\mode, yes listed.
  
 - run terminal app https://www.putty.org/ or https://www.chiark.greenend.org.uk/~sgtatham/putty/
