@@ -21,7 +21,12 @@ This chip can do up to 1.0 Mbps transmission. eg with 7.3728 Mhz /64 in code, se
  ##  Journal
 6850 first, 9511 second
 
-6850
+## 6850
+### method. 
+we want to get an echo back from buffer and a message out from buffer.
+pcb is plugged into expansion socket, jumper cable is attache also
+emu board is in rom socket, code is upload to emu cia usb
+
 i dont know clock rating of chip version
 for standard baud rates need baurd rate crystal. 
 The receiver is interrupt driven and output will be as fast as possible. 
