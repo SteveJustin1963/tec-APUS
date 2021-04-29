@@ -7,8 +7,8 @@ SERIAL
 The TEC-1 has existing IO options like 
 * https://github.com/SteveJustin1963/tec-IO
 * https://github.com/SteveJustin1963/tec-RELAY
-* https://github.com/SteveJustin1963/tec-DAT (buff serial in + bitbang out)
-* https://github.com/SteveJustin1963/tec-SERIAL-BG (2 select line operation)
+* https://github.com/SteveJustin1963/tec-DAT
+* https://github.com/SteveJustin1963/tec-SERIAL-BG 
 * https://github.com/SteveJustin1963/tec-SIO-BC
 
 ## tec-APUS, serial + maths, with Forth in mind. 
