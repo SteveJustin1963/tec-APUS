@@ -19,24 +19,17 @@ The MC6850 serial is wired per https://github.com/jhlagado/firth. adding 9511 we
 This chip can do up to 1.0 Mbps transmission. eg with 7.3728 Mhz /64 in code, set the control register =115,200 baud or (/16) = 460,800 baud, but make sure tec-1 can handle 7.3728 Mhz speed, some cant. or drop down to next baud rate crystal, ie 3.6864 Mhz /64 = 57600 baud. proving serial works is only to buffer space, that does not mean its integrated into the monitor or into forth. adding the AM9511 math chip on the same pcb is with Forth in mind, it can do 32 bit floating point operations, it runs hot at 2 watts and needs +5v and +12v. 
 
  ##  Journal
-build in 2 stages, 6850 first, 9511 second
+6850 first, 9511 second
 
 6850
-for standard baud rates need baurd rate crstal 
-The receiver is interrupt driven 
-and output will be as fast as possible. 
+for standard baud rates need baurd rate crystal. 
+The receiver is interrupt driven and output will be as fast as possible. 
+Baud rate is set by xtal and divisor 
+run terminal app on pc https://www.putty.org/    https://www.chiark.greenend.org.uk/~sgtatham/putty/
+connect USB-TTL cable (there is a FT232R or PL2303TA chip inside cable moulding, Red=+5V, Black=GND, White=RXD, Green=TXD, RTS, CTS, DSR not on cable ends ) from pc-usb to RX TX and GND on tec-apus, not power, for safety can have current limit resistors, but not needed. 
+plug cable into pc usb then pnp auto loads drivers, message COMxx appears, eg COM11. can also check port number on pc, run C:\cmd then C:\mode
+do loopback test on cable, short TX to RX (white green), typing anything.. character should echo back
 
-"Baud rate is set by xtal and divisor" (BG) 
-
-use USB-TTL cable (FT232R or PL2303TA inside cable) from
-4 wires, Red=+5V, Black=GND, White=RXD, Green=TXD (ignores RTS, CTS, DSR), 
-ignore current limit resistors. 
-
-plug into pc usb then pnp auto loads drivers, message COMxx appears, eg COM11. 
-Run C:\cmd then C:\mode
- 
-- run terminal app https://www.putty.org/ or https://www.chiark.greenend.org.uk/~sgtatham/putty/
-- do loopback test on cable, link TX to RX (white green), typing anything.. echo character back, pass
 - disconnect USB, connect TX RX, 5V ,GND to breadboard 6850. 
 - compiled echo-Z80 https://github.com/jhlagado/echo-Z80 with SERIALMODE equ 6850
 - compile creates .lst and .hex file ,presume is intel, http://www.keil.com/support/docs/1584/ 
