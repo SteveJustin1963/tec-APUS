@@ -20,19 +20,23 @@ goal to run two separate systems on one pcb.
 the serial part uses a 6850 chip that can do up to 1.0 Mbps serial transmission, 
 we only need a fraction of that, with a baud rated 7.3728 Mhz crystal and setting the divisor in software to /64 in results in 115,200 baud 
 or /16 to 460,800 baud. 
-running this high clock rate wont work with the 9511 unless we divide down or drop down to a slower crystal at 3.6864 Mhz /64 = 57600 baud. 
-to test serial works either echo to a buffer or write out from .db. 
-later integrate into apps or into forth. 
+running this high clock rate wont work with the 9511 unless we divide down or drop down to a slower crystal say 3.6864 Mhz /64 = 57600 baud or lower. 
+to test serial works either echo to a buffer or write out to TX from .db. 
+later integrate into apps and forth. 
 
 the AM9511 math chip was added with Forth in mind, 
 it can do 32 bit floating point operations and transcendental function, eg sin(x), sqrt(x). 
 its speed is questionable.
 
+the 6850 cct comes form grant searl, see https://github.com/jhlagado/firth 
 
 
 
 
-we combine https://github.com/jhlagado/firth and ref from doc folder and we get https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+the 9511 cct come from doc folder 
+
+
+the resulting cct is https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 
 image
 
