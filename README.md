@@ -29,7 +29,10 @@ it can do 32 bit floating point operations and transcendental function, eg sin(x
 its speed is questionable.
 
 the 6850 cct comes form grant searl, see https://github.com/jhlagado/firth 
+
+looking at the input control lines we have, /M1, A7,6,0 and /WR, for output control is /INT
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/chip%20select%206850.png)
+
 
 
 
