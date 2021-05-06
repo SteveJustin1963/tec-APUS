@@ -3,9 +3,10 @@
 # tec-APUS
 
 ## todo
-* add more low leverl ios with cascase 138s
+* add more low io selects with more 138s
 * divide clock 4 for 9511
-* check io map, account for current io address for issued pcb, allocate new io address for tec-apus
+* check io map, account for current used io's, allocate new io's for tec-apus etc
+* 
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/mc6850.png) 
 SERIAL
