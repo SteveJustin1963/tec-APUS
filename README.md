@@ -34,7 +34,7 @@ its speed is questionable.
 
 the 6850 circuit comes form grant searl, see https://github.com/jhlagado/firth 
 
-looking at the input control lines we have, /M1, A7,6,0 and /WR, for output control its /INT.
+looking at the input control lines we have, /M1, A7,A6,A0 (we can change this to get different io address) and /WR, for output control its /INT.
 for /M1 we know "The /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles.  
 It does not go low on I/O and memory read/write cycles that follow the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on.
 for A7,6 we need 10000000, so we write i/o to 80h. 
@@ -44,11 +44,7 @@ for A7,6 we need 10000000, so we write i/o to 80h.
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/chip%20select%206850.png)
 
-
-
-
 the 9511 circuit come from doc folder 
-
 
 the two systems together result is https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 
@@ -71,7 +67,7 @@ compiled the test program https://github.com/jhlagado/echo-Z80 with SERIALMODE e
 compile creates .lst and .hex file, its intel format, http://www.keil.com/support/docs/1584/ 
 - need .bin file, select Download BIN, then file "main.z80.bin" downloads to pc, must white list the site asm80.com
 - powerup EMU
-
+xx
 ![](https://github.com/SteveJustin1963/tec-EMU-BG/blob/master/pics/load-drive.png)
 
 - load driver for emu then transfer ECHO file..pass
