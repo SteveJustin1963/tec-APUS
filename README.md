@@ -3,7 +3,7 @@
 # tec-APUS
 
 ## todo
-* add more low io selects with more 138s
+* cascade another 74138 for low order io
 * divide clock 4 for 9511
 * check io map, account for current used io's, allocate new io's for tec-apus etc
 * 
@@ -67,7 +67,7 @@ there is a FT232R or PL2303TA chip inside cable moulding it converts usb to ttl 
 plug cable into pc usb then pnp auto loads drivers, message COMxx appears, eg COM11. can also check port number on pc, run C:\cmd then C:\mode
 do loopback test on cable, short TX to RX (white green), typing anything.. character should echo back
 
-compiled thr test program https://github.com/jhlagado/echo-Z80 with SERIALMODE equ 6850.
+compiled the test program https://github.com/jhlagado/echo-Z80 with SERIALMODE equ 6850.
 compile creates .lst and .hex file, its intel format, http://www.keil.com/support/docs/1584/ 
 - need .bin file, select Download BIN, then file "main.z80.bin" downloads to pc, must white list the site asm80.com
 - powerup EMU
@@ -75,10 +75,12 @@ compile creates .lst and .hex file, its intel format, http://www.keil.com/suppor
 ![](https://github.com/SteveJustin1963/tec-EMU-BG/blob/master/pics/load-drive.png)
 
 - load driver for emu then transfer ECHO file..pass
-- i place EMU board into RAM...oops, needs to go into ROM socket unless i don’t need RAM
-  - "eprom socket is 0000-07FF, 
-  - RAM is 800-0FFF, 
-  - expansion socket is 1000-17FF, 
+- reove rom and place EMU board into socket
+- the "eprom socket is 0000-07FF, 
+- RAM is 800-0FFF, 
+- expansion socket is 1000-17FF, 
+
+
 - you still need RAM, EMU only emulates eprom, 
 - if EMU is in eprom socket, it will place your code from 0000, when you code in the assembler, you'll usually want to tell it where your code is originating. Default to MON1B/2 ROMS internally, and with reset line to EMU, after code loads it'll restart and load the new ROM image" (BG)
 - reboot, load echo, run putty 9600, shows nothing 
