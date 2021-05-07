@@ -3,10 +3,11 @@
 # tec-APUS
 
 ## todo
-* cascade another 74138 for low order io
-* divide clock 4 for 9511
-* check io map, account for current used io's, allocate new io's for tec-apus etc
-* 
+* motherboard
+  * cascade another 74138 for low order io
+  * check io map, account for current used io's, allocate new io's for tec-apus etc
+  * io to 4k rom not 2k, to fit forth, adjust ram select
+* 9511; divide clock 4 for 9511
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/mc6850.png) 
 SERIAL
