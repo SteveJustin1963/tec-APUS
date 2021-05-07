@@ -16,7 +16,8 @@ The TEC-1 has existing IO options like
 * https://github.com/SteveJustin1963/tec-IO
 * https://github.com/SteveJustin1963/tec-RELAY
 * https://github.com/SteveJustin1963/tec-DAT
-* https://github.com/SteveJustin1963/tec-SERIAL-BG 
+* https://github.
+/SteveJustin1963/tec-SERIAL-BG 
 * https://github.com/SteveJustin1963/tec-SIO-BC
 
 ## tec-APUS, serial + maths, with Forth in mind. 
@@ -60,7 +61,7 @@ emu board is in rom socket, code is uploaded to emu via another usb cable.
 run terminal app on pc https://www.putty.org/    https://www.chiark.greenend.org.uk/~sgtatham/putty/ .
 connect USB-TTL cable from pc-usb to RX TX and GND on tec-apus.
 there is a FT232R or PL2303TA chip inside cable moulding it converts usb to ttl serial, another chips would be needed to turn it to rs232 voltages which are mch higher but needed here as ttl 5v will do. a driver will auto load in windows activated by pnp that will present a virtual serial port to the pc end. the cable end has Red=+5V, Black=GND, White=RXD, Green=TXD, but RTS, CTS, DSR are presented on the cheap cable i used. for safety current limit resistors can be added but for ttl-ttl they are not needed. 
-plug cable into pc usb then pnp auto loads drivers, message COMxx appears, eg COM11. can also check port number on pc, run C:\cmd then C:\mode
+plug cable into pc usb then pnp auto loads drivers, eg message appears COM11. can also check port number on pc, run C:\cmd then C:\mode
 do loopback test on cable, short TX to RX (white green), typing anything.. character should echo back
 
 compiled the test program https://github.com/jhlagado/echo-Z80 with SERIALMODE equ 6850.
