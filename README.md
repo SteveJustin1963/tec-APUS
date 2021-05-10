@@ -35,7 +35,7 @@ we know "the /M1 signal goes low only on instruction fetch cycles and interupt a
 
 
 
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/chip%20select%206850.png)
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/6850cct.png)
 
 the 9511 circuit come from doc folder 
 
