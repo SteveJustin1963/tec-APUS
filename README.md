@@ -23,10 +23,17 @@ The TEC-1 has existing IO options like
 
 ## tec-APUS, serial + maths, with Forth in mind. 
 goal to run two separate systems on one pcb. 
-the serial part uses a 6850 chip that can do up to 1.0 Mbps serial transmission, 
-we only need a fraction of that, with a baud rated 7.3728 Mhz crystal and setting the divisor in software to /64 in results in 115,200 baud 
-or /16 to 460,800 baud. 
-running this high clock rate wont work with the 9511 unless we divide down or drop down to a slower crystal say 3.6864 Mhz /64 = 57600 baud or lower. 
+
+## the serial part.
+one is serial using the MC6850 chip that can do up to 1.0 Mbps serial transmission, 
+we only need a fraction of that, with a 7.3728 Mhz baud rate crystal and setting the divisor in software to /64, results in 115,200 baud rate 
+or with /16 we get 460,800 baud. very fast.
+running this high clock rate wont work with the 9511, we need to use a divide circit to divide by 2 times twice, ie 4.
+
+xplain hw
+xpl sw
+xpl test
+
 to test serial works either echo to a buffer or write out to TX from .db. 
 later integrate into apps and forth. 
 
