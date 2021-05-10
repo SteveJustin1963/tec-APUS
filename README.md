@@ -23,26 +23,13 @@ The TEC-1 has existing IO options like
 
 ## tec-APUS, serial + maths, with Forth in mind. 
 goal to run two separate systems on one pcb. 
-
-## the serial part.
 one is serial using the MC6850 chip that can do up to 1.0 Mbps serial transmission, 
 we only need a fraction of that, with a 7.3728 Mhz baud rate crystal and setting the divisor in software to /64, results in 115,200 baud rate 
 or with /16 we get 460,800 baud. very fast.
 running this high clock rate wont work with the 9511, we need to use a divide circit to divide by 2 times twice, ie 4.
+to test serial works start with writing and reading the control registers, then send data out, then read data in. then send data in and echo back from buffer, last integrate this into apps and forth. similarily with the AM9511 math chip, write read the control registers, then call the functions with results.
 
-xplain hw
-xpl sw
-xpl test
-
-to test serial works either echo to a buffer or write out to TX from .db. 
-later integrate into apps and forth. 
-
-the AM9511 math chip was added with Forth in mind, 
-it can do 32 bit floating point operations and transcendental function, eg sin(x), sqrt(x). 
-its speed is questionable.
-
-the 6850 circuit comes form grant searl, see https://github.com/jhlagado/firth 
-
+design of the MC6850 circuit comes form Grant Searl, see https://github.com/jhlagado/firth. we change the select address so it does not conflict with other add ons.
 looking at the input control lines we have, /M1, A7,A6,A0 (we can change this to get different io address) and /WR, for output control its /INT.
 for /M1 we know "The /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles.  
 It does not go low on I/O and memory read/write cycles that follow the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on.
