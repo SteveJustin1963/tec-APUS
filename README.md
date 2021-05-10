@@ -29,11 +29,8 @@ or with /16 we get 460,800 baud. very fast.
 running this high clock rate wont work with the 9511, we need to use a divide circit to divide by 2 times twice, ie 4.
 to test serial works start with writing and reading the control registers, then send data out, then read data in. then send data in and echo back from buffer, last integrate this into apps and forth. similarily with the AM9511 math chip, write read the control registers, then call the functions with results.
 
-design of the MC6850 circuit comes form Grant Searl, see https://github.com/jhlagado/firth. we change the select address so it does not conflict with other add ons.
-looking at the input control lines we have, /M1, A7,A6,A0 (we can change this to get different io address) and /WR, for output control its /INT.
-for /M1 we know "The /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles.  
-It does not go low on I/O and memory read/write cycles that follow the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on.
-for A7,6 we need 10000000, so we write i/o to 80h. 
+looking at Grant Searl cct https://github.com/jhlagado/firth for for MC6850 circuit uses /M1, A7,A6,A0 and /WR with /INT.
+we know "the /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles, it does not go low on I/O and memory read/write cycles that follows the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on. we can leave A7 active high to get to 80h range, then split this down to 82 and 83 with active low A1 and active high A0. 
 
 
 
