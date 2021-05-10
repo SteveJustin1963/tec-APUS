@@ -30,7 +30,7 @@ running this high clock rate wont work with the 9511, we need to use a divide ci
 to test serial works start with writing and reading the control registers, then send data out, then read data in. then send data in and echo back from buffer, last integrate this into apps and forth. similarily with the AM9511 math chip, write read the control registers, then call the functions with results.
 
 looking at Grant Searl cct https://github.com/jhlagado/firth for for MC6850 circuit uses /M1, A7,A6,A0 and /WR with /INT.
-we know "the /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles, it does not go low on I/O and memory read/write cycles that follows the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on. we can leave A7 active high to get to 80h range, then split this down to 82 and 83 with active low A1 and active high A0. 
+we know "the /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles, it does not go low on I/O and memory read/write cycles that follows the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on. we can leave A7 active high to get to 80h range, then split this down to 82 and 83 with active low A1 and active high A0 to control the register select. 
 
 
 
