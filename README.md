@@ -22,26 +22,26 @@ The TEC-1 has existing IO options like
 * https://github.com/SteveJustin1963/tec-SIO-BC
 
 ## tec-APUS, serial + maths, with Forth in mind. 
-goal to run two separate systems on one pcb. 
-one is serial using the MC6850 chip that can do up to 1.0 Mbps serial transmission, 
+
+https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+
+one part is serial using the MC6850 chip that can do up to 1.0 Mbps serial transmission, 
 we only need a fraction of that, with a 7.3728 Mhz baud rate crystal and setting the divisor in software to /64, results in 115,200 baud rate 
 or with /16 we get 460,800 baud. very fast.
-running this high clock rate wont work with the 9511, we need to use a divide circit to divide by 2 times twice, ie 4.
-to test serial works start with writing and reading the control registers, then send data out, then read data in. then send data in and echo back from buffer, last integrate this into apps and forth. similarily with the AM9511 math chip, write read the control registers, then call the functions with results.
 
 looking at Grant Searl cct https://github.com/jhlagado/firth for for MC6850 circuit uses /M1, A7,A6,A0 and /WR with /INT.
-we know "the /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles, it does not go low on I/O and memory read/write cycles that follows the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on. we can leave A7 active high to get to 80h range, then split this down to 82 and 83 with active low A1 and active high A0 to control the register select. 
-
-
-
+we know "the /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles, it does not go low on I/O and memory read/write cycles that follows the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on. we can leave A7 active high to get to 80h range, then split this down to 82 and 83 with active low A1 and active high A0 to control the register select. to tx we select and send, when rx arrives the /irq drives /int to the z80 and we service the request.
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/6850cct.png)
 
-the 9511 circuit come from doc folder 
 
-the two systems together result is https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+the other part is MPU using AM9511. 
+it cant handle the high clock rate so use a divide circit to 4.
+use address select logic for 84,85, using A7 and A2. 
 
-image
+
+
+
 
 
 
