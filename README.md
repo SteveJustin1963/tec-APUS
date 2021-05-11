@@ -7,7 +7,7 @@
   * cascade another 74138 for low order io
   * check io map, account for current used io's, allocate new io's for tec-apus etc
   * io to 4k rom not 2k, to fit forth, adjust ram select
-* 9511; divide clock 4 for 9511
+* 9511; divide clock 6 for 9511, 7.3728 6 / . 1.2288
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/mc6850.png) 
 SERIAL
@@ -78,7 +78,8 @@ xx
   * ROM_SIZE        equ     $800
   * RAM_SIZE        equ     $800      
 
-* [I would have seen a problem if I had set the emulation file correctly to reflect the memory map of the TEC-1. For emulation in asm.80, the mycomputer.emu file should have the lines 
+* [I would have seen a problem if I had set the emulation file correctly to reflect 
+the memory map of the TEC-1. For emulation in asm.80, the mycomputer.emu file should have the lines 
   * memory.rom.from 0x0000
   * memory.rom.to     0x7FF
   * memory.ram.from 0x800
@@ -699,7 +700,7 @@ in the repo https://github.com/tec1group/software-repo/tree/master/misc
 try with a 7.3728 xtal, simple-echo, dont work. need to write my own test code.
 
 * 20sept
-building 555 cct to control /M1, /WAIT to step thru instructions
+shud i build a 555 cct to control /M1, /WAIT to step thru instructions?
 
 https://z80project.wordpress.com/2014/02/16/single-step-instruction-circuit/
 
@@ -730,9 +731,10 @@ JH; Hi Stephen I have a series of constants declared in a file. I guess it could
 
 9511
 
-i dont know clock rating of chip version i have
+i dont know clock rating of chip version i have, artiles says use low rate 1 ish Mhz
 
-
+12may2021
+redesign cct
 
 
 
