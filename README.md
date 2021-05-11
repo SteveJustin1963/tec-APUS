@@ -2,7 +2,7 @@
 
 # tec-APUS
 
-## todo
+## todo 
 * motherboard
   * cascade another 74138 for low order io
   * check io map, account for current used io's, allocate new io's for tec-apus etc
@@ -27,13 +27,17 @@ https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 
 one part is serial using the MC6850 chip that can do up to 1.0 Mbps serial transmission, 
 we only need a fraction of that, with a 7.3728 Mhz baud rate crystal and setting the divisor in software to /64, results in 115,200 baud rate 
-or with /16 we get 460,800 baud. very fast.
+or with /16 we get 460,800 baud. the other part uses the AM9511 maths chip. we send commmands and data and it executes the result and places on its internal stack to be read out. 
 
+## MC6850
 looking at Grant Searl cct https://github.com/jhlagado/firth for for MC6850 circuit uses /M1, A7,A6,A0 and /WR with /INT.
 we know "the /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles, it does not go low on I/O and memory read/write cycles that follows the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on. we can leave A7 active high to get to 80h range, then split this down to 82 and 83 with active low A1 and active high A0 to control the register select. to tx we select and send, when rx arrives the /irq drives /int to the z80 and we service the request.
 
+# AM9511
 
-## 6850
+# loading code
+
+
 we want to get an echo back from buffer and a message out from buffer. code is compile from .org 0000
 pcb is plugged into the expansion socket, jumper cable is attached also.
 emu board is in rom socket, code is uploaded to emu via another usb cable.
