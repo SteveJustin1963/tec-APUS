@@ -32,18 +32,6 @@ or with /16 we get 460,800 baud. very fast.
 looking at Grant Searl cct https://github.com/jhlagado/firth for for MC6850 circuit uses /M1, A7,A6,A0 and /WR with /INT.
 we know "the /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles, it does not go low on I/O and memory read/write cycles that follows the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on. we can leave A7 active high to get to 80h range, then split this down to 82 and 83 with active low A1 and active high A0 to control the register select. to tx we select and send, when rx arrives the /irq drives /int to the z80 and we service the request.
 
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/6850cct.png)
-
-
-the other part is MPU using AM9511. 
-it cant handle the high clock rate so use a divide circit to 4.
-use address select logic for 84,85, using A7 and A2. 
-
-
-
-
-
-
 
 ## 6850
 we want to get an echo back from buffer and a message out from buffer. code is compile from .org 0000
