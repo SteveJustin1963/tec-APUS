@@ -25,6 +25,7 @@ The TEC-1 has existing IO options like
 * serial in https://github.com/SteveJustin1963/tec-Southern-Cross-Computer
 
 ## tec-APUS, serial + maths, with Forth in mind. 
+cct so far, work in progress
 
 https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 
