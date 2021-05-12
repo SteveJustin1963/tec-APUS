@@ -17,8 +17,7 @@ The TEC-1 has existing IO options like
 * https://github.com/SteveJustin1963/tec-IO
 * https://github.com/SteveJustin1963/tec-RELAY
 * https://github.com/SteveJustin1963/tec-DAT
-* https://github.
-/SteveJustin1963/tec-SERIAL-BG 
+* https://github.com/SteveJustin1963/tec-EMU-BG
 * https://github.com/SteveJustin1963/tec-SIO-BC
 
 ## tec-APUS, serial + maths, with Forth in mind. 
