@@ -22,6 +22,7 @@ The TEC-1 has existing IO options like
 * https://github.com/SteveJustin1963/tec-SIO-BC
 * https://github.com/SteveJustin1963/tec-BIT-BANG
 * https://github.com/SteveJustin1963/tec-SERIAL-LOAD
+* serial in https://github.com/SteveJustin1963/tec-Southern-Cross-Computer
 
 ## tec-APUS, serial + maths, with Forth in mind. 
 
