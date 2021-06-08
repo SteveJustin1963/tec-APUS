@@ -1,3 +1,8 @@
+
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/mc6850.png) 
+SERIAL
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
+
 # draft doc
 
 # tec-APUS
@@ -9,9 +14,6 @@
   * io to 4k rom not 2k, to fit forth, adjust ram select
 * 9511; divide clock 6 for 9511, 7.3728 6 / . 1.2288
 
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/mc6850.png) 
-SERIAL
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
 
 The TEC-1 has existing IO options like 
 * https://github.com/SteveJustin1963/tec-IO
