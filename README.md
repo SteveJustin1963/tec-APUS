@@ -3,7 +3,7 @@
 SERIAL
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
 
-# draft doc
+# draft doc, do not use yet still working on it
 
 # tec-APUS
 
