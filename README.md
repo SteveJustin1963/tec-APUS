@@ -1,9 +1,4 @@
 
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/mc6850.png) 
-SERIAL
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/am9511%20logo.png)
-
-# draft doc, do not use yet still working on it
 
 # tec-APUS
 
@@ -12,7 +7,7 @@ SERIAL
   * cascade another 74138 for low order io
   * check io map, account for current used io's, allocate new io's for tec-apus etc
   * address and select line for 4k rom not 2k, try to fit forth, adjust ram select
-* 9511; divide clock 6 for 9511, 7.3728/6 = 1.2288
+* 9511; divide clock 6 for 9511, 7.3728/6 = 1.2288, oe use /m1 as slow clock
 
 
 The TEC-1 has existing IO options like 
