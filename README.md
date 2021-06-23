@@ -1,20 +1,14 @@
 
 ## tec-APUS, serial + maths, with Forth in mind. 
-cct so far, work in progress
 
+circit work, still evolving
 https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 
-one part is serial using the MC6850 chip that can do up to 1.0 Mbps serial transmission, 
+2 part to this addon, serial using MC6850 ,  can do up to 1.0 Mbps serial transmission, 
 we only need a fraction of that, with a 7.3728 Mhz baud rate crystal and setting the divisor in software to /64, results in 115,200 baud rate 
-or with /16 we get 460,800 baud. the other part uses the AM9511 maths chip. we send commmands and data and it executes the result and places on its internal stack to be read out. 
+or with /16 we get 460,800 baud. 
 
-## todo 
-* motherboard
-  * cascade another 74138 for low order io
-  * check io map, account for current used io's, allocate new io's for tec-apus etc
-  * address and select line for 4k rom not 2k, try to fit forth, adjust ram select
-* 9511; divide clock 6 for 9511, 7.3728/6 = 1.2288, oe use /m1 as slow clock
-
+the other part uses the AM9511 maths chip. we send commmands and data, executes with  results  placed on internal stack .
 
 
 ## MC6850
