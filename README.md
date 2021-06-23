@@ -734,6 +734,14 @@ i dont know clock rating of chip version i have, artiles says use low rate 1 ish
 12may2021
 redesign cct
 
+23 jun2021
+dedesigned cct
+to CJ
+HI, took ur advice and used port select more so redid sch, but i think i stuffed up 9511 decode with 2 port selects, not sure code will work, pls see attach, if u can help me,
+
+
+
+
 
 
 ## References
