@@ -1,6 +1,12 @@
 
+## tec-APUS, serial + maths, with Forth in mind. 
+cct so far, work in progress
 
-# tec-APUS
+https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+
+one part is serial using the MC6850 chip that can do up to 1.0 Mbps serial transmission, 
+we only need a fraction of that, with a 7.3728 Mhz baud rate crystal and setting the divisor in software to /64, results in 115,200 baud rate 
+or with /16 we get 460,800 baud. the other part uses the AM9511 maths chip. we send commmands and data and it executes the result and places on its internal stack to be read out. 
 
 ## todo 
 * motherboard
@@ -10,25 +16,6 @@
 * 9511; divide clock 6 for 9511, 7.3728/6 = 1.2288, oe use /m1 as slow clock
 
 
-The TEC-1 has existing IO options like 
-* https://github.com/SteveJustin1963/tec-IO
-* https://github.com/SteveJustin1963/tec-RELAY
-* https://github.com/SteveJustin1963/tec-DAT
-* https://github.com/SteveJustin1963/tec-EMU-BG
-* https://github.com/SteveJustin1963/tec-SERIAL-BG
-* https://github.com/SteveJustin1963/tec-SIO-BC
-* https://github.com/SteveJustin1963/tec-BIT-BANG
-* https://github.com/SteveJustin1963/tec-SERIAL-LOAD
-* serial in https://github.com/SteveJustin1963/tec-Southern-Cross-Computer
-
-## tec-APUS, serial + maths, with Forth in mind. 
-cct so far, work in progress
-
-https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
-
-one part is serial using the MC6850 chip that can do up to 1.0 Mbps serial transmission, 
-we only need a fraction of that, with a 7.3728 Mhz baud rate crystal and setting the divisor in software to /64, results in 115,200 baud rate 
-or with /16 we get 460,800 baud. the other part uses the AM9511 maths chip. we send commmands and data and it executes the result and places on its internal stack to be read out. 
 
 ## MC6850
 looking at Grant Searl cct https://github.com/jhlagado/firth for for MC6850 circuit uses /M1, A7,A6,A0 and /WR with /INT.
@@ -50,3 +37,6 @@ compile creates .lst and .hex file, its intel format, http://www.keil.com/suppor
 - powerup EMU
 
 ## AM9511
+
+## Journal
+https://github.com/SteveJustin1963/tec-APUS/wiki
