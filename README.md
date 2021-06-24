@@ -15,6 +15,7 @@ The pcb can be connected 2 ways; the expansion socket with ribbon or a 2x22 sock
 The MC6850 is selected via M1, A7,A1,A0  on IO ports 82, 83.
 
 The test code files are 
+
 -mycomputer.emu
 -simple-echo.z80
 
