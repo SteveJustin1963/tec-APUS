@@ -2,9 +2,9 @@
 ## tec-APUS, serial + maths, with Forth in mind. 
 
 This addon has 2 parts, async serial using the MC6850, amx rate of 1.0 Mbps.
-We only need a fraction of that, with a clock of 7.3728 Mhz, which is a special baud rated freq, then dividing down with reg setting divisor;  /64 = 115,200 baud or /16 =  460,800 baud. We set up the control registers then can tx and rx, with INT control as needed.
+We only need a fraction of that, with a clock of 7.3728 Mhz, which is a special baud rated freq, then by dividing down with reg settings divisor; ie /64 = 115,200 baud or /16 =  460,800 baud. We set up the control registers and then can tx and rx, with INT control as needed, ie rx buffer > INT.
 
-Second part adds a maths calculator using the AM9511. We setup control registers send maths commands and data, it executes with result on stack, then calls back on INT.
+The second part adds a maths calculator using the AM9511. We setup the control registers then send maths commands and data, it executes with the result placed on its internals  stack signaling with INT call.
 
 The circuit is WIP still;  https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 The pcb can be connect 2 ways expansion socket with ribbon or a 2x22 socket.
@@ -36,5 +36,7 @@ compile creates .lst and .hex file, its intel format, http://www.keil.com/suppor
 
 ## Journal
 https://github.com/SteveJustin1963/tec-APUS/wiki
+
+
 
 
