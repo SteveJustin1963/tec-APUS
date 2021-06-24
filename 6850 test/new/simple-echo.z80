@@ -7,6 +7,8 @@
 ; Full input buffering with incoming data hardware handshaking
 ; Handshake shows full before the buffer is totally filled to allow run-on from the sender
 
+; constants need to be changed to accomodate what your tec-1's hardware its running 
+
 SER_BUFSIZE     .EQU     3FH
 SER_FULLSIZE    .EQU     30H
 SER_EMPTYSIZE   .EQU     5
