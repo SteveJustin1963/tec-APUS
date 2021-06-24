@@ -1,14 +1,12 @@
 
 ## tec-APUS, serial + maths, with Forth in mind. 
 
-circit work, still evolving
-https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+This addon has 2 parts, async serial using the MC6850, amx rate of 1.0 Mbps.  
+We only need a fraction of that, with a clock of 7.3728 Mhz, which is a special baud rated freq, then dividing down with reg setting divisor;  /64 = 115,200 baud or /16 =  460,800 baud. We set up the control registers then can tx and rx, with INT control as needed.
 
-2 part to this addon, serial using MC6850 ,  can do up to 1.0 Mbps serial transmission, 
-we only need a fraction of that, with a 7.3728 Mhz baud rate crystal and setting the divisor in software to /64, results in 115,200 baud rate 
-or with /16 we get 460,800 baud. 
+Second part adds a maths calculator using the AM9511. We setup control registers send maths commmands and data, it executes with result on stack, then calls back on INT.
 
-the other part uses the AM9511 maths chip. we send commmands and data, executes with  results  placed on internal stack .
+The circit is WIP still;  https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
 
 
 ## MC6850
