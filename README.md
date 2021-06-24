@@ -24,7 +24,7 @@ The EMU board goes in the ROM socket, code is uploaded via USB cable from the pc
 Also note when you activate “Download BIN” function in the asm80.com IDE, you need to trim the bin file down default is 64k using ;
 eg
 - .binfrom 0000h 
-- .binto 130h
+- .binto 0130h
 
 You also need a special USB to TTL cable; it has a TTL to USB bridging chip ie the FT232R or PL2303TA and emulates a virtual com port. When the USB end goes into pc, It will activate PnP and windows will auto install drivers and create a virtual com port. Or use a TTL to RS-232 converter such the MAX232 chip on pcb. Then connect to TTL on tec-APUS and run a com cable to the com port on the pc. Bugt newer pcs and laptops don't always have com ports.
 Then run a terminal app to generate ascii text such as 
