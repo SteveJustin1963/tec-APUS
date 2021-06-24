@@ -1,9 +1,9 @@
 
-# tec-APUS
+## tec-APUS, 
 
 Serial + Maths+ Firth of Forth in mind. 
 
-This addon has 2 parts, async serial using the MC6850, with a max rate of 1.0 Mbps.
+This addon has 2 parts, async serial using the MC6850, amx rate of 1.0 Mbps.
 We only need a fraction of that, with a clock of 7.3728 Mhz, which is a special baud rated freq, then by dividing down with reg settings divisor; ie /64 = 115,200 baud or /16 =  460,800 baud. We set up the control registers and then can tx and rx, with INT control as needed, ie rx buffer > INT.
 
 The second part adds a maths calculator using the AM9511. We setup the control registers then send maths commands and data, it executes with the result placed on its internals  stack signaling with INT call.
@@ -14,12 +14,19 @@ The pcb can be connected 2 ways; the expansion socket with ribbon or a 2x22 sock
 ## MC6850
 The MC6850 is selected via M1, A7,A1,A0  on IO ports 82, 83.
 
-The test code files are 
-- mycomputer.emu
-- simple-echo.z80
+The test code is files are 
+-mycomputer.emu
+-simple-echo.z80
 
-You can compile it in asm80.com or OshonSoft etc, place your test message in the code and set the memory range to Download as a BIN file, main.z80.bin will download. Also setup ORG value depending on how or where you load the code or which monitor is used. If using Bens https://github.com/SteveJustin1963/tec-EMU-BG there is not monitor and org = 0000h. 
+You can compile it in asm80.com, place your test message in the code and set the memory range to Download as a BIN file, main.z80.bin will download. Also setup ORG value depending on how or where you load the code or which monitor is used. If using Bens https://github.com/SteveJustin1963/tec-EMU-BG there is not monitor and org = 0000h. 
 The EMU board goes in the ROM socket, code is uploaded via USB cable from the pc. When the USB end goes into pc, it will activate PnP and windows will auto install drivers for EMU that Bens app is a .bat DOS file when runs calls a python script to load the code. run C:\cmd and C:\mode.
+
+Also note when you activate “Download BIN” function in the asm80.com IDE, you need to trim the bin file down default is 64k using ;
+.binfrom ( hex addr) 
+.binto (hex addr)
+Eg 
+.binfrom 0000h 
+.binto 130h
 
 You also need a special USB to TTL cable; it has a TTL to USB bridging chip ie the FT232R or PL2303TA and emulates a virtual com port. When the USB end goes into pc, It will activate PnP and windows will auto install drivers and create a virtual com port. Or use a TTL to RS-232 converter such the MAX232 chip on pcb. Then connect to TTL on tec-APUS and run a com cable to the com port on the pc. Bugt newer pcs and laptops don't always have com ports.
 Then run a terminal app to generate ascii text such as 
