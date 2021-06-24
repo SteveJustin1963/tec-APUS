@@ -4,16 +4,20 @@
 This addon has 2 parts, async serial using the MC6850, amx rate of 1.0 Mbps.  
 We only need a fraction of that, with a clock of 7.3728 Mhz, which is a special baud rated freq, then dividing down with reg setting divisor;  /64 = 115,200 baud or /16 =  460,800 baud. We set up the control registers then can tx and rx, with INT control as needed.
 
-Second part adds a maths calculator using the AM9511. We setup control registers send maths commmands and data, it executes with result on stack, then calls back on INT.
+Second part adds a maths calculator using the AM9511. We setup control registers send maths commands and data, it executes with result on stack, then calls back on INT.
 
-The circit is WIP still;  https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
-
+The circuit is WIP still;  https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4
+The pcb can be connect 2 ways expansion socket with ribbon or a 2x22 socket.
 
 ## MC6850
-looking at Grant Searl cct https://github.com/jhlagado/firth for for MC6850 circuit uses /M1, A7,A6,A0 and /WR with /INT.
-we know "the /M1 signal goes low only on instruction fetch cycles and interupt acknowledge cycles, it does not go low on I/O and memory read/write cycles that follows the instructions." so when we /WR to the chip /M1 will be high and that actives CS0 on. we can leave A7 active high to get to 80h range, then split this down to 82 and 83 with active low A1 and active high A0 to control the register select. to tx we select and send, when rx arrives the /irq drives /int to the z80 and we service the request.
+The MC6850 circuit is similar to Grant Searl’s; https://github.com/jhlagado/firth, we use /M1, A7,A1,A0  for IO ports 82, 83.
 
-we want to get an echo back from buffer and a message out from buffer. code is compile from .org 0000
+The test code is 
+-mycomputer.emu
+-simple-echo.z80
+You can compile it in asm80.com
+
+echo.asm; to get an echo back from buffer and a message out from buffer
 pcb is plugged into the expansion socket, jumper cable is attached also.
 emu board is in rom socket, code is uploaded to emu via another usb cable.
 
@@ -32,3 +36,5 @@ compile creates .lst and .hex file, its intel format, http://www.keil.com/suppor
 
 ## Journal
 https://github.com/SteveJustin1963/tec-APUS/wiki
+
+
