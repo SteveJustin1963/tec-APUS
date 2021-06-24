@@ -1,7 +1,7 @@
 
 ## tec-APUS, serial + maths, with Forth in mind. 
 
-This addon has 2 parts, async serial using the MC6850, amx rate of 1.0 Mbps.  
+This addon has 2 parts, async serial using the MC6850, amx rate of 1.0 Mbps.
 We only need a fraction of that, with a clock of 7.3728 Mhz, which is a special baud rated freq, then dividing down with reg setting divisor;  /64 = 115,200 baud or /16 =  460,800 baud. We set up the control registers then can tx and rx, with INT control as needed.
 
 Second part adds a maths calculator using the AM9511. We setup control registers send maths commands and data, it executes with result on stack, then calls back on INT.
