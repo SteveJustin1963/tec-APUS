@@ -1,14 +1,25 @@
 
 cpu Z80
 
+; the EMU has 4k rom space so set to
 memory.rom.from 0x0000
 memory.rom.to 0x0fff
-memory.ram.from 0x1000
-memory.ram.to 0xffff
+
+; ram is very limited on tec-1 so set to what you have, 2k ram range is 800-1 h
+
+memory.ram.from 0x0800
+memory.ram.to 0x1000
+
 
 serial 6850
-serial.data 0x81
-serial.control 0x80
+; ports on Firth code 
+; serial.data 0x81
+; serial.control 0x80
+
+; ports on tec-APU is  
+serial.data 0x83
+serial.control 0x82
+
 
 serial.interrupt 1
 
