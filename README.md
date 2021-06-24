@@ -22,11 +22,9 @@ You can compile it in asm80.com, place your test message in the code and set the
 The EMU board goes in the ROM socket, code is uploaded via USB cable from the pc. When the USB end goes into pc, it will activate PnP and windows will auto install drivers for EMU that Bens app is a .bat DOS file when runs calls a python script to load the code. run C:\cmd and C:\mode.
 
 Also note when you activate “Download BIN” function in the asm80.com IDE, you need to trim the bin file down default is 64k using ;
-.binfrom ( hex addr) 
-.binto (hex addr)
-Eg 
-.binfrom 0000h 
-.binto 130h
+eg
+- .binfrom 0000h 
+- .binto 130h
 
 You also need a special USB to TTL cable; it has a TTL to USB bridging chip ie the FT232R or PL2303TA and emulates a virtual com port. When the USB end goes into pc, It will activate PnP and windows will auto install drivers and create a virtual com port. Or use a TTL to RS-232 converter such the MAX232 chip on pcb. Then connect to TTL on tec-APUS and run a com cable to the com port on the pc. Bugt newer pcs and laptops don't always have com ports.
 Then run a terminal app to generate ascii text such as 
