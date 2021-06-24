@@ -3,7 +3,7 @@
 
 Serial + Maths+ Firth of Forth in mind. 
 
-This addon has 2 parts, async serial using the MC6850, amx rate of 1.0 Mbps.
+This addon has 2 parts, async serial using the MC6850, with a max rate of 1.0 Mbps.
 We only need a fraction of that, with a clock of 7.3728 Mhz, which is a special baud rated freq, then by dividing down with reg settings divisor; ie /64 = 115,200 baud or /16 =  460,800 baud. We set up the control registers and then can tx and rx, with INT control as needed, ie rx buffer > INT.
 
 The second part adds a maths calculator using the AM9511. We setup the control registers then send maths commands and data, it executes with the result placed on its internals  stack signaling with INT call.
