@@ -15,9 +15,8 @@ The pcb can be connected 2 ways; the expansion socket with ribbon or a 2x22 sock
 The MC6850 is selected via M1, A7,A1,A0  on IO ports 82, 83.
 
 The test code files are 
-
--mycomputer.emu
--simple-echo.z80
+- mycomputer.emu
+- simple-echo.z80
 
 You can compile it in asm80.com, place your test message in the code and set the memory range to Download as a BIN file, main.z80.bin will download. Also setup ORG value depending on how or where you load the code or which monitor is used. If using Bens https://github.com/SteveJustin1963/tec-EMU-BG there is not monitor and org = 0000h. 
 The EMU board goes in the ROM socket, code is uploaded via USB cable from the pc. When the USB end goes into pc, it will activate PnP and windows will auto install drivers for EMU that Bens app is a .bat DOS file when runs calls a python script to load the code. run C:\cmd and C:\mode.
