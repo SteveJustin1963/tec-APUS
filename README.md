@@ -27,8 +27,8 @@ Also note when you activate “Download BIN” function in the asm80.com IDE, yo
 
 You also need a special USB to TTL cable; it has a TTL to USB bridging chip ie the FT232R or PL2303TA and emulates a virtual com port. When the USB end goes into pc, It will activate PnP and windows will auto install drivers and create a virtual com port. Or use a TTL to RS-232 converter such the MAX232 chip on pcb. Then connect to TTL on tec-APUS and run a com cable to the com port on the pc. Bugt newer pcs and laptops don't always have com ports.
 Then run a terminal app to generate ascii text such as 
--https://www.putty.org/    
--https://www.chiark.greenend.org.uk/~sgtatham/putty/ 
+- https://www.putty.org/    
+- https://www.chiark.greenend.org.uk/~sgtatham/putty/ 
 
 On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Green=TXD, but RTS, CTS, DSR are not there on a cheap cables, from the chip inside the lines are not presented and are not needed for the PCB. Some current limit resistors are on the tx and rx lines for protection. You can do loopback test on the cable, so short out TX to RX (white green), typing anything.. It should echo back.
 
