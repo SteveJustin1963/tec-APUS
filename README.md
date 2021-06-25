@@ -12,7 +12,7 @@ The circuit is still work in progress at   https://easyeda.com/editor#id=f38afcc
 The pcb can be connected 2 ways; the expansion socket with ribbon or a 2x22 socket.
 
 ## MC6850
-The MC6850 is selected via M1, A7,A1,A0  on IO ports 82, 83.
+The MC6850 is active high enabled on E with /IORQ inverted to IORQ high and write or read to IO ports 82, 83 with M1, A7,A1,A0.
 
 The test code is files are 
 -mycomputer.emu
@@ -33,7 +33,10 @@ Then run a terminal app to generate ascii text such as
 On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Green=TXD, but RTS, CTS, DSR are not there on a cheap cables, from the chip inside the lines are not presented and are not needed for the PCB. Some current limit resistors are on the tx and rx lines for protection. You can do loopback test on the cable, so short out TX to RX (white green), typing anything.. It should echo back.
 
 ## AM9511
-See the code file 9511.asm, still work in progress.
+The AM9511 is active low enabled and port selected simultaneously on /CS (chip select) with A7,A3,IORQ and A0 toggling C/D (Command/Data) for write or read to IO ports 84, 85. The 9511 needs a really slow clock so rather than use a divide down we can use M1 as a psudo clock.
+
+The test code is 
+- 9511.asm, still a work in progress.
 
 ## Firth of Forth
 Firth still wont fit in a 4k ROM mod (https://github.com/SteveJustin1963/tec-4krom-12kram-mod) but is not far off. When it does, Firth can be compiled with 82, 83 control ports and testing can begin.
