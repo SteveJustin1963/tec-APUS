@@ -39,7 +39,7 @@ The test code is
 - 9511.asm, still a work in progress.
 
 ## Firth of Forth
-Firth still wont fit in a 4k ROM mod (https://github.com/SteveJustin1963/tec-4krom-12kram-mod) but is not far off. When it does, Firth can be compiled with 82, 83 control ports and testing can begin.
+Firth still wont fit in a 4k ROM mod (https://github.com/SteveJustin1963/tec-4krom-12kram-mod) but is not far off. 
 
 ## Journal
 - Wiki in https://github.com/SteveJustin1963/tec-APUS/wiki
