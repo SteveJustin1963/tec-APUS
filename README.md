@@ -21,8 +21,7 @@ The test code is files are
 You can compile it in asm80.com, place your test message in the code and set the memory range to Download as a BIN file, main.z80.bin will download. Also setup ORG value depending on how or where you load the code or which monitor is used. If using Bens https://github.com/SteveJustin1963/tec-EMU-BG there is not monitor and org = 0000h. 
 The EMU board goes in the ROM socket, code is uploaded via USB cable from the pc. When the USB end goes into pc, it will activate PnP and windows will auto install drivers for EMU that Bens app is a .bat DOS file when runs calls a python script to load the code. run C:\cmd and C:\mode.
 
-Also note when you activate “Download BIN” function in the asm80.com IDE, you need to trim the bin file down default is 64k using ;
-eg
+Also note when you activate “Download BIN” function in the asm80.com IDE, you need to trim the bin file down default is 64k using ; ie
 - .binfrom 0000h 
 - .binto 0130h
 
