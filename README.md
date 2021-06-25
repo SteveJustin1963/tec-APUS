@@ -21,6 +21,7 @@ The test code is
 Using asm80.com IDE the default binary file size is 64k, way to large. Trim with
 - .binfrom 0000h 
 - .binto 0130h
+
 You then download the .bin file that can be uploaded to EMU, or use the intel hex file uploaded to an ee/eprom via a burner.
 
 Using OshonSoft IDE, the assembler will trim the code length, but if using basic to make asm, then insert "Define RAMEND = 4095".
