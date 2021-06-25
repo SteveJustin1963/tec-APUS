@@ -23,7 +23,7 @@ Using asm80.com IDE the default binary file size is 64k, way to large. Trim with
 - .binto 0130h
 
 Using OshonSoft IDE, assembler will trim to code length, if using basic to make asm, then insert eg 
-Define RAMEND = 4095
+- Define RAMEND = 4095
 
 Also code constants will depend if it runs in RAM or ROM space. ROM can be EPROM or emulated  ie with Bens' https://github.com/SteveJustin1963/tec-EMU-BG the monitor and ROM space is emulated side by side, as OR. When system is reset it reverts back. 
 The EMU board goes in the ROM socket, code is uploaded via USB cable from the pc. When the USB end goes into pc, it will activate PnP and windows will auto install drivers for EMU that Bens app is a .bat DOS file when runs calls a python script to load the code. run C:\cmd and C:\mode.
