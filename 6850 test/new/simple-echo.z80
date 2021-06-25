@@ -6,6 +6,8 @@
 ; Minimum 6850 ACIA interrupt driven serial I/O
 ; Full input buffering with incoming data hardware handshaking
 ; Handshake shows full before the buffer is totally filled to allow run-on from the sender
+; coded by John Hardy
+
 
 ; constants need to be changed to accomodate what your tec-1's hardware its running 
 
