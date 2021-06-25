@@ -21,14 +21,13 @@ The test code is
 Using asm80.com IDE the default binary file size is 64k, way to large. Trim with
 - .binfrom 0000h 
 - .binto 0130h
+You then download the .bin file that can be uploaded to EMU, or use the intel hex file uploaded to an ee/eprom via a burner.
 
-Using OshonSoft IDE, assembler will trim to code length, if using basic to make asm, then insert eg 
-- Define RAMEND = 4095
+Using OshonSoft IDE, the assembler will trim the code length, but if using basic to make asm, then insert "Define RAMEND = 4095".
+After compiling the .obj (binary) and .hex files are used. 
 
 Also code constants will depend if it runs in RAM or ROM space. ROM can be EPROM or emulated  ie with Bens' https://github.com/SteveJustin1963/tec-EMU-BG the monitor and ROM space is emulated side by side, as OR. When system is reset it reverts back. 
 The EMU board goes in the ROM socket, code is uploaded via USB cable from the pc. When the USB end goes into pc, it will activate PnP and windows will auto install drivers for EMU that Bens app is a .bat DOS file when runs calls a python script to load the code. run C:\cmd and C:\mode.
-
-
 
 You also need a special USB to TTL cable; it has a TTL to USB bridging chip ie the FT232R or PL2303TA and emulates a virtual com port. When the USB end goes into pc, It will activate PnP and windows will auto install drivers and create a virtual com port. Or use a TTL to RS-232 converter such the MAX232 chip on pcb. Then connect to TTL on tec-APUS and run a com cable to the com port on the pc. Bugt newer pcs and laptops don't always have com ports.
 Then run a terminal app to generate ascii text such as 
