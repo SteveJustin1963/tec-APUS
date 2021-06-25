@@ -41,7 +41,7 @@ Firth still wont fit in a 4k ROM mod but is not far off. When it does, Firth can
 
 ## Journal
 More info in https://github.com/SteveJustin1963/tec-APUS/wiki
-
+Docs in https://github.com/SteveJustin1963/tec-BOOKS/tree/master/tec-APUS
 
 
 
