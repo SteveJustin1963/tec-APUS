@@ -37,7 +37,7 @@ On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Gre
 See the code file 9511.asm, still work in progress.
 
 ## Firth of Forth
-Firth still wont fit in a 4k ROM mod but is not far off. When it does, Firth can be compiled with 82, 83 control ports and testing can begin.
+Firth still wont fit in a 4k ROM mod (https://github.com/SteveJustin1963/tec-4krom-12kram-mod) but is not far off. When it does, Firth can be compiled with 82, 83 control ports and testing can begin.
 
 ## Journal
 More info in https://github.com/SteveJustin1963/tec-APUS/wiki
