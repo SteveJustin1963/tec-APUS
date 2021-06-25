@@ -40,8 +40,8 @@ See the code file 9511.asm, still work in progress.
 Firth still wont fit in a 4k ROM mod (https://github.com/SteveJustin1963/tec-4krom-12kram-mod) but is not far off. When it does, Firth can be compiled with 82, 83 control ports and testing can begin.
 
 ## Journal
-More info in https://github.com/SteveJustin1963/tec-APUS/wiki
-Docs in https://github.com/SteveJustin1963/tec-BOOKS/tree/master/tec-APUS
+- Wiki in https://github.com/SteveJustin1963/tec-APUS/wiki
+- Docs in https://github.com/SteveJustin1963/tec-BOOKS/tree/master/tec-APUS
 
 
 
