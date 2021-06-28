@@ -3,7 +3,9 @@
 
 Serial + Maths+ Firth of Forth in mind. 
 
-The circuit is  at  https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4|fe21552d7b804fbdb700c020af962372
+The circuit is at
+- https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4|321ec5e4744a4cc79bfbc13cb8e15be6
+
 The pcb can be connected 2 ways; the expansion socket with ribbon or a 2x22 socket.
 
 This addon has 2 parts, async serial using the MC6850, amx rate of 1.0 Mbps.
