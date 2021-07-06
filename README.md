@@ -1,9 +1,11 @@
 
 ## tec-APUS
-
 Serial + Maths+ https://github.com/jhlagado/firth  or https://github.com/monsonite/MINT in mind.
 
-circuit https://easyeda.com/editor#id=|f38afcc535a449c0b98ccadf3163fde4|dee47719661d4ba880eba90f8b386a9a
+- 6850 ports 82, 83
+- 9511 ports 84, 85
+
+circuit and pcb https://easyeda.com/editor#id=|f38afcc535a449c0b98ccadf3163fde4|dee47719661d4ba880eba90f8b386a9a
 
 The pcb can be connected 2 ways; the expansion socket with ribbon or a 2x22 socket.
 
