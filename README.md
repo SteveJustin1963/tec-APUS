@@ -3,8 +3,7 @@
 
 Serial + Maths+ Firth of Forth in mind. 
 
-The circuit is at
-- https://easyeda.com/editor#id=f38afcc535a449c0b98ccadf3163fde4|321ec5e4744a4cc79bfbc13cb8e15be6
+circuit https://easyeda.com/editor#id=|f38afcc535a449c0b98ccadf3163fde4|dee47719661d4ba880eba90f8b386a9a
 
 The pcb can be connected 2 ways; the expansion socket with ribbon or a 2x22 socket.
 
