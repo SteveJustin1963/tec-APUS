@@ -5,7 +5,12 @@ Serial + Maths+ Forth in mind
 - https://github.com/monsonite/MINT 
 - https://github.com/yesco/ALForth
 
-circuit and pcb https://easyeda.com/editor#id=|f38afcc535a449c0b98ccadf3163fde4|dee47719661d4ba880eba90f8b386a9a
+circuit options
+
+https://easyeda.com/editor#id=|f38afcc535a449c0b98ccadf3163fde4|dee47719661d4ba880eba90f8b386a9a
+
+https://easyeda.com/editor#id=6f145406188c412f956cf865d4f4fa23|3f4140b2c93240a8af22c56c6d2cfec7
+
 - 6850 ports 82, 83
 - 9511 ports 84, 85
 
