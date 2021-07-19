@@ -18,15 +18,15 @@ TWO CHIP
 - 2x22 edge connect
 - idc or rj45 serial connect
 - 12v pcb piggy
-- - 6850 ports 82, 83, 9511 ports 84, 85
-- 
+- 6850 ports 82, 83, 9511 ports 84, 85
+
 https://easyeda.com/editor#id=|f38afcc535a449c0b98ccadf3163fde4|dee47719661d4ba880eba90f8b386a9a
 
 TWO CHIP L
 - L shape, expansion socket
 - 12v stepup included on pcb
 - 6850 ports 82, 83, 9511 ports 84, 85
-- 
+
 https://easyeda.com/editor#id=6f145406188c412f956cf865d4f4fa23|3f4140b2c93240a8af22c56c6d2cfec7
 
 
