@@ -31,11 +31,6 @@ https://easyeda.com/editor#id=6f145406188c412f956cf865d4f4fa23|3f4140b2c93240a8a
 
 
 
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/1.png)
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/2.png)
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/3.png)
-
-
 
 The pcb can be connected 2 ways; the expansion socket with ribbon or a 2x22 socket.
 
