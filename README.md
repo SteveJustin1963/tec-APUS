@@ -20,7 +20,7 @@ MC6850 needs a baud clock, am using 7.3728 Mhz. the code divides this down eg /6
 
 AM9511 setup the control registers then send maths commands or data; it executes and the result is placed on its internals stack, then it signals via NMI or INT call per jumper setting.
 the select line is active low, drive it with a free ram select say 6 (h3000,3001)  and 7 (h3800,3801), the A0 controls Command/Data registers.
-its alos needs a slow clock soam trying RC slowed /M1 its more than 2 T states or if that fails will use a pair of flip flops to /3.
+its alos needs a slow clock so am trying /M1 slowed RC cct to extend the 2T states or if that fails will use a pair of flip flops to /3. Or use a slower baud clock.
 
 
 ### AM9511 code
