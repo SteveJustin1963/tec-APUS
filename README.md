@@ -1,7 +1,7 @@
 
 ## tec-APUS
 
-this aim with this addon is to get a Serial port MC6850 and Maths co processor AM9511 support for maths code and Forth code.
+this addon hack is for Serial port MC6850 and Maths chip AM9511
 
 - https://github.com/jhlagado/firth  
 - https://github.com/monsonite/MINT 
@@ -10,8 +10,7 @@ this aim with this addon is to get a Serial port MC6850 and Maths co processor A
 ### circuit
 https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1|c5e3f76b1960488e92af095fc1e68dca
 
-this circuit was hacked together from for two chips, MC6850 and AM9511
-
+this circuit was hacked together from
 - https://www.tindie.com/products/semachthemonkey/rc2014-am9511a-apu-arithmetic-processor/
 - https://github.com/RC2014Z80/RC2014/tree/master/Hardware/APU%20RC2014
 - https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/ExpansionBoards/SC-Serial
