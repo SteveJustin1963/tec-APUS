@@ -3,6 +3,8 @@
 
 this addon hack is for Serial port MC6850 and Maths chip AM9511
 
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/255080535_3114837952082902_9094347087018948754_n.jpg)
+
 - https://github.com/jhlagado/firth  
 - https://github.com/monsonite/MINT
 - https://github.com/yesco/ALForth
