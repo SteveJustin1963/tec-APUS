@@ -1,7 +1,7 @@
 
 ## tec-APUS
 
-this addon hack is for Serial port MC6850 and Maths chip AM9511
+this add-on hack is for Serial port MC6850 and Maths chip AM9511 with exploiting forth or mint in mind. hoooorraaa
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/255080535_3114837952082902_9094347087018948754_n.jpg)
 
