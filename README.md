@@ -18,11 +18,11 @@ this circuit was hacked together from
 - https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/ExpansionBoards/SC-Serial
 
 
-MC6850 needs a baud clock, am using 7.3728 Mhz. the code divides this down eg /64 = 115,200 baud or /16 =  460,800 baud and also handles control registers  with INT control eg rx buffer > INT.
+MC6850 needs a baud clock eg 7.3728 Mhz or slower. the code divides this down eg /64 = 115,200 baud or /16 =  460,800 baud and also handles control registers  with INT control eg rx buffer > INT.
 
-AM9511 setup the control registers then send maths commands or data; it executes and the result is placed on its internals stack, then it signals via NMI or INT call per jumper setting.
-the select line is active low, drive it with a free ram select say 6 (h3000,3001)  and 7 (h3800,3801), the A0 controls Command/Data registers.
-its alos needs a slow clock so am trying /M1 slowed RC cct to extend the 2T states or if that fails will use a pair of flip flops to /3. Or use a slower baud clock.
+AM9511 setup the control registers then send maths commands or data; it executes and the result is placed on its internals stack, then it signals via INT.
+the select line P1 is active low, driven by eg port 6 (h3000,3001) or 7 (h3800,3801), the A0 controls Command/Data registers.
+its also needs a slower clock just over 1Mh so with drive direct with /M1 which is arount 2T states or just use the onboard flip flops /3; better. Or use a slower baud clock abd run it direct; mod needed.
 
 
 ### AM9511 code
