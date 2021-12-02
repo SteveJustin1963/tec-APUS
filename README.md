@@ -61,6 +61,18 @@ Then run a terminal app to generate ascii text such as
 On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Green=TXD, but RTS, CTS, DSR are not there on a cheap cables, from the chip inside the lines are not presented and are not needed for the PCB. Some current limit resistors are on the tx and rx lines for protection. You can do loopback test on the cable, so short out TX to RX (white green), typing anything.. It should echo back.
 
 ## Testing
+
+2 errors on 6850
+
+from CJ;
+OK, I got the 6850 to work with the SC, there are two errors on your schematic which got transferred to the PCB,  Firstly, you have an A5 net label on the A6 pin on the expansion socket so the board has A5 and A6 shorted together. Secondly, the RXCLK and TXCLK of the 6850 are connected to the net label CLK bar, but there is no CLK bar net, so those two pins are connected together but nowhere else, they should connect to CLK. 
+Only two small errors so that's not too bad at all!
+
+For the decoding I connected A6 to M1 ( I don't think you actually have to have M1 connected unless you are doing IM2 interrupts) and I connected PORT1 to A7 to decode the 6850 at $40 and $41 for the CONTROL/STATUS and TDR/RDR registers respectively, I might do this on the TEC-1F as well.
+
+Now I'm going to try again to get it going on the TEC-1F before I have a go at the APU.
+
+
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/cg%201.jpg)
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/cj-2.jpg)
 
