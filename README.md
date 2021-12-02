@@ -60,6 +60,10 @@ Then run a terminal app to generate ascii text such as
 
 On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Green=TXD, but RTS, CTS, DSR are not there on a cheap cables, from the chip inside the lines are not presented and are not needed for the PCB. Some current limit resistors are on the tx and rx lines for protection. You can do loopback test on the cable, so short out TX to RX (white green), typing anything.. It should echo back.
 
+## Testing
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/cg%201.jpg)
+
+
 ### Forth
 Firth still wont fit in a 4k ROM mod (https://github.com/SteveJustin1963/tec-4krom-12kram-mod) but is not far off. John H os working on another
 but MINT will fit in 1k !
