@@ -62,7 +62,7 @@ On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Gre
 
 ## Testing
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/cg%201.jpg)
-
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/cj-2.jpg)
 
 ### Forth
 - JH's Firth https://github.com/jhlagado/firth is just over 4k ROM, with some hacking maybe can get it under 4k
