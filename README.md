@@ -65,11 +65,13 @@ On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Gre
 
 
 ### Forth
-Firth still wont fit in a 4k ROM mod (https://github.com/SteveJustin1963/tec-4krom-12kram-mod) but is not far off. John H os working on another
-but MINT will fit in 1k !
+- JH's Firth maybe will fit in a 4k ROM with some hacking if the TEC-1 is modded (https://github.com/SteveJustin1963/tec-4krom-12kram-mod) 
+- JH Zedforth https://github.com/jhlagado/zedforth is working wip
+- or MINT will fit in 1k ROM
 
 
 ### Journal
+retired docs
 - Wiki in https://github.com/SteveJustin1963/tec-APUS/wiki
 - Docs in https://github.com/SteveJustin1963/tec-BOOKS/tree/master/tec-APUS
 
