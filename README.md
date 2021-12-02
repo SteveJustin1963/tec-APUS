@@ -65,8 +65,9 @@ On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Gre
 
 
 ### Forth
-- JH's Firth maybe will fit in a 4k ROM with some hacking if the TEC-1 is modded (https://github.com/SteveJustin1963/tec-4krom-12kram-mod) 
-- JH Zedforth https://github.com/jhlagado/zedforth is working wip
+- JH's Firth https://github.com/jhlagado/firth is just over 4k ROM, with some hacking maybe can get it under 4k
+- TEC-1 mod for 4k (https://github.com/SteveJustin1963/tec-4krom-12kram-mod), or use Grant Searls Z80 system.
+- JH's Zedforth https://github.com/jhlagado/zedforth is working wip, maybe 2k target, not sure
 - or MINT will fit in 1k ROM
 
 
