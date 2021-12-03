@@ -22,7 +22,7 @@ MC6850 needs a baud clock eg 7.3728 Mhz or slower. the code divides this down eg
 
 AM9511 setup the control registers then send maths commands or data; it executes and the result is placed on its internals stack, then it signals via INT.
 the select line P1 is active low, driven by eg port 6 (h3000,3001) or 7 (h3800,3801), the A0 controls Command/Data registers.
-its also needs a slower clock just over 1Mh so with drive direct with /M1 which is arount 2T states or just use the onboard flip flops /3; better. Or use a slower baud clock abd run it direct; mod needed.
+its also needs a slower clock just over 1Mh so with drive direct with /M1 which is arount 2T states or just use the onboard flip flops /3; better. Or use a slower baud clock and run it direct; mod needed.
 
 
 ### AM9511 code
