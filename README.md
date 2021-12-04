@@ -63,6 +63,7 @@ On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Gre
 ## Testing
 
 2 errors on 6850
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/errata-1.png)
 
 from CJ;
 OK, I got the 6850 to work with the SC, there are two errors on your schematic which got transferred to the PCB,  Firstly, you have an A5 net label on the A6 pin on the expansion socket so the board has A5 and A6 shorted together. Secondly, the RXCLK and TXCLK of the 6850 are connected to the net label CLK bar, but there is no CLK bar net, so those two pins are connected together but nowhere else, they should connect to CLK. 
