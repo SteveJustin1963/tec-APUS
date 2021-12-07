@@ -87,7 +87,17 @@ Now I'm going to try again to get it going on the TEC-1F before I have a go at t
 ### Journal
 retired docs
 - Wiki in https://github.com/SteveJustin1963/tec-APUS/wiki
-- Docs in https://github.com/SteveJustin1963/tec-BOOKS/tree/master/tec-APUS
 
+### btw, TEC-1 has other IO options aka; 
+* https://github.com/SteveJustin1963/tec-IO
+* https://github.com/SteveJustin1963/tec-RELAY
+* https://github.com/SteveJustin1963/tec-DAT
+* https://github.com/SteveJustin1963/tec-EMU-BG
+* https://github.com/SteveJustin1963/tec-SERIAL-BG
+* https://github.com/SteveJustin1963/tec-SIO-BC
+* https://github.com/SteveJustin1963/tec-BIT-BANG
+* https://github.com/SteveJustin1963/tec-SERIAL-LOAD
+* serial in https://github.com/SteveJustin1963/tec-Southern-Cross-Computer
+* https://www.facebook.com/groups/623556744820045/posts/1139514603224254/
 
 
