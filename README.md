@@ -93,11 +93,6 @@ Next step is to get the APU going!
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/263019317_280462017379491_3466954581733273683_n.jpg)
 
 
-### Forth
-- JH's Firth https://github.com/jhlagado/firth is just over 4k ROM, with some hacking maybe can get it under 4k
-- TEC-1 mod for 4k (https://github.com/SteveJustin1963/tec-4krom-12kram-mod), or use Grant Searls Z80 system.
-- JH's Zedforth https://github.com/jhlagado/zedforth is working wip, maybe 2k target, not sure
-- or MINT will fit in 1k ROM
 
 
 ### Journal
