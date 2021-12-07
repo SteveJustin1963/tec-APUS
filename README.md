@@ -77,6 +77,22 @@ Now I'm going to try again to get it going on the TEC-1F before I have a go at t
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/cg%201.jpg)
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/cj-2.jpg)
 
+Craig Jones
+7/12/21
+If you are following along at home, this is Stephen Justin's APU / Serial board running on a virtual TEC-1. 
+To get it to work I had to apply inverted A7 to the E3(G1) Pin 6 of the IO decoder of the TEC-1 using a transistor inverter. This mod disables the TEC-1 IO decoder above $80. 
+Now A7 can be used to select the  6850 ACIA at $80.
+The Baud clock is coming from the 4MHz crystal, a great feature of the terminal program Teraterm is the ability to enter non standard Baud Rates. With a 4Mhz crystal the Baud rate is 62500.
+I was also able to use the RC oscillator as the Baud clock by downloading a program that just sent lower case 'a' out the 6850 serial port, I set Teraterm to 9600 and adjusted the RC oscillator to give a start bit of 104us as seen on the CRO. 
+Next step is to get the APU going!
+
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/260717599_280462014046158_384653013632846250_n.jpg)
+
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/261002318_280462027379490_7516334454848220787_n.jpg)
+
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/263019317_280462017379491_3466954581733273683_n.jpg)
+
+
 ### Forth
 - JH's Firth https://github.com/jhlagado/firth is just over 4k ROM, with some hacking maybe can get it under 4k
 - TEC-1 mod for 4k (https://github.com/SteveJustin1963/tec-4krom-12kram-mod), or use Grant Searls Z80 system.
