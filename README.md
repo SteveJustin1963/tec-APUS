@@ -92,7 +92,7 @@ Next step is to get the APU going!
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/263019317_280462017379491_3466954581733273683_n.jpg)
 
-
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/262870855_463720035302369_3813373904138282086_n.jpg)
 
 
 ### Journal
