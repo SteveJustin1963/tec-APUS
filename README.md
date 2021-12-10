@@ -92,7 +92,19 @@ Next step is to get the APU going!
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/263019317_280462017379491_3466954581733273683_n.jpg)
 
+My first TEC stack!
+
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/262870855_463720035302369_3813373904138282086_n.jpg)
+
+
+Craig Jones
+I am at point of powering up the APU, I'm a bit afraid too, just in case I find that I can't get it to work because it's a fake chip. That would be such a disappointment.
+In ur Photo you’re running my board with just the GPU and your serial boards so does that mean my serial is not going? I'm just working on one thing at a time! your serial is going - I'm using my serial board because it has the decoder for 8 x 2 IO addresses on board. I can use the extras to select the APU and your 6850. I don't need 2 6850s going!
+I have no code for it either, I'm looking at the code to see what's around. The RC2014 code looks promising. I might even start with the JH code just to get it working. It's not going to matter if the code for either the serial is in RAM or ROM. of course the bog standard TEC-1 only has 2k ROM and 2K RAM - not much to work with!
+Pretty much, it also will be able to use bit bang serial or 6850 serial.
+So the serial part. Yes just add a single IO input line like I have shown with the 74hc125 and you can connect bit bang to the original TEC-1 up to the TEC-1D 
+your system it has a subroutine calls to get a serial character and receive a serial character, you add your own specific serial routines depending on the type of serial you have, 6850, bit bang, whatever. with the specific serial routines for the serial port available on each board.
+
 
 
 ### Journal
