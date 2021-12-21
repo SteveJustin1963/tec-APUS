@@ -118,7 +118,7 @@ retired docs
 * https://github.com/SteveJustin1963/tec-EMU-BG
 * https://github.com/SteveJustin1963/tec-SERIAL-BG
 * https://github.com/SteveJustin1963/tec-SIO-BC
-* https://github.com/SteveJustin1963/tec-BIT-BANG
+* https://github.com/SteveJustin1963/tec-BIT-BANG and the CJ port mod
 * https://github.com/SteveJustin1963/tec-SERIAL-LOAD
 * serial in https://github.com/SteveJustin1963/tec-Southern-Cross-Computer
 * https://www.facebook.com/groups/623556744820045/posts/1139514603224254/
