@@ -111,7 +111,7 @@ your system it has a subroutine calls to get a serial character and receive a se
 
 Hi Stephen, just to update you on progress, I have set up the APU on a breadboard, to make sure I can access the chip,  it 's easier than modifying the PCB. I wrote a little bit of code to talk to it, so far I haven't got anything meaningful out of it! Next  I'm going to try Philip Stevens' interface.
 
-![]()
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/271732275_4710190225767426_3493303551305514214_n.jpg)
 
 
 
