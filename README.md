@@ -116,36 +116,36 @@ Hi Stephen, just to update you on progress, I have set up the APU on a breadboar
 
 0000000000000000
 
-Hi Stephen, just to update you on progress, I have set up the APU on a breadboard, to make sure I can access the chip,  it 's easier than modifying the PCB. I wrote a little bit of code to talk to it, so far I haven't got anything meaningful out of it! Next  I'm going to try Philip Stevens' interface.
+2feb 2022
+
+
+  I'd never seen this chip before I saw your posts about it on the TEC group, It's a really interesting chip that I'd really love to get working.  
+I ordered some more when you sent me the PCB, so I now have your one and three more. I hope they are not all fakes or dud's. 
+I don't know of any other chips like this one, so we will just have to get it working!
+
+Another update. I got it working! I'm just doing the basic integer add like John Hardy's example code and I get the right answer.
+The chips I have are all AM9511A-4DC (4MHz!) so I have been using them at that speed. The chip you sent me works intermittently at 4MHz, SO I am checking it at 2MHz, it may be good at a lower frequency.
+
+I used Phillip Steven's circuit, using "demand wait" mode of operating - reading  the busy bit and allowing the pause output to WAIT the z80.
+
+What I need right now is to find some code to convert floating point to a number as an ascii string, and vica-versa so we can see a meaningful result of the calculations.
 
 
 000000000
 
-
-
-You sent
+You sent to John Hardy 
 craig jones got the 9511 working with ur code. yay.
-You sent
-ok
-John
+
 John Hardy
 Really? That code I wrote ages ago for the Apu coprocessor?
-You sent
-yep. i am amazed. ur stuff is good
-John
-Lol it's hard to believe. He got my Mint code working the same way so there you go
-John
-John Hardy
-Code isn't supposed to work that way 😉 there should be lots of debugging first
-You sent
-Wed 8:05 PM
-You sent
-“the tec-1 has never had an undetected error” 😂
-John
-John Hardy
-Only 100% detected errors
-Write to John Hardy
 
+yep. i am amazed. ur stuff is good
+
+John
+Lol it's hard to believe. He got my Mint code working the same way so there you go. 
+Code isn't supposed to work that way 😉 there should be lots of debugging first
+
+00000000000
 
 
 
