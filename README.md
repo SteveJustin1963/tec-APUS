@@ -69,6 +69,9 @@ On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Gre
 2 errors on 6850
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/errata-1.png)
 
+pcb files updated for fix, new rev coming to have proper decoding.
+
+
 from CJ;
 OK, I got the 6850 to work with the SC, there are two errors on your schematic which got transferred to the PCB,  Firstly, you have an A5 net label on the A6 pin on the expansion socket so the board has A5 and A6 shorted together. Secondly, the RXCLK and TXCLK of the 6850 are connected to the net label CLK bar, but there is no CLK bar net, so those two pins are connected together but nowhere else, they should connect to CLK. 
 Only two small errors so that's not too bad at all!
@@ -83,7 +86,8 @@ Now I'm going to try again to get it going on the TEC-1F before I have a go at t
 
 Craig Jones
 7/12/21
-If you are following along at home, this is Stephen Justin's APU / Serial board running on a virtual TEC-1. 
+
+" If you are following along at home, this is Stephen Justin's APU / Serial board running on a virtual TEC-1. 
 To get it to work I had to apply inverted A7 to the E3(G1) Pin 6 of the IO decoder of the TEC-1 using a transistor inverter. This mod disables the TEC-1 IO decoder above $80. 
 Now A7 can be used to select the  6850 ACIA at $80.
 The Baud clock is coming from the 4MHz crystal, a great feature of the terminal program Teraterm is the ability to enter non standard Baud Rates. With a 4Mhz crystal the Baud rate is 62500.
