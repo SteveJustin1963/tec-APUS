@@ -114,6 +114,37 @@ Hi Stephen, just to update you on progress, I have set up the APU on a breadboar
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/271732275_4710190225767426_3493303551305514214_n.jpg)
 
 
+0000000000000000
+
+
+
+You sent
+craig jones got the 9511 working with ur code. yay.
+You sent
+ok
+John
+John Hardy
+Really? That code I wrote ages ago for the Apu coprocessor?
+You sent
+yep. i am amazed. ur stuff is good
+John
+Lol it's hard to believe. He got my Mint code working the same way so there you go
+John
+John Hardy
+Code isn't supposed to work that way 😉 there should be lots of debugging first
+You sent
+Wed 8:05 PM
+You sent
+“the tec-1 has never had an undetected error” 😂
+John
+John Hardy
+Only 100% detected errors
+Write to John Hardy
+
+
+
+
+
 
 ### Journal
 retired docs
