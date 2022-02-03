@@ -116,6 +116,11 @@ Hi Stephen, just to update you on progress, I have set up the APU on a breadboar
 
 0000000000000000
 
+Hi Stephen, just to update you on progress, I have set up the APU on a breadboard, to make sure I can access the chip,  it 's easier than modifying the PCB. I wrote a little bit of code to talk to it, so far I haven't got anything meaningful out of it! Next  I'm going to try Philip Stevens' interface.
+
+
+000000000
+
 
 
 You sent
