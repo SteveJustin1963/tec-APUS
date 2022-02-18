@@ -122,8 +122,7 @@ Hi Stephen, just to update you on progress, I have set up the APU on a breadboar
 
 2feb 2022
 
-
-  I'd never seen this chip before I saw your posts about it on the TEC group, It's a really interesting chip that I'd really love to get working.  
+I'd never seen this chip before I saw your posts about it on the TEC group, It's a really interesting chip that I'd really love to get working.  
 I ordered some more when you sent me the PCB, so I now have your one and three more. I hope they are not all fakes or dud's. 
 I don't know of any other chips like this one, so we will just have to get it working!
 
@@ -134,8 +133,10 @@ I used Phillip Steven's circuit, using "demand wait" mode of operating - reading
 
 What I need right now is to find some code to convert floating point to a number as an ascii string, and vica-versa so we can see a meaningful result of the calculations.
 
-
 000000000
+ 
+
+
 
 You sent to John Hardy 
 craig jones got the 9511 working with ur code. yay.
@@ -150,7 +151,6 @@ Lol it's hard to believe. He got my Mint code working the same way so there you 
 Code isn't supposed to work that way 😉 there should be lots of debugging first
 
 00000000000
-
 
 
 
