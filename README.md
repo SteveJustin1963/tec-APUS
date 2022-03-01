@@ -1,13 +1,12 @@
 
 ## tec-APUS
-![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/255080535_3114837952082902_9094347087018948754_n.jpg)
 
 this ver7 add-on hack is to get Serial port MC6850 and Maths chip AM9511 on one pcb plugin to exploit Forth or MINT. 
 - https://github.com/SteveJustin1963/tec-MINT
 - https://github.com/jhlagado/firth
 - https://github.com/yesco/ALForth
 
-### circuit
+### Circuit
 https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1|c5e3f76b1960488e92af095fc1e68dca
 
 error corrected in cct, more work needs to be done done in io decode.
