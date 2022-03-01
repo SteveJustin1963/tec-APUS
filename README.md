@@ -95,8 +95,14 @@ Now I'm going to try again to get it going on the TEC-1F before I have a go at t
 - a great feature of the terminal program Teraterm is the ability to enter non standard Baud Rates. With a 4Mhz crystal the Baud rate is 62500.
 - I was also able to use the RC oscillator as the Baud clock by downloading a program that just sent lower case 'a' out the 6850 serial port, 
 - I set Teraterm to 9600 and adjusted the RC oscillator to give a start bit of 104us as seen on the CRO. 
+- if thigs fail try my serial board because it has the decoder for 8 x 2 IO addresses on board. 
+- use the extras to select the APU and your 6850. I don't need 2 6850s going!
+- just add a single IO input line like I have shown with the 74hc125 
+- and you can connect bit bang to the original TEC-1 up to the TEC-1D
+- your system has a subroutine calls to get a serial character and receive a serial character, 
+- you add your own specific serial routines depending on the type of serial you have, 6850, bit bang, whatever. 
+- with the specific serial routines for the serial port available on each board.
 
-### get the APU going!
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/260717599_280462014046158_384653013632846250_n.jpg)
 
@@ -104,122 +110,55 @@ Now I'm going to try again to get it going on the TEC-1F before I have a go at t
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/263019317_280462017379491_3466954581733273683_n.jpg)
 
-My first TEC stack!
-
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/262870855_463720035302369_3813373904138282086_n.jpg)
 
-- I am at point of powering up the APU, I'm a bit afraid too, just in case I find that I can't get it to work because it's a fake chip. 
-- That would be such a disappointment.
-- just work on one thing at a time! 
-- get your serial going 
-- try my serial board because it has the decoder for 8 x 2 IO addresses on board. 
-- I can use the extras to select the APU and your 6850. I don't need 2 6850s going!
-### code
-to see what's around. The RC2014 code looks promising. I might even start with the JH code just to get it working. It's not going to matter if the code for either the serial is in RAM or ROM. of course the bog standard TEC-1 only has 2k ROM and 2K RAM - not much to work with!
-Pretty much, it also will be able to use bit bang serial or 6850 serial.
-So the serial part. Yes just add a single IO input line like I have shown with the 74hc125 and you can connect bit bang to the original TEC-1 up to the TEC-1D 
-your system it has a subroutine calls to get a serial character and receive a serial character, you add your own specific serial routines depending on the type of serial you have, 6850, bit bang, whatever. with the specific serial routines for the serial port available on each board.
 
-Hi Stephen, just to update you on progress, I have set up the APU on a breadboard, to make sure I can access the chip,  it 's easier than modifying the PCB. I wrote a little bit of code to talk to it, so far I haven't got anything meaningful out of it! Next  I'm going to try Philip Stevens' interface.
+### code
+- to see what's around. 
+- The RC2014 code looks promising. I might even start with the JH code just to get it working. 
+- It's not going to matter if the code for either the serial is in RAM or ROM. 
+- also will be able to use bit bang serial or 6850 serial.
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/271732275_4710190225767426_3493303551305514214_n.jpg)
 
-
-0000000000000000
-
-2feb 2022
-
-I'd never seen this chip before I saw your posts about it on the TEC group, It's a really interesting chip that I'd really love to get working.  
-I ordered some more when you sent me the PCB, so I now have your one and three more. I hope they are not all fakes or dud's. 
-I don't know of any other chips like this one, so we will just have to get it working!
-
-Another update. I got it working! I'm just doing the basic integer add like John Hardy's example code and I get the right answer.
-The chips I have are all AM9511A-4DC (4MHz!) so I have been using them at that speed. The chip you sent me works intermittently at 4MHz, SO I am checking it at 2MHz, it may be good at a lower frequency.
-
-I used Phillip Steven's circuit, using "demand wait" mode of operating - reading  the busy bit and allowing the pause output to WAIT the z80.
-
-What I need right now is to find some code to convert floating point to a number as an ascii string, and vica-versa so we can see a meaningful result of the calculations.
-
-000000000
- 
-to JH. craig jones got the 9511 working with ur code. yay.
-John Hardy. Really? That code I wrote ages ago for the Apu coprocessor?
-sj, yep. i am amazed. ur stuff is good
-John. Lol it's hard to believe. He got my Mint code working the same way so there you go.
-Code isn't supposed to work that way 😉 there should be lots of debugging first. 
- 
-00000000000
-
-
-SJ to ask CJ
-HI, took ur advice and used port select more so redid sch, but i think i stuffed up 9511 decode with 2 port selects, not sure code will work, pls see attach, if u can help me,
-
-
-HI, took ur advice and used port select more so redid sch, but i think i stuffed up 9511 decode with 2 port selects, not sure code will work, pls see attach, if u can help me,
-You sent Today at 3:16 PM
-You sent Today at 3:20 PM
-ill post in group as well
-
-3:49 PM
-Craig Jones
-Craig sent Today at 3:49 PM
-
-I haven't got my 9511's yet (still waiting...) 
-so I didn't look at how to connect it yet! Let's see what the group says, (if anything, not many takers on hardware questions). Got my serial LCD prototype going, not ready to announce to group yet, still got some documentation to do.
-
-
-Craig Jones
-Craig sent Today at 3:49 PM
-
-You sent Today at 3:50 PM
-wow
-
-You sent Today at 3:52 PM
-the way i tried i put 2 io select lines on the one 9511. correct me, cant call 2 io lines at once?
-You sent Today at 3:52 PM
-back top drawing board
-
-Craig Jones
-Craig sent Today at 4:00 PM
--You cannot use two i/o selects at the same time, 
+### 9511 gpu
+- You cannot use two i/o selects at the same time, 
 -C/D should connect to A0, 
 - what you need is a select that is enabled for 2 addresses; a0=0 and a0=1. 
 - look at the serial circuit I sent you, 
 - have a look at the 138 and see that I have connected a,b,c to a1,a2, and a3. 
 - this gives 8 cs lines each with two addresses, the 6850 has the same deal.
 - The other way to do it is like the LCD on the DAT board, connect CD to a higher address like A7.
+#### working
+- got it to work
+- I'm just doing the basic integer add like John Hardy's example code and I get the right answer.
+- The chips I have are all AM9511A-4DC (4MHz!) so I have been using them at that speed. 
+- The chip you sent me works intermittently at 4MHz, SO I am checking it at 2MHz, it may be good at a lower frequency. see markings.
+- I used Phillip Steven's circuit, using "demand wait" mode of operating 
+- reading the busy bit and allowing the pause output to WAIT the z80.
+- need code to convert floating point to a number as an ascii string, and vica-versa 
+- so we can see a meaningful result of the calculations.
+- have used Phillip Stevens Z80 conversion of the Lawrence Livermore Labs Floating Point Library from Herb Johnson, 
+- so now I can enter numbers via the terminal and use this library to do a Floating Point calculation and display the result on the terminal.
+- Phillip also has code to use the APU, but it's a bit complicated so I will start with something simpler. 
+- https://github.com/feilipu/LLL-Floating-Point
 
-000000000000
+### decode
+- I plan on using a 74HC688 for the APU (like RC2014 boards) 
+- because the decoding is a little different that usual,
+- this will mean that it can be decoded anywhere in the bottom 256 I/O addresses.
+- as a practice, all addons should have on-board decoding to allow the option of decoding at different addresses. 
+- there is a limit to the number of devices that the Z80 can drive, 
+- this is why some Z80 systems have buffered address and data lines, 
+- it's not so much of a problem with CMOS processors (which we all should be using).
+- It's a 8 bit comparator, 
+ - you put A0-A7 on the 'P' side 
+ - and pullup or pull down the inputs on the 'Q' side, 
+- when they both match the one output goes low - decoding 1 address in 256.
+- Leave off A0 and you decode 2 consecutive addresses in 256, and so on.
 
 
-0000000000000
 
-
-Craig Jones. 
-I plan on using a 74HC688 for the APU (like RC2014 boards) because the decoding is a little different that usual, 
-this will mean that it can be decoded anywhere in the bottom 256 I/O addresses.
-Yes, I agree, all addons should have on-board decoding to allow the option of decoding at different addresses. 
-It's not crazy but there is a limit to the number of devices that the Z80 can drive, 
-this is why some Z80 systems have buffered address and data lines, 
-it's not so much of a problem with CMOS processors (which we all should be using). 
-It's a 8 bit comparator, you put A0-A7 on the 'P' side and pullup or pull down the inputs on the 'Q' side, 
-when they both match the one output goes low - decoding 1 address in 256.
-Leave off A0 and you decode 2 consecutive addresses in 256, and so on.
-
-000000000000
-
-14th Feb
-You sent
-hi Craig can I use the code u have for the 9511 work ?
-
-Craig Jones
-I know you are chomping at the bit to get this going, I am going as fast as I can!😅😄. 
-I have used Phillip Stevens Z80 conversion of the Lawrence Livermore Labs Floating Point Library from Herb Johnson, so now I can enter numbers via the terminal and use this library to do a Floating Point calculation and display the result on the terminal. 
-Phillip also has code to use the APU, but it's a bit complicated so I will start with something simpler. 
-This is where I am up too so far. https://github.com/feilipu/LLL-Floating-Point
-
-0000000000
- 
 
 ### other io
 * https://github.com/SteveJustin1963/tec-IO
