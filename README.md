@@ -4,9 +4,7 @@
 
 this ver7 add-on hack is to get Serial port MC6850 and Maths chip AM9511 on one pcb plugin to exploit Forth or MINT. 
 - https://github.com/SteveJustin1963/tec-MINT
-- 
-- https://github.com/jhlagado/firth  
-- https://github.com/monsonite/MINT
+- https://github.com/jhlagado/firth
 - https://github.com/yesco/ALForth
 
 ### circuit
