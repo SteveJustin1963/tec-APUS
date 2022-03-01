@@ -61,7 +61,7 @@ Then run a terminal app to generate ascii text such as
 
 On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Green=TXD, but RTS, CTS, DSR are not there on a cheap cables, from the chip inside the lines are not presented and are not needed for the PCB. Some current limit resistors are on the tx and rx lines for protection. You can do loopback test on the cable, so short out TX to RX (white green), typing anything.. It should echo back.
 
-## Testing
+## error on pcb
 
 2 errors on 6850
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/errata-1.png)
@@ -69,27 +69,34 @@ On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Gre
 pcb files updated for fix, new rev coming to have proper decoding.
 
 
-from CJ;
-OK, I got the 6850 to work with the SC, there are two errors on your schematic which got transferred to the PCB,  Firstly, you have an A5 net label on the A6 pin on the expansion socket so the board has A5 and A6 shorted together. Secondly, the RXCLK and TXCLK of the 6850 are connected to the net label CLK bar, but there is no CLK bar net, so those two pins are connected together but nowhere else, they should connect to CLK. 
-Only two small errors so that's not too bad at all!
+## Craig Jones
 
-For the decoding I connected A6 to M1 ( I don't think you actually have to have M1 connected unless you are doing IM2 interrupts) and I connected PORT1 to A7 to decode the 6850 at $40 and $41 for the CONTROL/STATUS and TDR/RDR registers respectively, I might do this on the TEC-1F as well.
+OK, I got the 6850 to work with the SC, 
+- there are two errors on your schematic which got transferred to the PCB,  
+- Firstly, you have an A5 net label on the A6 pin on the expansion socket so the board has A5 and A6 shorted together. 
+- Secondly, the RXCLK and TXCLK of the 6850 are connected to the net label CLK bar, but there is no CLK bar net, so those two pins are connected together but nowhere else, they should connect to CLK.
+-  Only two small errors so that's not too bad at all!
+
+### decoding
+- For the decoding I connected A6 to M1 
+- I don't think you actually have to have M1 connected unless you are doing IM2 interrupts
+- and I connected PORT1 to A7 to decode the 6850 at $40 and $41 for the CONTROL/STATUS and TDR/RDR registers respectively, 
+- I might do this on the TEC-1F as well.
 
 Now I'm going to try again to get it going on the TEC-1F before I have a go at the APU.
-
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/cg%201.jpg)
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/cj-2.jpg)
 
-Craig Jones
-7/12/21
+- I had to apply inverted A7 to the E3(G1) Pin 6 of the IO decoder of the TEC-1 using a transistor inverter. 
+- This mod disables the TEC-1 IO decoder above $80. 
+- Now A7 can be used to select the  6850 ACIA at $80.
+- The Baud clock is coming from the 4MHz crystal, 
+- a great feature of the terminal program Teraterm is the ability to enter non standard Baud Rates. With a 4Mhz crystal the Baud rate is 62500.
+- I was also able to use the RC oscillator as the Baud clock by downloading a program that just sent lower case 'a' out the 6850 serial port, 
+- I set Teraterm to 9600 and adjusted the RC oscillator to give a start bit of 104us as seen on the CRO. 
 
-" If you are following along at home, this is Stephen Justin's APU / Serial board running on a virtual TEC-1. 
-To get it to work I had to apply inverted A7 to the E3(G1) Pin 6 of the IO decoder of the TEC-1 using a transistor inverter. This mod disables the TEC-1 IO decoder above $80. 
-Now A7 can be used to select the  6850 ACIA at $80.
-The Baud clock is coming from the 4MHz crystal, a great feature of the terminal program Teraterm is the ability to enter non standard Baud Rates. With a 4Mhz crystal the Baud rate is 62500.
-I was also able to use the RC oscillator as the Baud clock by downloading a program that just sent lower case 'a' out the 6850 serial port, I set Teraterm to 9600 and adjusted the RC oscillator to give a start bit of 104us as seen on the CRO. 
-Next step is to get the APU going!
+### get the APU going!
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/260717599_280462014046158_384653013632846250_n.jpg)
 
@@ -101,11 +108,14 @@ My first TEC stack!
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/262870855_463720035302369_3813373904138282086_n.jpg)
 
-
-Craig Jones
-I am at point of powering up the APU, I'm a bit afraid too, just in case I find that I can't get it to work because it's a fake chip. That would be such a disappointment.
-In ur Photo you’re running my board with just the GPU and your serial boards so does that mean my serial is not going? I'm just working on one thing at a time! your serial is going - I'm using my serial board because it has the decoder for 8 x 2 IO addresses on board. I can use the extras to select the APU and your 6850. I don't need 2 6850s going!
-I have no code for it either, I'm looking at the code to see what's around. The RC2014 code looks promising. I might even start with the JH code just to get it working. It's not going to matter if the code for either the serial is in RAM or ROM. of course the bog standard TEC-1 only has 2k ROM and 2K RAM - not much to work with!
+- I am at point of powering up the APU, I'm a bit afraid too, just in case I find that I can't get it to work because it's a fake chip. 
+- That would be such a disappointment.
+- just work on one thing at a time! 
+- get your serial going 
+- try my serial board because it has the decoder for 8 x 2 IO addresses on board. 
+- I can use the extras to select the APU and your 6850. I don't need 2 6850s going!
+### code
+to see what's around. The RC2014 code looks promising. I might even start with the JH code just to get it working. It's not going to matter if the code for either the serial is in RAM or ROM. of course the bog standard TEC-1 only has 2k ROM and 2K RAM - not much to work with!
 Pretty much, it also will be able to use bit bang serial or 6850 serial.
 So the serial part. Yes just add a single IO input line like I have shown with the 74hc125 and you can connect bit bang to the original TEC-1 up to the TEC-1D 
 your system it has a subroutine calls to get a serial character and receive a serial character, you add your own specific serial routines depending on the type of serial you have, 6850, bit bang, whatever. with the specific serial routines for the serial port available on each board.
