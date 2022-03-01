@@ -132,31 +132,86 @@ What I need right now is to find some code to convert floating point to a number
 
 000000000
  
-
-
-
-You sent to John Hardy 
-craig jones got the 9511 working with ur code. yay.
-
-John Hardy
-Really? That code I wrote ages ago for the Apu coprocessor?
-
-yep. i am amazed. ur stuff is good
-
-John
-Lol it's hard to believe. He got my Mint code working the same way so there you go. 
-Code isn't supposed to work that way 😉 there should be lots of debugging first
-
+to JH. craig jones got the 9511 working with ur code. yay.
+John Hardy. Really? That code I wrote ages ago for the Apu coprocessor?
+sj, yep. i am amazed. ur stuff is good
+John. Lol it's hard to believe. He got my Mint code working the same way so there you go.
+Code isn't supposed to work that way 😉 there should be lots of debugging first. 
+ 
 00000000000
 
 
+SJ to ask CJ
+HI, took ur advice and used port select more so redid sch, but i think i stuffed up 9511 decode with 2 port selects, not sure code will work, pls see attach, if u can help me,
 
 
-### Journal
-retired docs
-- Wiki in https://github.com/SteveJustin1963/tec-APUS/wiki
+HI, took ur advice and used port select more so redid sch, but i think i stuffed up 9511 decode with 2 port selects, not sure code will work, pls see attach, if u can help me,
+You sent Today at 3:16 PM
+You sent Today at 3:20 PM
+ill post in group as well
 
-### btw, TEC-1 has other IO options aka; 
+3:49 PM
+Craig Jones
+Craig sent Today at 3:49 PM
+
+I haven't got my 9511's yet (still waiting...) 
+so I didn't look at how to connect it yet! Let's see what the group says, (if anything, not many takers on hardware questions). Got my serial LCD prototype going, not ready to announce to group yet, still got some documentation to do.
+
+
+Craig Jones
+Craig sent Today at 3:49 PM
+
+You sent Today at 3:50 PM
+wow
+
+You sent Today at 3:52 PM
+the way i tried i put 2 io select lines on the one 9511. correct me, cant call 2 io lines at once?
+You sent Today at 3:52 PM
+back top drawing board
+
+Craig Jones
+Craig sent Today at 4:00 PM
+-You cannot use two i/o selects at the same time, 
+-C/D should connect to A0, 
+- what you need is a select that is enabled for 2 addresses; a0=0 and a0=1. 
+- look at the serial circuit I sent you, 
+- have a look at the 138 and see that I have connected a,b,c to a1,a2, and a3. 
+- this gives 8 cs lines each with two addresses, the 6850 has the same deal.
+- The other way to do it is like the LCD on the DAT board, connect CD to a higher address like A7.
+
+000000000000
+
+
+0000000000000
+
+
+Craig Jones. 
+I plan on using a 74HC688 for the APU (like RC2014 boards) because the decoding is a little different that usual, 
+this will mean that it can be decoded anywhere in the bottom 256 I/O addresses.
+Yes, I agree, all addons should have on-board decoding to allow the option of decoding at different addresses. 
+It's not crazy but there is a limit to the number of devices that the Z80 can drive, 
+this is why some Z80 systems have buffered address and data lines, 
+it's not so much of a problem with CMOS processors (which we all should be using). 
+It's a 8 bit comparator, you put A0-A7 on the 'P' side and pullup or pull down the inputs on the 'Q' side, 
+when they both match the one output goes low - decoding 1 address in 256.
+Leave off A0 and you decode 2 consecutive addresses in 256, and so on.
+
+000000000000
+
+14th Feb
+You sent
+hi Craig can I use the code u have for the 9511 work ?
+
+Craig Jones
+I know you are chomping at the bit to get this going, I am going as fast as I can!😅😄. 
+I have used Phillip Stevens Z80 conversion of the Lawrence Livermore Labs Floating Point Library from Herb Johnson, so now I can enter numbers via the terminal and use this library to do a Floating Point calculation and display the result on the terminal. 
+Phillip also has code to use the APU, but it's a bit complicated so I will start with something simpler. 
+This is where I am up too so far. https://github.com/feilipu/LLL-Floating-Point
+
+0000000000
+ 
+
+### other io
 * https://github.com/SteveJustin1963/tec-IO
 * https://github.com/SteveJustin1963/tec-RELAY
 * https://github.com/SteveJustin1963/tec-DAT
@@ -169,3 +224,15 @@ retired docs
 * https://www.facebook.com/groups/623556744820045/posts/1139514603224254/
 
 
+
+## References
+- https://github.com/feilipu/yaz180
+- https://en.wikipedia.org/wiki/Instructions_per_second
+- https://retrocomputing.stackexchange.com/questions/6835/why-did-ti-8x-calculator-series-use-the-z80-processor
+- https://archive.is/2015.07.14-173053/http://sgate.emt.bme.hu/patai/publications/z80guide/part4.html
+- http://www.andreadrian.de/oldcpu/Z80_number_cruncher.html
+- http://www.cpushack.com/2010/09/23/arithmetic-processors-then-and-now/
+- https://sourceforge.net/projects/realterm/files/Realterm/2.0.0.70/
+- https://feilipu.me/2017/02/22/characterising-am9511a-1-apu/
+- https://github.com/z88dk/z88dk/tree/master/libsrc/_DEVELOPMENT/target/yaz180/device/am9511a
+- https://github.com/SteveJustin1963/z88dk/tree/master/libsrc/_DEVELOPMENT/target/yaz180/device/am9511a
