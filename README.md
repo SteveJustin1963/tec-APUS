@@ -143,6 +143,7 @@ Now I'm going to try again to get it going on the TEC-1F before I have a go at t
 - Phillip also has code to use the APU, but it's a bit complicated so I will start with something simpler. 
 - https://github.com/feilipu/LLL-Floating-Point
 
+## iterate
 ### decode
 - I plan on using a 74HC688 for the APU (like RC2014 boards) 
 - because the decoding is a little different that usual,
