@@ -28,7 +28,8 @@ its also needs a slower clock just over 1Mh so with drive direct with /M1 which 
 
 ### AM9511 code
 - 9511.asm, still a work in progress.
-check and adjust code constants, will depend on RAM and ROM/EPROM space
+- check and adjust code constants, will depend on RAM and ROM/EPROM space
+- https://github.com/z88dk/z88dk/tree/master/libsrc/_DEVELOPMENT/math/float/am9511
 
 ### MC6850 code
 - mycomputer.emu
