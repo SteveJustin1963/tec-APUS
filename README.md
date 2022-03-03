@@ -143,17 +143,11 @@ Now I'm going to try again to get it going on the TEC-1F before I have a go at t
 - https://github.com/feilipu/LLL-Floating-Point
 
 ## iterate
-- try proper decoding cct
-- use 74HC688 for the APU (like RC2014 boards) 
-- because the decoding is a little different that usual,
-- this will mean that it can be decoded anywhere in the bottom 256 I/O addresses.
-- as a practice, all addons should have on-board decoding to allow the option of decoding at different addresses. 
-- there is a limit to the number of devices that the Z80 can drive, 
-- this is why some Z80 systems have buffered address and data lines, 
-- it's not so much of a problem with CMOS processors (which we all should be using).
-- It's a 8 bit comparator, 
- - you put A0-A7 on the 'P' side 
- - and pullup or pull down the inputs on the 'Q' side, 
+- try proper decoding cct, eg 74HC688 (eg in the APU-RC2014 board), a 8 bit comparator as IO address decoder
+- can be decoded anywhere in the bottom 256 I/O addresses. 74HCT688 compares two 8-bit inputs and outputs an active low if both sets match. Enable is active low eg use MREQ to drive this. set inputs to address lines and to VCC, via a DIP switch dial in address you want your io peripheral to enabled on.
+- note interrupt modes of IOReq and M1 will be low at the same for an interrupt acknowledge, consider this when selecting io
+- there is a limit to the number of devices that the Z80 can drive, some systems need buffered address and data lines, not problem with CMOS processors which we all should be using.
+- put A0-A7 on the 'P' side, pullup or pull down the inputs on the 'Q' side, 
 - when they both match the one output goes low - decoding 1 address in 256.
 - Leave off A0 and you decode 2 consecutive addresses in 256, and so on.
 
