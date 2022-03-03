@@ -62,12 +62,11 @@ Then run a terminal app to generate ascii text such as
 On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Green=TXD, but RTS, CTS, DSR are not there on a cheap cables, from the chip inside the lines are not presented and are not needed for the PCB. Some current limit resistors are on the tx and rx lines for protection. You can do loopback test on the cable, so short out TX to RX (white green), typing anything.. It should echo back.
 
 ## error on pcb
-
-2 errors on 6850
+ 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/errata-1.png)
-
-pcb files updated for fix, new rev coming to have proper decoding.
-
+- 2 errors on 6850
+- pcb files updated for fix
+- decoding not working properly see below
 
 ## Craig Jones
 
@@ -144,8 +143,8 @@ Now I'm going to try again to get it going on the TEC-1F before I have a go at t
 - https://github.com/feilipu/LLL-Floating-Point
 
 ## iterate
-### decode
-- I plan on using a 74HC688 for the APU (like RC2014 boards) 
+- try proper decoding cct
+- use 74HC688 for the APU (like RC2014 boards) 
 - because the decoding is a little different that usual,
 - this will mean that it can be decoded anywhere in the bottom 256 I/O addresses.
 - as a practice, all addons should have on-board decoding to allow the option of decoding at different addresses. 
