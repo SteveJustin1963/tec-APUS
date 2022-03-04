@@ -19,11 +19,23 @@ this circuit was hacked together from
 
 
 
-MC6850 needs a baud clock eg 7.3728 Mhz or slower. the code divides this down eg /64 = 115,200 baud or /16 =  460,800 baud and also handles control registers  with INT control eg rx buffer > INT.
+### MC6850
+- a baud clock eg 7.3728 Mhz or slower. 
+- the code divides this down eg /64 = 115,200 baud or /16 =  460,800 baud 
+- and also handles control registers with INT control eg rx buffer > INT.
 
-AM9511 setup the control registers then send maths commands or data; it executes and the result is placed on its internals stack, then it signals via INT.
-the select line P1 is active low, driven by eg port 6 (h3000,3001) or 7 (h3800,3801), the A0 controls Command/Data registers.
-its also needs a slower clock just over 1Mh so with drive direct with /M1 which is arount 2T states or just use the onboard flip flops /3; better. Or use a slower baud clock and run it direct; mod needed.
+### AM9511 
+- setup the control registers 
+- then send maths commands or data; 
+- it executes and the result is placed on its internals stack, 
+- then it signals via INT.
+- the select line P1 is active low, driven by eg port 6 (h3000,3001) 
+- or 7 (h3800,3801), 
+- the A0 controls Command/Data registers.
+- its also needs a slower clock just over 1Mh (unless u have the 3Mhz ver) 
+- or try drive with /M1 as a clock ( 2T states) 
+- or use the onboard flip flops /3; better. 
+- or use a slower baud clock and run it direct; mod needed.
 
 
 ### AM9511 code
@@ -34,9 +46,8 @@ its also needs a slower clock just over 1Mh so with drive direct with /M1 which 
 ### MC6850 code
 - mycomputer.emu
 - simple-echo.z80
-check and adjust code constants, will depend on RAM and ROM/EPROM space
-
-download the .bin then uploaded to EMU or burn rom with intel hex file
+- check and adjust code constants, will depend on RAM and ROM/EPROM space
+- download the .bin then uploaded to EMU or burn rom with intel hex file
 
 ### asm80.com
 reduce code size  
@@ -44,16 +55,33 @@ reduce code size
 - .binto 0130h
 
 ### OshonSoft IDE
-trim code length insert "Define RAMEND = 4095".
-compile to .obj (binary) which = .hex file
+trim code length insert 
+```
+Define RAMEND = 4095
+```
+compile to .obj (binary) which normaly is the same as .hex file
 
 
 ### EPROM emulation
-Bens https://github.com/SteveJustin1963/tec-EMU-BG has the monitor code and or your own uploaded code. when you upload it executes it right away, a system reset goes back to the mon.
-The EMU board goes in the ROM socket, code is uploaded via USB cable from the pc. When the USB end goes into pc, it will activate PnP and windows will auto install drivers for EMU. load code with Bens .bat file run in DOS, it calls a python script to load the code. run C:\cmd for dos.
+- instead of burning a ROM, use Bens ROM emulator
+- https://github.com/SteveJustin1963/tec-EMU-BG 
+- its boots with tec-1 monitor code 
+- or your uploaded your own code, runs from 0000
+- when you upload it executes it right away, a system reset goes back to the monitor.
+- The EMU board plugs into the ROM socket
+- code is uploaded via USB cable from your pc.
+- When the USB cable end goes into the pc, it will activate PnP and windows shud auto install drivers for the EMU. 
+- there maybe extra steps to get it to work in win10, but win7 will work.
+- then load your code with Bens .bat file run in a DOS box, it calls a python script to load the code. run C:\cmd from dos.
 
 ### Cable
-You also need a special USB to TTL cable; it has a TTL to USB bridging chip inside eg FT232R or PL2303TA and emulates a virtual com port. When the USB end goes into pc's USB, it will activate PnP and windows will auto install drivers and create a virtual com port. run C:\mode to check com port. Or use a TTL to RS-232 converter such the MAX232 chip on pcb. Then connect to TTL on tec-APUS and run a com cable to the db9 com port on the pc. Newer pcs and laptops don't have db9 com ports.
+- unless you have a raw serial or com port, use a usb to serial-TTL cable
+- it has a TTL to USB bridging chip inside eg FT232R or PL2303TA and also emulates a virtual com port via a PnP driver load. 
+- When the USB end goes into pc's USB, it will activate PnP and windows will auto install drivers and creates a virtual com port 
+- run C:\mode to check for the com port number. 
+- or convert TTL to real RS-232 levels with a converter chip ie MAX232, u can install it to the tecAPUS pcb 
+- connect the TTL or rs232 lines of tx, rx, gnd lines to the tec-APUS and other end to usb or db9 or db25 pin port.
+
 
 ### Terminal
 Then run a terminal app to generate ascii text such as
