@@ -8,15 +8,13 @@ a add-on hack to get Serial port MC6850 and Maths APU AM9511 on one pcb plugin t
 
 ### Circuit
 - https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1|c5e3f76b1960488e92af095fc1e68dca
- - 2 errors on 6850
+
+- 2 errors on 6850 cct now corrected 
 - pcb files updated for fix
-- decoding not working properly see below
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/errata-1.png)
 
-- 2 errors were found in ver7 pcb
-- now corrected 
-- design is work in progress, a better io decode cct is needed
+- design is work in progress, a better io decode cct is needed, see Craigs notes below
 
 this circuit was hacked together from
 - https://www.tindie.com/products/semachthemonkey/rc2014-am9511a-apu-arithmetic-processor/
