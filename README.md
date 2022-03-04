@@ -7,9 +7,10 @@ this ver7 add-on hack is to get Serial port MC6850 and Maths chip AM9511 on one 
 - https://github.com/yesco/ALForth
 
 ### Circuit
-https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1|c5e3f76b1960488e92af095fc1e68dca
-
-error corrected in cct, more work needs to be done done in io decode.
+- https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1|c5e3f76b1960488e92af095fc1e68dca
+- 2 errors were found in pcb
+- now corrected 
+- design ins work in progress, a better io decode cct is needed
 
 
 this circuit was hacked together from
@@ -20,9 +21,10 @@ this circuit was hacked together from
 
 
 ### MC6850
-- a baud clock eg 7.3728 Mhz or slower. 
+- us can use a standard baud clock eg 7.3728 Mhz or slower version 
 - the code divides this down eg /64 = 115,200 baud or /16 =  460,800 baud 
-- and also handles control registers with INT control eg rx buffer > INT.
+- and also handles control registers with INT control eg rx buffer > INT
+- or use other speeds, 4Mhz pcb or slow RC clockm then dial up custom baud rate with Tera-Term 
 
 ### AM9511 
 - setup the control registers 
