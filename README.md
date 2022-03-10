@@ -165,8 +165,7 @@ OK, I got the 6850 to work with the SC,
 - have used Phillip Stevens Z80 conversion of the Lawrence Livermore Labs Floating Point Library from Herb Johnson, 
 - so now I can enter numbers via the terminal and use this library to do a Floating Point calculation and display the result on the terminal.
 - Phillip also has code to use the APU, but it's a bit complicated so I will start with something simpler. 
-- https://github.com/feilipu/LLL-Floating-Point
-- 10.3.22 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80.use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU
+
 
 ## iterate
 - try proper decoding cct, eg 74HC688 (eg in the APU-RC2014 board), a 8 bit comparator as IO address decoder
@@ -177,4 +176,17 @@ OK, I got the 6850 to work with the SC,
 - when they both match the one output goes low - decoding 1 address in 256.
 - Leave off A0 and you decode 2 consecutive addresses in 256, and so on.
 
+### more
+- https://github.com/feilipu/LLL-Floating-Point
+- 10.3.22 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80.use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU
+- Also, I have a new design for the APU, I will send you the schematic  soon for the next version of your TEC-APUS.
+- 74HC688 works well, does not have to be INT driven, but can be. My initial code replaces the functions of the LLL library above. I am using the Wait and software polling the APU status.
+- I think we should be able to do Poll/Status and Interrupt Driven interfaces for the APU, perhaps even Demand/Wait.
+- Int driven just let's you do something else while the APU is working. the other modes mean you just wait for the APU to finish the calculation.
+- Each operation is probably ms or less, maybe the transcendental's are longer? Anyway we will be able to use it in more than one mode. And of course it will run at 4Mhz!
+- You should be able to use it from Mint, although we don't have a method of using interrupts in Mint quite yet!
+- Yes, it has a lot of history attached to it being the first of it's kind, and was apparently more popular than the IEEE754 AM9512. go figure!
+- There's a lot we can use in RC2014. Things have changed a lot, now sharing is the thing to do as long as you acknowledge the source.
+- 
+- 
 
