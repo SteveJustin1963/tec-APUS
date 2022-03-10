@@ -151,7 +151,7 @@ OK, I got the 6850 to work with the SC,
 - have a look at the 138 and see that I have connected a,b,c to a1,a2, and a3. 
 - this gives 8 cs lines each with two addresses, the 6850 has the same deal.
 - The other way to do it is like the LCD on the DAT board, connect CD to a higher address like A7.
-- 10.3.22 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80.use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU
+
  
 ### working
 - got it to work
@@ -166,6 +166,7 @@ OK, I got the 6850 to work with the SC,
 - so now I can enter numbers via the terminal and use this library to do a Floating Point calculation and display the result on the terminal.
 - Phillip also has code to use the APU, but it's a bit complicated so I will start with something simpler. 
 - https://github.com/feilipu/LLL-Floating-Point
+- 10.3.22 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80.use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU
 
 ## iterate
 - try proper decoding cct, eg 74HC688 (eg in the APU-RC2014 board), a 8 bit comparator as IO address decoder
