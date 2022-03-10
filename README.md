@@ -151,6 +151,8 @@ OK, I got the 6850 to work with the SC,
 - have a look at the 138 and see that I have connected a,b,c to a1,a2, and a3. 
 - this gives 8 cs lines each with two addresses, the 6850 has the same deal.
 - The other way to do it is like the LCD on the DAT board, connect CD to a higher address like A7.
+- 10.3.22 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80.use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU
+ 
 ### working
 - got it to work
 - I'm just doing the basic integer add like John Hardy's example code and I get the right answer.
