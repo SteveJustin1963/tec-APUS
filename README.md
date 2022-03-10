@@ -94,7 +94,7 @@ Then run a terminal app to generate ascii text such as
 - tera term, best
 
 
-### Craig Jones testing and dev
+### Craig Jones testing and dev from here down.
 
 OK, I got the 6850 to work with the SC, 
 - there are two errors on your schematic which got transferred to the PCB,  
