@@ -181,6 +181,8 @@ OK, I got the 6850 to work with the SC,
 - 10.3.22 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80.
 - use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU
 - Also, I have a new design for the APU, I will send you the schematic soon for the next version of your TEC-APUS.
+- https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/TEC-APU-cj-1.pdf
+- 
 - 74HC688 works well, does not have to be INT driven, but can be. My initial code replaces the functions of the LLL library above. I am using the Wait and software polling the APU status.
 - I think we should be able to do Poll/Status and Interrupt Driven interfaces for the APU, perhaps even Demand/Wait.
 - Int driven just let's you do something else while the APU is working. the other modes mean you just wait for the APU to finish the calculation.
