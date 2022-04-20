@@ -1,17 +1,18 @@
 
 ## tec-APUS
 
-This add-on combines a serial port from the MC6850 with maths from the AM9511 onto one pcb. It can support MINT to make the system more powerful than bitbang serial and doing transcendental functions that take MINT beyond integer arithmetic and polynomials.
-
-## 
+- This add-on combines a serial port from the MC6850 with maths from the AM9511 onto one pcb. 
+- The goal is to support ASM and also MINT which buy default has bitbang and integer maths, but make it more powerful with fast serial and transcendental functions.
 
 ### Circuit
 
-this circuit was hacked together from
+- this circuit was hacked together from
+
 - https://www.tindie.com/products/semachthemonkey/rc2014-am9511a-apu-arithmetic-processor/
 - https://github.com/RC2014Z80/RC2014/tree/master/Hardware/APU%20RC2014
 - https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/ExpansionBoards/SC-Serial
 
+![](schematic)
 
 - https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1|c5e3f76b1960488e92af095fc1e68dca
 
