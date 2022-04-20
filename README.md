@@ -20,7 +20,7 @@
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/errata-1.png)
 
 
-### MC6850
+## MC6850
 - use a standard baud clock eg 7.3728 Mhz or slower version 
 - the code divides this down eg /64 = 115,200 baud or /16 =  460,800 baud 
 - handles control registers and with INT control eg rx buffer sends a INT
@@ -31,7 +31,7 @@
 - check and adjust code constants, will depend on RAM and ROM/EPROM space
 - download the .bin then uploaded to EMU or burn rom with intel hex file
 
-### AM9511 
+## AM9511 
 - setup the control registers 
 - then send maths commands or data; 
 - it executes and the result is placed on its internals stack, 
@@ -52,7 +52,7 @@
 
 
 
-### Craig Jones testing and dev from here down.
+## Craig Jones testing and dev from here down.
 
 OK, I got the 6850 to work with the SC, 
 - there are two errors on your schematic which got transferred to the PCB,  
@@ -93,7 +93,7 @@ OK, I got the 6850 to work with the SC,
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/262870855_463720035302369_3813373904138282086_n.jpg)
 
 
-### code
+## code
 - to see what's around. 
 - The RC2014 code looks promising. I might even start with the JH code just to get it working. 
 - It's not going to matter if the code for either the serial is in RAM or ROM. 
@@ -101,7 +101,7 @@ OK, I got the 6850 to work with the SC,
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/271732275_4710190225767426_3493303551305514214_n.jpg)
 
-### 9511 gpu
+## 9511 gpu
 - You cannot use two i/o selects at the same time, 
 -C/D should connect to A0, 
 - what you need is a select that is enabled for 2 addresses; a0=0 and a0=1. 
@@ -111,7 +111,7 @@ OK, I got the 6850 to work with the SC,
 - The other way to do it is like the LCD on the DAT board, connect CD to a higher address like A7.
 
  
-### working
+## working
 - got it to work
 - I'm just doing the basic integer add like John Hardy's example code and I get the right answer.
 - The chips I have are all AM9511A-4DC (4MHz!) so I have been using them at that speed. 
@@ -126,7 +126,6 @@ OK, I got the 6850 to work with the SC,
 
 
 ## iterate
-
 - design is work in progress, a better io decode cct is needed, see Craigs notes below
 - try proper decoding cct, eg 74HC688 (eg in the APU-RC2014 board), a 8 bit comparator as IO address decoder
 - can be decoded anywhere in the bottom 256 I/O addresses. 74HCT688 compares two 8-bit inputs and outputs an active low if both sets match. Enable is active low eg use MREQ to drive this. set inputs to address lines and to VCC, via a DIP switch dial in address you want your io peripheral to enabled on.
@@ -136,7 +135,7 @@ OK, I got the 6850 to work with the SC,
 - when they both match the one output goes low - decoding 1 address in 256.
 - Leave off A0 and you decode 2 consecutive addresses in 256, and so on.
 
-### more
+## more
 - https://github.com/feilipu/LLL-Floating-Point
 - 10.3.22 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80.
 - use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU
@@ -159,9 +158,5 @@ OK, I got the 6850 to work with the SC,
 - so actually the 688 output goes low when A7 to A1 = $C2 and MREQ is high. 
 - This is really just a little 'redesign' of the RC2014 board.
 
-### Ref
-- https://github.com/SteveJustin1963/tec-MINT
-- https://github.com/jhlagado/firth
-- https://github.com/yesco/ALForth
- 
+
 
