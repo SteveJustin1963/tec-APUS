@@ -6,6 +6,13 @@ This add-on combines a serial port from the MC6850 with maths from the AM9511 on
 ## 
 
 ### Circuit
+
+this circuit was hacked together from
+- https://www.tindie.com/products/semachthemonkey/rc2014-am9511a-apu-arithmetic-processor/
+- https://github.com/RC2014Z80/RC2014/tree/master/Hardware/APU%20RC2014
+- https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/ExpansionBoards/SC-Serial
+
+
 - https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1|c5e3f76b1960488e92af095fc1e68dca
 
 - 2 errors on 6850 cct now corrected 
@@ -13,12 +20,6 @@ This add-on combines a serial port from the MC6850 with maths from the AM9511 on
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/errata-1.png)
 
-- design is work in progress, a better io decode cct is needed, see Craigs notes below
-
-this circuit was hacked together from
-- https://www.tindie.com/products/semachthemonkey/rc2014-am9511a-apu-arithmetic-processor/
-- https://github.com/RC2014Z80/RC2014/tree/master/Hardware/APU%20RC2014
-- https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/ExpansionBoards/SC-Serial
 
 
 ### MC6850
@@ -167,6 +168,8 @@ OK, I got the 6850 to work with the SC,
 
 
 ## iterate
+
+- design is work in progress, a better io decode cct is needed, see Craigs notes below
 - try proper decoding cct, eg 74HC688 (eg in the APU-RC2014 board), a 8 bit comparator as IO address decoder
 - can be decoded anywhere in the bottom 256 I/O addresses. 74HCT688 compares two 8-bit inputs and outputs an active low if both sets match. Enable is active low eg use MREQ to drive this. set inputs to address lines and to VCC, via a DIP switch dial in address you want your io peripheral to enabled on.
 - note interrupt modes of IOReq and M1 will be low at the same for an interrupt acknowledge, consider this when selecting io
