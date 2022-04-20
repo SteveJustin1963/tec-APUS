@@ -1,7 +1,9 @@
 
 ## tec-APUS
 
-a add-on hack to get Serial port MC6850 and Maths APU AM9511 on one pcb plugin to help Forth or MINT maths code. serial is optional for MINT as can use BitBang port. 
+This add-on combines serial port from a MC6850 and Maths APU from a AM9511 onto one pcb. It can helpful with MINT as it needs a serial port and the maths chip can do some heavly lifting
+
+
 - https://github.com/SteveJustin1963/tec-MINT
 - https://github.com/jhlagado/firth
 - https://github.com/yesco/ALForth
