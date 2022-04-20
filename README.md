@@ -49,6 +49,7 @@ this circuit was hacked together from
 - 9511.asm, still a work in progress.
 - check and adjust code constants, will depend on RAM and ROM/EPROM space
 - https://github.com/z88dk/z88dk/tree/master/libsrc/_DEVELOPMENT/math/float/am9511
+- needs 5V and 12V, add a step up board or add to main circuit design. https://easyeda.com/Little_Arc/MT3608
 
 
 
