@@ -50,48 +50,7 @@ this circuit was hacked together from
 - check and adjust code constants, will depend on RAM and ROM/EPROM space
 - https://github.com/z88dk/z88dk/tree/master/libsrc/_DEVELOPMENT/math/float/am9511
 
-## IDE
-### asm80.com
--reduce code size  
-```
-.binfrom 0000h
-.binto 0130h
-```
-### OshonSoft IDE
-- trim code length insert 
-```
-Define RAMEND = 4095
-```
-compile to .obj (binary) which normaly is the same as .hex file
 
-
-### EPROM emulation
-- instead of burning a ROM, use Bens ROM emulator
-- https://github.com/SteveJustin1963/tec-EMU-BG 
-- its boots with tec-1 monitor code 
-- or your uploaded your own code, runs from 0000
-- when you upload it executes it right away, a system reset goes back to the monitor.
-- The EMU board plugs into the ROM socket
-- code is uploaded via USB cable from your pc.
-- When the USB cable end goes into the pc, it will activate PnP and windows shud auto install drivers for the EMU. 
-- there maybe extra steps to get it to work in win10, but win7 will work.
-- then load your code with Bens .bat file run in a DOS box, it calls a python script to load the code. run C:\cmd from dos.
-
-### Cable
-- unless you have a raw serial or com port, use a usb to serial-TTL cable
-- it has a TTL to USB bridging chip inside eg FT232R or PL2303TA and also emulates a virtual com port via a PnP driver load. 
-- When the USB end goes into pc's USB, it will activate PnP and windows will auto install drivers and creates a virtual com port 
-- run C:\mode to check for the com port number. 
-- or convert TTL to real RS-232 levels with a converter chip ie MAX232, u can install it to the tecAPUS pcb 
-- connect the TTL or rs232 lines of tx, rx, gnd lines to the tec-APUS and other end to usb or db9 or db25 pin port.
-- On the USB to TTL cable, the TTL end presents Red=+5V, Black=GND, White=RXD, Green=TXD, but RTS, CTS, DSR are not there on a cheap cables, from the chip inside the lines are not presented and are not needed for the PCB. Some current limit resistors are on the tx and rx lines for protection. You can do loopback test on the cable, so short out TX to RX (white green), typing anything.. It should echo back.
-
-
-### Terminal
-Then run a terminal app to generate ascii text such as
-- https://www.putty.org/    
-- https://www.chiark.greenend.org.uk/~sgtatham/putty/
-- tera term, best
 
 
 ### Craig Jones testing and dev from here down.
