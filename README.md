@@ -20,7 +20,7 @@ this circuit was hacked together from
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/errata-1.png)
 
-
+ 
 
 ### MC6850
 - use a standard baud clock eg 7.3728 Mhz or slower version 
