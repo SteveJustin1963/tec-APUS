@@ -1,12 +1,9 @@
 
 ## tec-APUS
 
-This add-on combines serial port from a MC6850 and Maths APU from a AM9511 onto one pcb. It can helpful with MINT as it needs a serial port and the maths chip can do some heavly lifting
+This add-on combines a serial port from the MC6850 with maths from the AM9511 onto one pcb. It can support MINT to make the system more powerful than bitbang serial and doing transcendental functions that take MINT beyond integer arithmetic and polynomials.
 
 
-- https://github.com/SteveJustin1963/tec-MINT
-- https://github.com/jhlagado/firth
-- https://github.com/yesco/ALForth
 
 ### Circuit
 - https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1|c5e3f76b1960488e92af095fc1e68dca
@@ -201,5 +198,9 @@ OK, I got the 6850 to work with the SC,
 - so actually the 688 output goes low when A7 to A1 = $C2 and MREQ is high. 
 - This is really just a little 'redesign' of the RC2014 board.
 
+### Ref
+- https://github.com/SteveJustin1963/tec-MINT
+- https://github.com/jhlagado/firth
+- https://github.com/yesco/ALForth
  
 
