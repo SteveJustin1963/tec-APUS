@@ -8,8 +8,11 @@ PAGE UNDER EDIT
 - The goal is to support ASM and also MINT which buy default has bitbang and integer maths, but make it more powerful with fast serial and transcendental functions.
 
 
-## MC6850 features
+## MC6850 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/6850chip.png)   
+
+- data sheet https://github.com/SteveJustin1963/tec-APUS/blob/master/docs/MC6850.pdf
+### features
 
 - chip select ......
 - chip control.......
