@@ -9,7 +9,7 @@ PAGE UNDER EDIT
 
 
 ## MC6850 features
-![]()  chip pic  
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/6850chip.png)   
 
 - chip select ......
 - chip control.......
