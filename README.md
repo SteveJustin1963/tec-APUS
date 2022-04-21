@@ -24,6 +24,7 @@ PAGE UNDER EDIT
 - download the .bin then uploaded to EMU or burn rom with intel hex file
 
 ## AM9511 features
+![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/9511chip.png)   
 
 - chip select ......
 - chip control.......
