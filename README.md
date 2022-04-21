@@ -25,7 +25,7 @@ PAGE UNDER EDIT
 - check and adjust code constants, will depend on RAM and ROM/EPROM space
 - download the .bin then uploaded to EMU or burn rom with intel hex file
 
-## AM9511 features
+## AM9511  
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/9511chip.png)   
 
 - data sheet https://github.com/SteveJustin1963/tec-APUS/blob/master/docs/AMD%209511%20FPU.pdf
