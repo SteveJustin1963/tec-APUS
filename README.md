@@ -60,7 +60,8 @@ PAGE UNDER EDIT
 
 ## Ver 8
 
-## Ver 7 and older https://github.com/SteveJustin1963/tec-APUS/wiki
+## Ver 7 and older 
+- https://github.com/SteveJustin1963/tec-APUS/wiki
 
 
 
