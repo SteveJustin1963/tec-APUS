@@ -12,7 +12,6 @@ PAGE UNDER EDIT
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/6850chip.png)   
 
 - data sheet https://github.com/SteveJustin1963/tec-APUS/blob/master/docs/MC6850.pdf
-### features
 
 - chip select ......
 - chip control.......
@@ -28,6 +27,8 @@ PAGE UNDER EDIT
 
 ## AM9511 features
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/9511chip.png)   
+
+- data sheet https://github.com/SteveJustin1963/tec-APUS/blob/master/docs/AMD%209511%20FPU.pdf
 
 - chip select ......
 - chip control.......
