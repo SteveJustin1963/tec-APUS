@@ -1,3 +1,6 @@
+PAGE UNDER EDIT
+
+
 
 ## tec-APUS
 
@@ -5,9 +8,11 @@
 - The goal is to support ASM and also MINT which buy default has bitbang and integer maths, but make it more powerful with fast serial and transcendental functions.
 
 
-## MC6850
-- use a standard baud clock eg 7.3728 Mhz or slower version 
-- the code divides this down eg /64 = 115,200 baud or /16 =  460,800 baud 
+## MC6850 features
+- chip select ......
+- chip control.......
+- clock can use stanbdared 4mhz or a baud rate frew of 7.3728 Mhz gives standard baud rates 4800, 9600... 
+- the code divides this down  `/64 = 115,200` baud or `/16 =  460,800` baud 
 - handles control registers and with INT control eg rx buffer sends a INT
 - or use other speeds, 4Mhz pcb or slow RC clock then dial up custom baud rate with Tera-Term 
 - code
@@ -16,18 +21,22 @@
 - check and adjust code constants, will depend on RAM and ROM/EPROM space
 - download the .bin then uploaded to EMU or burn rom with intel hex file
 
-## AM9511 
-- setup the control registers 
+## AM9511 features
+
+- chip select ......
+- chip control.......
+  - A0 controls Command/Data registers.
+- clock
+  - its also needs a slower clock just over 1Mh (unless u have the 3Mhz ver) 
+  - or try drive with /M1 as a clock ( 2T states) 
+  - or use the onboard flip flops /3; better. 
+  - or use a slower baud clock and run it direct; mod needed.
+
 - then send maths commands or data; 
 - it executes and the result is placed on its internals stack, 
 - then it signals via INT.
 - the select line P1 is active low, driven by eg port 6 (h3000,3001) 
 - or 7 (h3800,3801), 
-- the A0 controls Command/Data registers.
-- its also needs a slower clock just over 1Mh (unless u have the 3Mhz ver) 
-- or try drive with /M1 as a clock ( 2T states) 
-- or use the onboard flip flops /3; better. 
-- or use a slower baud clock and run it direct; mod needed.
 - code
 - 9511.asm, still a work in progress.
 - check and adjust code constants, will depend on RAM and ROM/EPROM space
