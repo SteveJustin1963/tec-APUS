@@ -19,7 +19,7 @@
 - 2 errors on 6850 cct now corrected 
 - pcb files updated for fix
 
--last batch of pcbs had this error; easy to fix
+- last batch of pcbs had this error; easy to fix
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/errata-1.png)
 
 
