@@ -59,8 +59,8 @@ PAGE UNDER EDIT
 
 
 ## Ver 8
-- older ver see wiki
-- 
+
+## Ver 7 and older see wiki
 
 
 
