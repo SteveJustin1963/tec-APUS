@@ -16,6 +16,8 @@ CARRY equ $01
 SADD equ $6C
 
         org $800
+
+; calculates the sum of two numbers and stores the result.
 start:
         ld HL, 1                ; arg1
         ld DE, 1                ; arg2
@@ -36,6 +38,11 @@ start:
         org $900       
 RESULT: dw 0
 ERROR:  db 0
+
+
+; code is for a push-pop FIFO data structure. 
+; The pushData function pushes a byte onto the FIFO, and the popData function pops a byte off the FIFO. 
+; The awaitResult function waits until the FIFO is no longer busy before returning.
 
 pushData:
         ld A,L
