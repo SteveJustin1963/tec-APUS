@@ -4,8 +4,7 @@ PAGE UNDER EDIT
 
 ## tec-APUS
 
-
-- This add-on board provides a serial port and math functions using a MC6850 and AM9511 chip which provides fast serial and transcendental functions.
+This add-on board provides a serial port and math functions using a MC6850 and AM9511 chip which provides fast serial and transcendental functions.
 
 
 ## MC6850 
