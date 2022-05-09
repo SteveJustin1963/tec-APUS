@@ -67,6 +67,10 @@ RST18            JP      CKINCHAR
 RST38            JR      serialInt       
 
 ;------------------------------------------------------------------------------
+
+
+; This code checks if an interrupt has been generated due to the read buffer being full. 
+; If the buffer is full, the code ignores the interrupt.
 serialInt:      PUSH     AF
                 PUSH     HL
 
@@ -81,13 +85,23 @@ serialInt:      PUSH     AF
                 JR       NZ,notFull
                 POP      AF
                 JR       rts0
-
+; The "notFull" label indicates the start of a loop that checks if the serial input buffer is full. 
+; The buffer is considered full if the value in the "serInPtr" register is equal to the value 
+; in the "serBuf+SER_BUFSIZE" register. 
+; If the buffer is not full, the program execution jumps to the "notWrap" label. 
+; If the buffer is full, the program execution continues to the next line of code.
 notFull:        LD       HL,(serInPtr)
                 INC      HL
                 LD       A,L             ; Only need to check low byte becasuse buffer<256 bytes
                 CP       (serBuf+SER_BUFSIZE) & $FF
                 JR       NZ, notWrap
                 LD       HL,serBuf
+
+
+; This code loads the value of serInPtr into HL, pops AF, and loads A into the location pointed to by HL. 
+; Then, it increments serBufUsed and compares it to SER_FULLSIZE. 
+; If it's less than SER_FULLSIZE, it returns. 
+; Otherwise, it loads A with RTS_HIGH and outputs it to $80.
 notWrap:        LD       (serInPtr),HL
                 POP      AF
                 LD       (HL),A
@@ -104,6 +118,9 @@ rts0:           POP      HL
                 RETI
 
 ;------------------------------------------------------------------------------
+
+; The code is checking if there is a character in the serial buffer, and if there is, it reads it. 
+; If the buffer is empty, it waits until there is a character.
 RXA:
 waitForChar:    LD       A,(serBufUsed)
                 CP       $00
@@ -115,6 +132,10 @@ waitForChar:    LD       A,(serBufUsed)
                 CP       (serBuf+SER_BUFSIZE) & $FF
                 JR       NZ, notRdWrap
                 LD       HL,serBuf
+
+; This code is a part of a serial communications routine. 
+; It is responsible for reading data from a serial buffer and decrementing the number of bytes used in the buffer. 
+; If the buffer is empty, it will return an error code.
 notRdWrap:      DI
                 LD       (serRdPtr),HL
                 LD       A,(serBufUsed)
@@ -124,6 +145,9 @@ notRdWrap:      DI
                 JR       NC,rts1
                 LD       A,RTS_LOW
                 OUT      ($80),A
+
+; This code loads a character from the address pointed to by HL into register A, 
+; enables interrupts, pops HL off the stack, and returns.
 rts1:
                 LD       A,(HL)
                 EI
@@ -131,6 +155,12 @@ rts1:
                 RET                      ; Char ready in A
 
 ;------------------------------------------------------------------------------
+
+; This code pushes the value in the AF register onto the stack, then loads the status byte from port $80 into register A. 
+; It checks the value in bit 1 of register A, and if it is set to 1, it loops back to the conout1 label. 
+; If the value in bit 1 is not set to 1, it pops the value off the stack into the AF register and outputs the character to port $81. 
+; Finally, it returns.
+
 TXA:            PUSH     AF              ; Store character
 conout1:        IN       A,($80)         ; Status byte       
                 BIT      1,A             ; Set Zero flag if still transmitting character       
@@ -140,10 +170,19 @@ conout1:        IN       A,($80)         ; Status byte
                 RET
 
 ;------------------------------------------------------------------------------
+
+; The code checks if there are any characters in the serial buffer. If there are, it returns. 
+; Otherwise, it continues on.
 CKINCHAR        LD       A,(serBufUsed)
                 CP       $0
                 RET
 
+
+; The code is printing a string stored in memory, starting at the address in HL. 
+; The string is terminated with a $00 byte, so when that is encountered, the RET instruction is executed 
+; and the print operation stops. 
+; Otherwise, the character is printed using the RST 08H instruction, 
+; and then the HL register is incremented so that the next character in the string will be printed.
 PRINT:          LD       A,(HL)          ; Get character
                 OR       A               ; Is it $00 ?
                 RET      Z               ; Then RETurn on terminator
@@ -152,6 +191,9 @@ PRINT:          LD       A,(HL)          ; Get character
                 JR       PRINT           ; Continue until $00
                 RET
 ;------------------------------------------------------------------------------
+
+; This code initializes the ACIA chip, sets up a temporary stack, and prints a sign-on message. 
+; If the BASIC STARTED flag is not set, it will print a message saying it is doing a cold start. 
 INIT:
                LD        HL,TEMPSTACK    ; Temp stack
                LD        SP,HL           ; Set up a temporary stack
@@ -171,6 +213,9 @@ INIT:
                JR        NZ,COLDSTART    ; If not BASIC started then always do cold start
                LD        HL,SIGNON2      ; Cold/warm message
                CALL      PRINT           ; Output string
+
+; The code converts lowercase letters to uppercase, and then checks if the letter is 'C'. 
+; If it is, it outputs a new line.
 CORW:
                CALL      RXA
                AND       %11011111       ; lower to uppercase
@@ -181,9 +226,14 @@ CORW:
                RST       08H
                LD        A,$0A
                RST       08H
+
+; This code is setting the flag for BASIC to start, and then jumping to the start address for BASIC.
 COLDSTART:     LD        A,'Y'           ; Set the BASIC STARTED flag
                LD        (basicStarted),A
                JP        $0150           ; Start BASIC COLD
+               
+               
+; This code checks if the computer is in warm start mode. If it is, it runs a short routine and then jumps to the start of BASIC.
 CHECKWARM:
                CP        'W'
                JR        NZ, CORW
