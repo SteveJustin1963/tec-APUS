@@ -13,7 +13,7 @@ This add-on board provides a serial port and math functions using a MC6850 and A
 ### Datasheet
 - https://github.com/SteveJustin1963/tec-APUS/blob/master/docs/MC6850.pdf
 
-### chip conrol
+### chip control
 - select, is used to select the device on the bus that the master is communicating with. 
 - control, is used to control the operation of the device, such as writing to or reading from the device. 
 - clock is used to synchronize the data transfer between the master and the device. from this we derive the baud rate at which data is transferred between the devices on serial port. 
@@ -29,40 +29,36 @@ This add-on board provides a serial port and math functions using a MC6850 and A
 ## AM9511  
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/9511chip.png)   
 
-The chip select line is used to select the chip that the microcontroller wants to communicate with. The chip control lines are used to control the chip, such as setting the chip's address or data register. The clock line is used to provide a clock signal to the chip. The chip uses the clock signal to synchronize its internal operations. The chip select and chip control lines are used to send commands or data to the chip. The chip executes the commands or data and the results are placed on its internal stack. The chip signals via INT when the results are ready.
+### Datasheet
+- https://github.com/SteveJustin1963/tec-APUS/blob/master/docs/AMD%209511%20FPU.pdf
 
-- data sheet https://github.com/SteveJustin1963/tec-APUS/blob/master/docs/AMD%209511%20FPU.pdf
-- A0 controls Command/Data registers.
-- clock
-  - its also needs a slower clock just over 1Mh (unless u have the 3Mhz ver) 
-  - or try drive with /M1 as a clock ( 2T states) 
-  - or use the onboard flip flops /3; better. 
-  - or use a slower baud clock and run it direct; mod needed.
-- the select line P1 is active low, driven by eg port 6 (h3000,3001) 
-- or 7 (h3800,3801), 
-- https://github.com/z88dk/z88dk/tree/master/libsrc/_DEVELOPMENT/math/float/am9511
 - needs 5V and 12V, add a step up board or add to main circuit design. 
+
+### chip control
+- select used to select the chip
+- A0 controls Command/Data registers.
+- clock, needs a slower clock 1Mh and 3Mhz versions, check markings . maybe but recommended yo use a slwer clock use the M1 signal as its 2T states 
+- or use a divider cct with flip flops etc 
+- the select line P1 is active low, driven by eg port 6 (h3000,3001) or 7 (h3800,3801), 
+
+
+### test code
+- see CJ code, url ?
+- https://github.com/z88dk/z88dk/tree/master/libsrc/_DEVELOPMENT/math/float/am9511
 - https://easyeda.com/Little_Arc/MT3608
-
-
 
 
 
 ## Circuit
 
-- this circuit is hacked together from
+
+
+## older cct versions 
+- https://github.com/SteveJustin1963/tec-APUS/wiki
+
+
+### Ref 
 - https://www.tindie.com/products/semachthemonkey/rc2014-am9511a-apu-arithmetic-processor/
 - https://github.com/RC2014Z80/RC2014/tree/master/Hardware/APU%20RC2014
 - https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/ExpansionBoards/SC-Serial
 - https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/ExpansionBoards/SC-APU
-- 
-
-
-## Ver 8
-
-## Ver 7 and older 
-- https://github.com/SteveJustin1963/tec-APUS/wiki
-
-
-
-
