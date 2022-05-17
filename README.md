@@ -4,10 +4,10 @@ PAGE UNDER EDIT
 
 ## tec-APUS
 
-This add-on board provides a serial port and math functions using a MC6850 and AM9511 chip which provides fast serial and transcendental functions.
-
+PCB provides 1x async serial port upto 1Mbps (MC6850) and transcendental math functions (AM9511). Use in MINT or your ASM code etc.
 
 ## MC6850 
+
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/6850chip.png)   
 
 ### Datasheet
@@ -27,6 +27,7 @@ This add-on board provides a serial port and math functions using a MC6850 and A
 
 
 ## AM9511  
+
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/9511chip.png)   
 
 ### Datasheet
