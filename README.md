@@ -14,11 +14,13 @@ Design is work in progress, a better io decode cct is needed, see Craigs notes b
 
 10.3.22 
 - https://github.com/feilipu/LLL-Floating-Point
+ 
 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80. use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU Also, I have a new design for the APU, I will send you the schematic soon for the next version of your TEC-APUS. the 74HC688 works well, does not have to be INT driven, but can be. My initial code replaces the functions of the LLL library above. I am using the Wait and software polling the APU status. I think we should be able to do Poll/Status and Interrupt Driven interfaces for the APU, perhaps even Demand/Wait. Int driven just let's you do something else while the APU is working. the other modes mean you just wait for the APU to finish the calculation. Each operation is probably msec or less, maybe the transcendental's are longer? Anyway we will be able to use it in more than one mode. And of course it will run at 4Mhz! You should be able to use it from Mint, although we don't have a method of using interrupts in Mint quite yet! Yes, it has a lot of history attached to it being the first of it's kind, and was apparently more popular than the IEEE754 AM9512. go figure! There's a lot we can use in RC2014. Things have changed a lot, now sharing is the thing to do as long as you acknowledge the source.
 
 
 16.3.22  
 - https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/TEC-APU-cj-1.pdf
+
 A0 selects between the command(write)/status(read) register ($C2)and the Read/Write 'data' registers (the operand stack) ($C3). Yes it will work with other addons, I chose $c2 to be out of the way on the TEC1-F, it will need to change for the TEC, by changing the connections P7 to P1, because of the TEC's bad IO decoding. I'm not sure what the best approach is here... Yes, one 688 per APU. The 688 compares the P inputs with the Q inputs, when they are the same, the output goes low. P0 is compared against Q0 which connects to MREQ, so actually the 688 output goes low when A7 to A1 = $C2 and MREQ is high. This is really just a little 'redesign' of the RC2014 board.
 
 
