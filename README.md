@@ -1,4 +1,5 @@
- MC6850+ AM9511, use in MINT/ASM etc.
+ (A_rithmetic P_rocessing U_nit) AM9511 + (S_erial) MC6850
+ - use in MINT amd ASM code
 
 
 ## Ver 10 Craig Jones  
@@ -167,6 +168,7 @@ Then run a terminal app to generate ascii text such as
 
 
 ## Ref
+- https://en.wikipedia.org/wiki/Arithmetic_logic_unit
 - http://www.andreadrian.de/oldcpu/Z80_number_cruncher.html
 - http://www.cpushack.com/2010/09/23/arithmetic-processors-then-and-now/
 - https://archive.is/2015.07.14-173053/http://sgate.emt.bme.hu/patai/publications/z80guide/part4.html
