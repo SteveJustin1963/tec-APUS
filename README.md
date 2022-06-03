@@ -5,27 +5,11 @@
 Design is work in progress, a better io decode cct is needed, see Craigs notes below. Try proper decoding cct, eg 74HC688 (eg in the APU-RC2014 board), a 8 bit comparator as IO address decoder, can be decoded anywhere in the bottom 256 I/O addresses. 74HCT688 compares two 8-bit inputs and outputs an active low if both sets match. Enable is active low eg use MREQ to drive this. set inputs to address lines and to VCC, via a DIP switch dial in address you want your io peripheral to enabled on. Note interrupt modes of IOReq and M1 will be low at the same for an interrupt acknowledge, consider this when selecting io. There is a limit to the number of devices that the Z80 can drive, some systems need buffered address and data lines, not problem with CMOS processors which we all should be using. Put A0-A7 on the 'P' side, pull-up or pull-down the inputs on the 'Q' side, when they both match the one output goes low - decoding 1 address in 256. Leave off A0 and you decode 2 consecutive addresses in 256, and so on.
 
 - https://github.com/feilipu/LLL-Floating-Point
-- 10.3.22 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80.
-- use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU
-- Also, I have a new design for the APU, I will send you the schematic soon for the next version of your TEC-APUS.
-- 74HC688 works well, does not have to be INT driven, but can be. My initial code replaces the functions of the LLL library above. I am using the Wait and software polling the APU status.
-- I think we should be able to do Poll/Status and Interrupt Driven interfaces for the APU, perhaps even Demand/Wait.
-- Int driven just let's you do something else while the APU is working. the other modes mean you just wait for the APU to finish the calculation.
-- Each operation is probably ms or less, maybe the transcendental's are longer? Anyway we will be able to use it in more than one mode. And of course it will run at 4Mhz!
-- You should be able to use it from Mint, although we don't have a method of using interrupts in Mint quite yet!
-- Yes, it has a lot of history attached to it being the first of it's kind, and was apparently more popular than the IEEE754 AM9512. go figure!
-- There's a lot we can use in RC2014. Things have changed a lot, now sharing is the thing to do as long as you acknowledge the source.
-- 16.3.22
+10.3.22 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80. use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU Also, I have a new design for the APU, I will send you the schematic soon for the next version of your TEC-APUS. the 74HC688 works well, does not have to be INT driven, but can be. My initial code replaces the functions of the LLL library above. I am using the Wait and software polling the APU status. I think we should be able to do Poll/Status and Interrupt Driven interfaces for the APU, perhaps even Demand/Wait. Int driven just let's you do something else while the APU is working. the other modes mean you just wait for the APU to finish the calculation. Each operation is probably msec or less, maybe the transcendental's are longer? Anyway we will be able to use it in more than one mode. And of course it will run at 4Mhz! You should be able to use it from Mint, although we don't have a method of using interrupts in Mint quite yet! Yes, it has a lot of history attached to it being the first of it's kind, and was apparently more popular than the IEEE754 AM9512. go figure! There's a lot we can use in RC2014. Things have changed a lot, now sharing is the thing to do as long as you acknowledge the source.
+- 
+16.3.22  
 - https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/TEC-APU-cj-1.pdf
-- A0 selects between the command(write)/status(read) register ($C2)and the Read/Write 'data' registers (the operand stack) ($C3).
-- Yes it will work with other addons, I chose $c2 to be out of the way on the TEC1-F, 
-- it will need to change for the TEC, by changing the connections P7 to P1, because of the TEC's bad IO decoding. I'm not sure what the best approach is here...
-- Yes, one 688 per APU. The 688 compares the P inputs with the Q inputs, 
-- when they are the same, the output goes low.
-- P0 is compared against Q0 which connects to MREQ, 
-- so actually the 688 output goes low when A7 to A1 = $C2 and MREQ is high. 
-- This is really just a little 'redesign' of the RC2014 board.
-
+A0 selects between the command(write)/status(read) register ($C2)and the Read/Write 'data' registers (the operand stack) ($C3). Yes it will work with other addons, I chose $c2 to be out of the way on the TEC1-F, it will need to change for the TEC, by changing the connections P7 to P1, because of the TEC's bad IO decoding. I'm not sure what the best approach is here... Yes, one 688 per APU. The 688 compares the P inputs with the Q inputs, when they are the same, the output goes low. P0 is compared against Q0 which connects to MREQ, so actually the 688 output goes low when A7 to A1 = $C2 and MREQ is high. This is really just a little 'redesign' of the RC2014 board.
 
 
 ## Ver 9 Craig Jones  
@@ -107,12 +91,11 @@ See what's around. The RC2014 code looks promising. I might even start with the 
 ![120720a](https://user-images.githubusercontent.com/58069246/171794754-10b2162e-6230-460b-b6b1-ebd805c65a23.png)
 
 ## 6850 code 
-- Grant Searl solution. look at the loader in Searls msbasic rom. It sets up a sort of bios based on the 6850 serial io
-- simple-echo.z80. it echoes back what you sent to it. set your RAM and ROM values. downloaded as intel hex or binary. load hex into into rom with burner (covets to binary) or bin to EMU.
-- clocks speed determines baud rate, a &.3728 Mhz clk gives standard baud rates 4800, 9600... The code divides this down  `/64 = 115,200` baud or `/16 =  460,800` baud 
-- but a standard clock is not required to operate such as 4Mhz. simply adjust the terminal speed to aquire the right baud rate with Tera-Term. 
-- handles the control registers and with INT control, 
-  - rx buffer sends a INT when the buffer is full. 
+Grant Searl solution. look at the loader in Searls msbasic rom. It sets up a sort of bios based on the 6850 serial io 
+```
+simple-echo.z80
+```
+It echoes back what you sent to it. set your RAM and ROM values. downloaded as intel hex or binary. load hex into into rom with burner (covets to binary) or bin to EMU. clocks speed determines baud rate, a &.3728 Mhz clk gives standard baud rates 4800, 9600... The code divides this down  `/64 = 115,200` baud or `/16 =  460,800` baud, but a standard clock is not required to operate such as 4Mhz. simply adjust the terminal speed to aquire the right baud rate with Tera-Term. handles the control registers and with INT control, rx buffer sends a INT when the buffer is full. 
 
 
 ### 9511 code
@@ -133,50 +116,33 @@ See what's around. The RC2014 code looks promising. I might even start with the 
 ```
 
 - OshonSoft IDE
-- compile to .obj (binary) which (normally) is the same as .hex file
-- to trim code length insert this
-```
-Define RAMEND = 4095
-```
+compile to .obj (binary) which (normally) is the same as .hex file, to trim code length insert this `Define RAMEND = 4095`
 
 
 ## EPROM emulator 
-- you can use an EEPROM, fast to erase and reprogram but you can use a EMU form Ben
+You can use an EEPROM, fast to erase and reprogram but you can use a EMU form Ben.
 - https://github.com/SteveJustin1963/tec-EMU-BG 
-- a https://github.com/OliviliK/STM32F103/wiki/F103CB piggy backs onto the EMU
-- its default boots to tec-1 monitor or your uploaded your own code from pc then runs from 0000.
-- when you upload your code it executes it right away, a system reset goes back to the monitor.
-- The EMU board plugs into the ROM socket
-- code is uploaded via USB cable from your pc. when inserted it will activate PnP and auto install drivers for the EMU. 
-- there maybe extra steps to get it to work in win10, but win7 will work first go. 
-- USB connections and ports must be healthy
-- the micro usb connector on the EMU is VERY easy to break off, do not stress the joint.
-- open a DOS box (C:\cmd) then load your code with Bens .bat file run. The bat file calls a python script to load all the code. 
+- https://github.com/OliviliK/STM32F103/wiki/F103CB piggy backs onto the EMU
 
-## wiring
-- the tec-APUS uses TTL serial not RS-232, use a usb to serial-TTL cable
-- it has a TTL to USB bridging chip inside eg FT232R or PL2303TA and also emulates a virtual com port via a PnP driver load. 
-- When the USB end goes into pc's USB, it will activate PnP and windows will auto install drivers and creates a virtual com port 
-- run C:\mode to check for the com port number. 
-- or convert TTL to real RS-232 levels with a converter chip ie MAX232, u can install it to the tecAPUS pcb 
-- connect the TTL or rs232 lines of tx, rx, gnd lines to the tec-APUS and other end to usb or db9 or db25 pin port.
-- On the USB to TTL cable, the TTL end presents 
+Its default boots to tec-1 monitor or your uploaded your own code from pc then runs from 0000. when you upload your code it executes it right away, a system reset goes back to the monitor. The EMU board plugs into the ROM socket. code is uploaded via USB cable from your pc. when inserted it will activate PnP and auto install drivers for the EMU. There maybe extra steps to get it to work in win10, but win7 will work first go. USB connections and ports must be healthy, the micro usb connector on the EMU is VERY easy to break off, do not stress the joint. Open a DOS box (C:\cmd) then load your code with Bens .bat file run. The bat file calls a python script to load all the code. 
+
+## Wiring
+The tec-APUS uses TTL (+5V) serial not RS-232, use a usb to serial-TTL cable, it has a TTL to USB bridging chip inside eg FT232R or PL2303TA and also emulates a virtual com port via a PnP driver load. When the USB end goes into pc's USB, it will activate PnP and windows will auto install drivers and creates a virtual com port 
+so run C:\mode to check for the com port number, but when you load Teraterm it will show you the avail serial port number as well. Also you convert TTL to real RS-232 levels with a converter chip like the MAX232, you can install it onto the tecAPUS pcb or your own pcb flavour. connect the TTL or rs232 lines of tx, rx, gnd lines to the tec-APUS and other end to usb or db9 or db25 pin port. On the USB to TTL cable, the TTL end presents as; 
 ```
 Red=+5V
 Black=GND
 White=RXD
 Green=TXD
 ```
-- but RTS, CTS, DSR are not there on a cheap cables, from the chip inside the lines are not presented and are not needed for this project. 
-- Some current limit resistors are a good idea on tx and rx lines but not needed. 
-- do loopback test on the cable, short TX to RX (white-green), typing anything.. It should echo back at any baud speed.
+But RTS, CTS, DSR are not there on a cheap cables, from the chip inside the lines are not presented to outside and are not needed for this project anyway as we wont run faster than the codes ability to keep up. Some current limiting resistors are a good idea on tx and rx lines but not needed if your careful. Also do a quick loopback test on the cable, short TX to RX (white-green), typing anything.. It should echo back at any baud speed, then good to go.
 
 
 ## Terminal
 Then run a terminal app to generate ascii text such as
 - https://www.putty.org/    
 - https://www.chiark.greenend.org.uk/~sgtatham/putty/
-- tera term, best
+- https://tera-term.en.softonic.com/ is the best (
 
 
 
