@@ -18,18 +18,18 @@ Design is work in progress, a better io decode cct is needed, see Craigs notes b
 I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, with a little demo program to run in ASM80. use the 'import from GitHub' option and this link to load it. https://github.com/crsjones/APU Also, I have a new design for the APU, I will send you the schematic soon for the next version of your TEC-APUS. the 74HC688 works well, does not have to be INT driven, but can be. My initial code replaces the functions of the LLL library above. I am using the Wait and software polling the APU status. I think we should be able to do Poll/Status and Interrupt Driven interfaces for the APU, perhaps even Demand/Wait. Int driven just let's you do something else while the APU is working. the other modes mean you just wait for the APU to finish the calculation. Each operation is probably msec or less, maybe the transcendental's are longer? Anyway we will be able to use it in more than one mode. And of course it will run at 4Mhz! You should be able to use it from Mint, although we don't have a method of using interrupts in Mint quite yet! Yes, it has a lot of history attached to it being the first of it's kind, and was apparently more popular than the IEEE754 AM9512. go figure! There's a lot we can use in RC2014. Things have changed a lot, now sharing is the thing to do as long as you acknowledge the source.
 
 
-### 16.3.22 - Shematic  
+### 16.3.22 - Schematic  
 - https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/TEC-APU-cj-1.pdf
 
 A0 selects between the command(write)/status(read) register ($C2)and the Read/Write 'data' registers (the operand stack) ($C3). Yes it will work with other addons, I chose $c2 to be out of the way on the TEC1-F, it will need to change for the TEC, by changing the connections P7 to P1, because of the TEC's bad IO decoding. I'm not sure what the best approach is here... Yes, one 688 per APU. The 688 compares the P inputs with the Q inputs, when they are the same, the output goes low. P0 is compared against Q0 which connects to MREQ, so actually the 688 output goes low when A7 to A1 = $C2 and MREQ is high. This is really just a little 'redesign' of the RC2014 board.
 
 
-## Ver 9 Craig Jones  - 9511 GPU
+## Ver 9 Craig Jones  - 9511 APU
 You cannot use two i/o selects at the same time, C/D should connect to A0, what you need is a select, that is enabled for 2 addresses; a0=0 and a0=1. Look at the serial circuit I sent you, have a look at the 138 and see that I have connected a,b,c to a1,a2, and a3. This gives 8 CS lines each with two addresses, the 6850 has the same deal. The other way to do it is like the LCD on the DAT board, connect CD to a higher address like A7.
 
 Got it to work. I'm just doing the basic integer add like John Hardy's example code and I get the right answer. The chips I have are all AM9511A-4DC (4MHz!) so I have been using them at that speed. The chip you sent me works intermittently at 4MHz, SO I am checking it at 2MHz, it may be good at a lower frequency. see markings. I used Phillip Steven's circuit, using "demand wait" mode of operating, reading the busy bit and allowing the pause output to WAIT the Z80. Need code to convert floating point to a number as an ascii string, and visa-versa, so we can see a meaningful result of the calculations. Have used Phillip Stevens Z80 conversion of the Lawrence Livermore Labs Floating Point Library from Herb Johnson, so now I can enter numbers via the terminal and use this library to do a Floating Point calculation and display the result on the terminal. Phillip also has code to use the APU, but it's a bit complicated so I will start with something simpler. 
 
-## Ver 8 Craig Jones  - 6850
+## Ver 8 Craig Jones  - 6850 Serial
 
 OK, I got the 6850 to work with the SC, there are two errors on your schematic which got transferred to the PCB. Firstly, you have an A5 net label on the A6 pin on the expansion socket so the board has A5 and A6 shorted together. Secondly, the RXCLK and TXCLK of the 6850 are connected to the net label CLK bar, but there is no CLK bar net, so those two pins are connected together but nowhere else, they should connect to CLK. Only two small errors so that's not too bad at all! For the decoding I connected A6 to M1. I don't think you actually have to have M1 connected unless you are doing IM2 interrupts and I connected PORT1 to A7 to decode the 6850 at `$40 and $41` for the CONTROL/STATUS and TDR/RDR registers respectively. I might do this on the TEC-1F as well. Now I'm going to try again to get it going on the TEC-1F before I have a go at the APU.
 
@@ -164,6 +164,7 @@ Then run a terminal app to generate ascii text such as
 
 ## other io ports for the tec-1
 - https://github.com/SteveJustin1963/tec-IO
+- Southern Cross serial PCB
 - https://github.com/SteveJustin1963/tec-RELAY
 - https://github.com/SteveJustin1963/tec-DAT
 - https://github.com/SteveJustin1963/tec-EMU-BG
@@ -171,7 +172,7 @@ Then run a terminal app to generate ascii text such as
 - https://github.com/SteveJustin1963/tec-SIO-BC
 - https://github.com/SteveJustin1963/tec-BIT-BANG and the CJ port mod
 - https://github.com/SteveJustin1963/tec-SERIAL-LOAD
-- serial in https://github.com/SteveJustin1963/tec-Southern-Cross-Computer
+- Built in serial https://github.com/SteveJustin1963/tec-Southern-Cross-Computer
 - https://www.facebook.com/groups/623556744820045/posts/1139514603224254/
 
 
