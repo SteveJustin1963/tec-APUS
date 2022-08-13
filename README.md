@@ -8,7 +8,16 @@
  - use in MINT amd ASM code
 
 
-## Ver 10 Craig Jones  - decoding 74HC688
+## Ver 10 Craig Jones  
+What can I say, I have finished a few projects this week!
+This is a AM9511A Arithmetic Processor, it has featured here previously courtesy of Stephen Justin.
+It's a predecessor of the 8087 and is a stack processor that does, amongst other things, floating point math.
+Details are in the repo and there is plenty of stuff on the web about it, there is a RC2014 version by Philip Stevens that he did a couple of years ago, and he has also added support for it in the Z88DK environment.  
+https://github.com/.../Southern-Cross.../tree/main/SC-APU
+
+![296695661_423670749725283_5916979048714754944_n](https://user-images.githubusercontent.com/58069246/184461064-931d17f9-8fb9-4191-a095-ee8816cb7aa0.jpg)
+
+### decoding 74HC688
 Design is work in progress, a better io decode cct is needed, see Craigs notes below. Try proper decoding cct, eg 74HC688 (eg in the APU-RC2014 board), a 8 bit comparator as IO address decoder, can be decoded anywhere in the bottom 256 I/O addresses. 74HCT688 compares two 8-bit inputs and outputs an active low if both sets match. Enable is active low eg use MREQ to drive this. set inputs to address lines and to VCC, via a DIP switch dial in address you want your io peripheral to enabled on. Note interrupt modes of IOReq and M1 will be low at the same for an interrupt acknowledge, consider this when selecting io. There is a limit to the number of devices that the Z80 can drive, some systems need buffered address and data lines, not problem with CMOS processors which we all should be using. Put A0-A7 on the 'P' side, pull-up or pull-down the inputs on the 'Q' side, when they both match the one output goes low - decoding 1 address in 256. Leave off A0 and you decode 2 consecutive addresses in 256, and so on. https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 
 
