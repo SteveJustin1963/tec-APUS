@@ -5,7 +5,8 @@
 
 
 (A_rithmetic P_rocessing U_nit) AM9511 + (S_erial) MC6850
- - use in MINT amd ASM code
+ 
+ Goal...use with MINT and ASM code...
 
 "I played with it, Craig perfected it...John helped as well...thanks!"
 
