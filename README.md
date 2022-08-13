@@ -12,8 +12,7 @@
 What can I say, I have finished a few projects this week!
 This is a AM9511A Arithmetic Processor, it has featured here previously courtesy of Stephen Justin.
 It's a predecessor of the 8087 and is a stack processor that does, amongst other things, floating point math.
-Details are in the repo and there is plenty of stuff on the web about it, there is a RC2014 version by Philip Stevens that he did a couple of years ago, and he has also added support for it in the Z88DK environment.  
-https://github.com/.../Southern-Cross.../tree/main/SC-APU
+Details are in the repo and there is plenty of stuff on the web about it, there is a RC2014 version by Philip Stevens that he did a couple of years ago, and he has also added support for it in the Z88DK environment.  https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 
 ![296695661_423670749725283_5916979048714754944_n](https://user-images.githubusercontent.com/58069246/184461064-931d17f9-8fb9-4191-a095-ee8816cb7aa0.jpg)
 
