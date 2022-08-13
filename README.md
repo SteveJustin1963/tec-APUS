@@ -174,7 +174,7 @@ Then run a terminal app to generate ascii text such as
 
 ## other io ports for the tec-1
 - https://github.com/SteveJustin1963/tec-IO
-- Southern Cross serial PCB
+- https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-6850_Serial
 - https://github.com/SteveJustin1963/tec-RELAY
 - https://github.com/SteveJustin1963/tec-DAT
 - https://github.com/SteveJustin1963/tec-EMU-BG
