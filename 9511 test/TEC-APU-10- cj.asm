@@ -2,6 +2,11 @@
 ;SC-APU.asm
 ;
 ; Craig Jones  January 2022
+
+; I found my code, It's not done but it will do the Add example with the APU or the library, 
+; and should work on the tEC or the SC.
+; The main reason to use the library is that it does the conversions, 
+; from ASCII string to Floating point and vica-versa.
 ;
 ; uses Southern Cross Monitor SCM V1.6 monitor
 ; 
