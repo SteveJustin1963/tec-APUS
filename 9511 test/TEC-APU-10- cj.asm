@@ -7,6 +7,17 @@
 ; and should work on the tEC or the SC.
 ; The main reason to use the library is that it does the conversions, 
 ; from ASCII string to Floating point and vica-versa.
+
+
+;Ok, who wrote this crap code? oh it was me.😝
+;make it;
+;apuflag:    DS   1  
+; reserve a byte to flag when the APU is being used $aa= apu else $00 = Use LLL library
+;change pnewline to CRLF    ;prints a CR LF
+
+
+
+
 ;
 ; uses Southern Cross Monitor SCM V1.6 monitor
 ; 
