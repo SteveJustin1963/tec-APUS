@@ -34,16 +34,16 @@ MSGBUF:  .EQU $3E00   ;string handling area
 ;
 ; I/O PORT ADDRESS
 ;
-#IFDEF TEC-1F
-KEYBUF:      .EQU 00H             ;MM74C923N KEYBOARD ENCODER
-SCAN:        .EQU 01H             ;DISPLAY SCAN LATCH
-DISPLY:      .EQU 02H             ;DISPLAY LATCH
-PORT3:       .EQU 03H             ;ST3 (8X8), STROBE (RELAY BOARD) DATLATCH (DAT BOARD)
-PORT4:       .EQU 04H             ;ST4 (8X8), LCD 'E' (DAT BOARD)
-PORT5:       .EQU 05H
-PORT6:       .EQU 06H
-PORT7:       .EQU 07H             ;ENABLE/DISABLE SINGLE STEPPER (IF INSTALLED)
-#ELSE
+;#IFDEF TEC-1F
+;KEYBUF:      .EQU 00H             ;MM74C923N KEYBOARD ENCODER
+;SCAN:        .EQU 01H             ;DISPLAY SCAN LATCH
+;DISPLY:      .EQU 02H             ;DISPLAY LATCH
+;PORT3:       .EQU 03H             ;ST3 (8X8), STROBE (RELAY BOARD) DATLATCH (DAT BOARD)
+;PORT4:       .EQU 04H             ;ST4 (8X8), LCD 'E' (DAT BOARD)
+;PORT5:       .EQU 05H
+;PORT6:       .EQU 06H
+;PORT7:       .EQU 07H             ;ENABLE/DISABLE SINGLE STEPPER (IF INSTALLED)
+;#ELSE
 IO0:         .EQU 80H             ;IO PORT 0
 IO1:         .EQU 81H             ;IO PORT 1
 IO2:         .EQU 82H             ;IO PORT 2
@@ -52,7 +52,7 @@ DISPLY:      .EQU 84H             ;DISPLAY LATCH
 SCAN:        .EQU 85H             ;DISPLAY SCAN LATCH
 KEYBUF:      .EQU 86H             ;KEYBOARD BUFFER
 IO7:         .EQU 87H             ;ENABLE/DISABLE SINGLE STEPPER (IF INSTALLED)
-#ENDIF
+;#ENDIF
 
 ;AM9511A APU
 STATUSPORT:  .EQU $C3            ;read status
@@ -79,10 +79,10 @@ ESC:    .EQU   1BH
 CR:     .EQU   0DH
 LF:     .EQU   0AH
 
-        .ORG    $2000
+        .ORG    $800
         jp      main
 ; some variables
-apuflag:  .equ   *
+apuflag:  .equ   1
       
 ;
 ; lll floating point package demo
@@ -304,7 +304,7 @@ getop1:
         LD      L,OP1           ;POINTER TO OPERAND 1
         LD      C,SCR           ;SCRATCH AREA
         CALL    INPUT           ;INPUT OPERAND 1 FROM TTY
-        CALL    pnewline
+        CALL    CRLF
         RET
 
 getop2:
@@ -312,7 +312,7 @@ getop2:
        LD      L,OP2           ;POINTER TO OPERAND 2
        LD      C,SCR           ;SCRATCH AREA
        CALL    INPUT           ;INPUT OPERAND 1 FROM TTY
-       CALL    pnewline
+       CALL    CRLF
        RET
 
 putop1:
@@ -320,7 +320,7 @@ putop1:
         LD L,OP1
         LD C,SCR               ;SCRATCH AREA
         call CVRT              ;OUTPUT NUMBER STARTING IN LOCATION OP1 TO TTY
-        CALL  pnewline         
+        CALL CRLF         
         RET
 
 putrsult:
@@ -328,7 +328,7 @@ putrsult:
         LD L,RSULT
         LD C,SCR               ;SCRATCH AREA
         call CVRT              ;OUTPUT NUMBER STARTING IN LOCATION OP1 TO TTY
-        CALL  pnewline
+        CALL CRLF
         RET        
                
 ;-----------------
@@ -503,7 +503,7 @@ loopsz:
 ;
 ;       MODIFIES : A,B,C
 ;
-sndmsg:
+;sndmsg:
 SNDMSG:     
         LD    B,128         ;128 CHARS MAX
 SDMSG1: LD    A,(HL)        ;GET THE CHAR
