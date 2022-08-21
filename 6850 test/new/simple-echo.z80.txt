@@ -2,6 +2,7 @@
 .engine mycomputer
 
 ; NON COMMERCIAL USE ONLY
+; Johm Hardy
 ; Modified from code by Grant Searle
 ; Minimum 6850 ACIA interrupt driven serial I/O
 ; Full input buffering with incoming data hardware handshaking
