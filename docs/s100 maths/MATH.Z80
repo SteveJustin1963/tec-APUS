@@ -1,0 +1,1502 @@
+;THIS IS A PROGRAM TO test the S100Computers math Board 9511 Chip 
+;
+;	JOHN MONAHAN	(monahan@vitasoft.org)	Started 2/3/2022	
+;	VERSION	0.1	Initial code
+;
+;	V0.1			2/3/2022	Initial version, IDE CF Card only
+;
+;
+;Please see the notes in FPGA_DC.Z80 to understand how this Diagnostic routine works
+
+FALSE		EQU	0
+TRUE		EQU	NOT FALSE
+
+SCROLL		EQU	01H					
+BELL		EQU	07H
+SPACE		EQU	20H
+TAB		EQU	09H		;TAB ACROSS (8 SPACES FOR SD-BOARD)
+CR		EQU	0DH
+LF		EQU	0AH
+FF		EQU	0CH
+QUIT		EQU	11H		;Turns off any screen enhancements (flashing, underline etc).
+NO_ENH		EQU 	17H		;Turns off whatever is on
+FAST		EQU	10H		;High speed scroll
+ESC		EQU	1BH
+DELETE		EQU	7FH
+BACKS		EQU	08H
+
+
+FALSE			EQU	0
+TRUE			EQU	NOT FALSE
+
+CPM			EQU	FALSE		;TRUE if output via CPM, FALSE if direct to hardware
+
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;++++++++++++++++++++++++++++++++++ BOARD HARDWARE PORTS ++++++++++++++++++++++++++++++++++++++++++
+;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                                
+
+;	PORTS  FOR FOR Propeller Console IO Board
+
+CIN			EQU	1H		;IN Data SD Systems Video Board
+COUT			EQU	1H		;OUT Data SD Systems Video Board
+CSTAT			EQU	0H		;Status Port SD Systems Video Board
+
+MONITOR			EQU	0F000H		;Location of Z80 monitor for program abort
+
+;	MATH BOARD PORTS
+
+MATH_DATA_PORT		EQU	80H
+MATH_CTRL_PORT		EQU	81H
+
+CHIP_8255_A		EQU	82H
+CHIP_8255_B		EQU	83H
+CHIP_8255_C		EQU	84H
+CHIP_8255_CTRL_PORT	EQU	85H
+
+						;9511 Commands
+SADD			EQU	06CH		;9511 add TOS to NOS
+SSUB			EQU	06DH		;Subtract
+SMUL			EQU	06EH		;Multiply lower bytes
+SMUU			EQU	0E6H		;Multiply upper bytes
+
+DADD			EQU	02CH		;Add 32+32
+DMUL			EQU	02EH		;Multiply 32X16
+FLTD			EQU	01CH		;Convert 32 bit number to float
+FIXD			EQU	01EH		;Convert float to fixed
+SQRT			EQU	001H		;Get the square root of a floating point number
+
+
+;--------------------------------------------------------------------------------------------------------------
+
+	ORG	100H
+	LD	(SP_SAVE),SP
+	LD	SP,STACK
+
+START:	CALL	CRLF
+	LD	DE,SIGNON
+	CALL	PRINT_STRING
+	CALL	CRLF
+	
+	LD	A,81H			;Set A,B 8255 Ports to outputs & C port as input
+	OUT	(CHIP_8255_CTRL_PORT),A
+	
+	CALL	RESET_9511
+	
+MAIN_LOOP:
+	LD	DE,MAIN_MENU
+	CALL	PRINT_STRING
+	LD	DE,Prompt		;Please Entar a cmd >
+	CALL	PRINT_STRING
+	
+	CALL	ZCI
+	CP	A,ESC			;Abort if ESC
+	JP	Z,ABORT
+
+	CALL	UPPER
+	CP	A,'*'			;Must be >= '*' 
+	JP	C,ERROR
+	CP	A,'Z'+1			;Must be <= 'Z'
+	JP	NC,ERROR
+	LD	C,A
+	CALL	ZCO
+	
+	CALL	CRLF
+	
+	CP	A,'R'
+	JP	Z,RESET9511
+	CP	A,'+'
+	JP	Z,SIMPLE_ADD
+	CP	A,'='
+	JP	Z,SIMPLE_ADD
+	CP	A,'A'
+	JP	Z,SIMPLE_ADD
+	CP	A,'-'
+	JP	Z,SIMPLE_SUBTRACT
+	CP	A,'_'
+	JP	Z,SIMPLE_SUBTRACT
+	CP	A,'M'
+	JP	Z,SIMPLE_MULTIPLY_X8	;16 bit x 8 bit	
+	CP	A,'D'
+	JP	Z,SIMPLE_32_ADD
+	CP	A,'X'
+	JP	Z,MULTIPLY_32_X8
+	CP	A,'C'
+	JP	Z,TO_FLOAT_NUMBER	;Convert 32 bit number to floating point
+	CP	A,'E'
+	JP	Z,FROM_FLOAT_NUMBER	;;Convert floating point number to 32 bits
+	CP	A,'S'
+	JP	Z,SQUARE_FLOAT_NUMBER	;Get the square root of a  floating point number
+	JP	ERROR
+		
+	
+
+;-------------------------- MENU COMMANDS ---------------------------------------------------
+		
+ABORT:	
+        IF CPM
+	JP	0H			;Reboot CPM	
+        ELSE
+ 	JP	0F000H			;Monitor
+        ENDIF	
+
+;--------------------------------------------------------------------
+
+SIMPLE_ADD:
+	CALL	RESET_9511		;Just in case previous errors
+
+	LD	DE,FIRST_NUMBER_MSG	;Enter the first 16 bit number (XXH)
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_1),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_0),A
+
+	LD	A,(FIRST_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	DATA_9511_OUT
+	
+	LD	DE,SECOND_NUMBER_MSG	;Enter the second 16 bit number (XXH)
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_1),A
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_0),A
+	
+	LD	A,(SECOND_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(SECOND_NUMBER_1)
+	CALL	DATA_9511_OUT
+
+	LD	A,SADD			;Add CMD (6CH)
+	LD	(CMD_BYTE),A
+	CALL	CTRL_9511_OUT
+
+	LD	DE,START_CALC_MSG	;Enter CR to display the result of the calculation
+	CALL	PRINT_STRING
+	CALL	ZCI
+	
+	CALL	WAIT_CMD_COMPLETE
+	JP	Z,MAIN_LOOP		;Abort if the command cannot be completed
+	
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_1),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_0),A
+	
+	CALL	CTRL_9511_IN		;Clear status port
+	CALL	CRLF
+					;Send data summary
+	LD	DE,RESULT_MSG1		;Command ADD 
+	CALL	PRINT_STRING
+	LD	A,(FIRST_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_0)
+	CALL	HEXOUT
+	
+	LD	DE,RESULT_MSG2		;'H - '
+	CALL	PRINT_STRING
+	LD	A,(SECOND_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(SECOND_NUMBER_0)
+	CALL	HEXOUT
+
+	LD	DE,RESULT_MSG3		;'H = '
+	CALL	PRINT_STRING
+	LD	A,(RESULT_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_0)
+	CALL	HEXOUT
+	LD	DE,RESULT_MSG4		;'H'
+	CALL	PRINT_STRING
+
+	CALL	CRLF
+	JP	MAIN_LOOP
+
+;--------------------------------------------------------------------
+
+SIMPLE_32_ADD:
+	CALL	RESET_9511		;Just in case previous errors
+
+	LD	DE,FIRST_32_NUMBER_MSG	;Enter the first 32 bit number (XXXXXXXXH)
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_3),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_2),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_1),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_0),A
+	
+	LD	A,(FIRST_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_2)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_3)
+	CALL	DATA_9511_OUT
+	
+	CALl	CRLF
+	LD	DE,SECOND_32_NUMBER_MSG	;Enter the second 32 bit number (XXXXXXXXH)
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_3),A
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_2),A
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_1),A
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_0),A
+	
+	LD	A,(SECOND_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(SECOND_NUMBER_1)
+	CALL	DATA_9511_OUT
+	LD	A,(SECOND_NUMBER_2)
+	CALL	DATA_9511_OUT
+	LD	A,(SECOND_NUMBER_3)
+	CALL	DATA_9511_OUT
+
+	LD	A,DADD			;Add DADD CMD (2C)
+	LD	(CMD_BYTE),A
+	CALL	CTRL_9511_OUT
+
+	LD	DE,START_CALC_MSG	;Enter CR to display the result of the calculation
+	CALL	PRINT_STRING
+	CALL	ZCI
+	
+	CALL	WAIT_CMD_COMPLETE
+	JP	Z,MAIN_LOOP		;Abort if the command cannot be completed
+
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_3),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_2),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_1),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_0),A
+
+	CALL	CTRL_9511_IN		;Clear status port
+		
+					;Send data summary
+	LD	DE,RESULT_MSG9		;Command ADD 32 bit numbers
+	CALL	PRINT_STRING
+	CALL	CRLF
+	
+	LD	A,(FIRST_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_0)
+	CALL	HEXOUT
+	
+	LD	DE,RESULT_MSG2		;'H + $'
+	CALL	PRINT_STRING
+	
+	LD	A,(SECOND_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(SECOND_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(SECOND_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(SECOND_NUMBER_0)
+	CALL	HEXOUT
+
+	LD	DE,RESULT_MSG3		;'H = '
+	CALL	PRINT_STRING
+
+	LD	A,(RESULT_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_0)
+	CALL	HEXOUT
+
+	LD	DE,RESULT_MSG4		;'H.'
+	CALL	PRINT_STRING
+	CALL	CRLF
+	JP	MAIN_LOOP
+
+
+
+;--------------------------------------------------------------------
+
+SIMPLE_SUBTRACT:
+	CALL	RESET_9511		;Just in case previous errors
+
+	LD	DE,FIRST_NUMBER_MSG	;Enter the first 16 bit number (XXH)
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_1),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_0),A
+
+	LD	A,(FIRST_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	DATA_9511_OUT
+	
+	LD	DE,SECOND_NUMBER_MSG	;Enter the second 16 bit number (XXH)
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_1),A
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_0),A
+	
+	LD	A,(SECOND_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(SECOND_NUMBER_1)
+	CALL	DATA_9511_OUT
+
+	LD	A,SSUB			;Subtract CMD (6DH)
+	LD	(CMD_BYTE),A
+	CALL	CTRL_9511_OUT
+
+	LD	DE,START_CALC_MSG	;Enter CR to display the result of the calculation
+	CALL	PRINT_STRING
+	CALL	ZCI
+	
+	CALL	WAIT_CMD_COMPLETE
+	JP	Z,MAIN_LOOP		;Abort if the command cannot be completed
+	
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_1),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_0),A
+	
+	CALL	CTRL_9511_IN		;Clear status port
+	CALL	CRLF
+					;Send data summary
+	LD	DE,RESULT_MSG6		;Command SUBTRACT 
+	CALL	PRINT_STRING
+	LD	A,(FIRST_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_0)
+	CALL	HEXOUT
+	
+	LD	DE,RESULT_MSG5		;'H - '
+	CALL	PRINT_STRING
+	LD	A,(SECOND_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(SECOND_NUMBER_0)
+	CALL	HEXOUT
+
+	LD	DE,RESULT_MSG3		;'H = '
+	CALL	PRINT_STRING
+	LD	A,(RESULT_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_0)
+	CALL	HEXOUT
+	LD	DE,RESULT_MSG4		;'H'
+	CALL	PRINT_STRING
+
+	CALL	CRLF
+	JP	MAIN_LOOP
+
+;--------------------------------------------------------------------
+
+SIMPLE_MULTIPLY_X8:
+	CALL	RESET_9511		;Just in case previous errors
+
+	LD	DE,FIRST_NUMBER_MSG	;Enter the first 16 bit number (XXH)
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_1),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_0),A
+
+	LD	A,(FIRST_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	DATA_9511_OUT
+
+	
+	LD	DE,SECOND_8_NUMBER_MSG	;Enter the second 8 bit number (XXH)
+	CALL	PRINT_STRING
+	LD	A,0
+	LD	(SECOND_NUMBER_1),A
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_0),A
+
+	LD	A,(SECOND_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(SECOND_NUMBER_1)
+	CALL	DATA_9511_OUT
+	
+					;Send data summary
+	LD	A,SMUL			;MULTIPLY LOWER HALF CMD
+	LD	C,A
+	LD	(CMD_BYTE),A
+
+	LD	DE,START_CALC_MSG	;Enter CR to display the result of the calculation
+	CALL	PRINT_STRING
+	CALL	ZCI
+	
+	CALL	CTRL_9511_OUT
+	CALL	WAIT_CMD_COMPLETE
+	JP	Z,MAIN_LOOP		;Abort if the command cannot be completed
+	
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_1),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_0),A
+	
+	CALL	CTRL_9511_IN		;Clear status port
+	LD	(STATUS_BITS),A	
+
+	LD	DE,RESULT_MSG8		;Command Multiply
+	CALL	PRINT_STRING
+	LD	A,(FIRST_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_0)
+	CALL	HEXOUT
+
+	LD	DE,RESULT_MSG7		;'H X '
+	CALL	PRINT_STRING
+	LD	A,(SECOND_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(SECOND_NUMBER_0)
+	CALL	HEXOUT
+
+
+	LD	DE,RESULT_MSG3		;'H = '
+	CALL	PRINT_STRING
+	LD	A,(RESULT_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_0)
+	CALL	HEXOUT
+	LD	DE,RESULT_MSG4		;'H'
+	CALL	PRINT_STRING
+
+	CALL	CRLF
+	JP	MAIN_LOOP
+
+
+;--------------------------------------------------------------------
+
+MULTIPLY_32_X8:
+	CALL	RESET_9511		;Just in case previous errors
+
+	LD	DE,FIRST_32_NUMBER_MSG	;Enter the first 32 bit number (XXXXXXXXH)
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_3),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_2),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_1),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_0),A
+	
+	LD	A,(FIRST_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_2)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_3)
+	CALL	DATA_9511_OUT
+	
+	CALl	CRLF
+	LD	DE,SECOND_16_NUMBER_MSG	;Enter the second 16 bit number (XXXXXH)
+	CALL	PRINT_STRING
+	LD	A,0
+	LD	(SECOND_NUMBER_3),A
+	LD	A,0
+	LD	(SECOND_NUMBER_2),A
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_1),A
+	CALL	GETHEX
+	LD	(SECOND_NUMBER_0),A
+	
+	LD	A,(SECOND_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(SECOND_NUMBER_1)
+	CALL	DATA_9511_OUT
+	LD	A,(SECOND_NUMBER_2)
+	CALL	DATA_9511_OUT
+	LD	A,(SECOND_NUMBER_3)
+	CALL	DATA_9511_OUT
+
+	LD	A,DMUL			;Add DMUL CMD (2E)
+	LD	(CMD_BYTE),A
+	CALL	CTRL_9511_OUT
+
+	LD	DE,START_CALC_MSG	;Enter CR to display the result of the calculation
+	CALL	PRINT_STRING
+	CALL	ZCI
+	
+	CALL	WAIT_CMD_COMPLETE
+	JP	Z,MAIN_LOOP		;Abort if the command cannot be completed
+	
+
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_3),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_2),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_1),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_0),A
+
+	CALL	CTRL_9511_IN		;Clear status port
+
+					;Send data summary
+	LD	DE,RESULT_MSG9		;Command ADD 32 bit numbers
+	CALL	PRINT_STRING
+	CALL	CRLF
+	
+	LD	A,(FIRST_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_0)
+	CALL	HEXOUT
+	
+	LD	DE,RESULT_MSG7		;'H X $'
+	CALL	PRINT_STRING
+	
+submit 	LD	A,(SECOND_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(SECOND_NUMBER_0)
+	CALL	HEXOUT
+
+	LD	DE,RESULT_MSG3		;'H = '
+	CALL	PRINT_STRING
+
+	LD	A,(RESULT_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_0)
+	CALL	HEXOUT
+
+	LD	DE,RESULT_MSG4		;'H.'
+	CALL	PRINT_STRING
+	CALL	CRLF
+	JP	MAIN_LOOP
+
+
+
+;--------------------------------------------------------------------
+
+TO_FLOAT_NUMBER:
+	CALL	RESET_9511		;Just in case previous errors
+
+	LD	DE,FIRST_32_NUMBER_MSG	;Enter the 32 bit number (XXXXXXXXH)
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_3),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_2),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_1),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_0),A
+	
+	LD	A,(FIRST_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_2)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_3)
+	CALL	DATA_9511_OUT
+	
+	LD	A,FLTD			;Add FLTD CMD (1C)
+	LD	(CMD_BYTE),A
+	CALL	CTRL_9511_OUT
+
+	LD	DE,START_CALC_MSG	;Enter CR to display the result of the calculation
+	CALL	PRINT_STRING
+	CALL	ZCI
+	CALL	CRLF
+	
+	CALL	WAIT_CMD_COMPLETE
+	JP	Z,MAIN_LOOP		;Abort if the command cannot be completed
+	
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_3),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_2),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_1),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_0),A
+
+	CALL	CTRL_9511_IN		;Clear status port
+
+					;Send data summary
+	LD	DE,RESULT_MSG10		;The 32 bit number 
+	CALL	PRINT_STRING
+	
+	LD	A,(FIRST_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_0)
+	CALL	HEXOUT
+	
+	LD	DE,RESULT_MSG11		;'= $'
+	CALL	PRINT_STRING
+	
+	LD	A,(RESULT_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_0)
+	CALL	HEXOUT
+
+	LD	DE,RESULT_MSG12		;'In Floating point format.'
+	CALL	PRINT_STRING
+	CALL	CRLF
+	JP	MAIN_LOOP
+
+	
+;--------------------------------------------------------------------
+
+FROM_FLOAT_NUMBER:
+	CALL	RESET_9511		;Just in case previous errors
+
+	LD	DE,FIRST_FLOAT_NUMBER_MSG	;Enter the Floating point number XXXXXXXX
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_3),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_2),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_1),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_0),A
+	
+	LD	A,(FIRST_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_2)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_3)
+	CALL	DATA_9511_OUT
+	
+	LD	A,FIXD			;Add FIXD CMD (1E)
+	LD	(CMD_BYTE),A
+	CALL	CTRL_9511_OUT
+
+	LD	DE,START_CALC_MSG	;Enter CR to display the result of the calculation
+	CALL	PRINT_STRING
+	CALL	ZCI
+	CALL	CRLF
+	
+	CALL	WAIT_CMD_COMPLETE
+	JP	Z,MAIN_LOOP		;Abort if the command cannot be completed
+	
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_3),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_2),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_1),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_0),A
+
+	CALL	CTRL_9511_IN		;Clear status port
+					
+	LD	DE,RESULT_MSG13		;'The floating point number $'
+	CALL	PRINT_STRING
+	
+	LD	A,(FIRST_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_0)
+	CALL	HEXOUT
+	
+	LD	DE,RESULT_MSG11		;'= $'
+	CALL	PRINT_STRING
+	
+	LD	A,(RESULT_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_0)
+	CALL	HEXOUT
+
+	LD	DE,RESULT_MSG14		;'H 32 bit fixed format.$'
+
+	CALL	PRINT_STRING
+	CALL	CRLF
+	JP	MAIN_LOOP
+
+;--------------------------------------------------------------------
+	
+	
+SQUARE_FLOAT_NUMBER:			;Get the square root of a  floating point number
+	CALL	RESET_9511		;Just in case previous errors
+
+	LD	DE,FIRST_FLOAT_NUMBER_MSG	;Enter the Floating point number XXXXXXXX
+	CALL	PRINT_STRING
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_3),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_2),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_1),A
+	CALL	GETHEX
+	LD	(FIRST_NUMBER_0),A
+	
+	LD	A,(FIRST_NUMBER_0)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_2)
+	CALL	DATA_9511_OUT
+	LD	A,(FIRST_NUMBER_3)
+	CALL	DATA_9511_OUT
+	
+	LD	A,SQRT			;Add SQRT CMD (01)
+	LD	(CMD_BYTE),A
+	CALL	CTRL_9511_OUT
+
+	LD	DE,START_CALC_MSG	;Enter CR to display the result of the calculation
+	CALL	PRINT_STRING
+	CALL	ZCI
+	
+	CALL	WAIT_CMD_COMPLETE
+	JP	Z,MAIN_LOOP		;Abort if the command cannot be completed
+	
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_3),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_2),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_1),A
+	CALL	DATA_9511_IN
+	LD	(RESULT_NUMBER_0),A
+
+	CALL	CTRL_9511_IN		;Clear status port
+					
+	LD	DE,RESULT_MSG15		;'The Square root of floating point number $'
+	CALL	PRINT_STRING
+	
+	LD	A,(FIRST_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(FIRST_NUMBER_0)
+	CALL	HEXOUT
+	
+	LD	DE,RESULT_MSG11		;'= $'
+	CALL	PRINT_STRING
+	
+	LD	A,(RESULT_NUMBER_3)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_2)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_1)
+	CALL	HEXOUT
+	LD	A,(RESULT_NUMBER_0)
+	CALL	HEXOUT
+
+	LD	DE,RESULT_MSG16		;' (in floating point format).$'
+
+	CALL	PRINT_STRING
+	CALL	CRLF
+	JP	MAIN_LOOP
+
+	
+			
+;--------------------------------------------------------------------
+
+RESET9511:
+	CALL	RESET_9511
+	LD	DE,RESET_MSG		;AM9511 Reset pin was pulsed low
+	CALL	PRINT_STRING
+	CALL	CRLF
+	JP	MAIN_LOOP
+	
+
+
+;----------------------------------------------------------------------------------
+;-------------------------- CORE 9511 SUPPORT ROUTINES ----------------------------
+;----------------------------------------------------------------------------------
+;Noteh for "normal use" (libraries etc) you may wish to comment out teh LED HEX display routines
+;PUSH_DISPLAY, POP_DISPLAY
+
+
+DATA_9511_OUT:				;Note the default bit 7 of the 8255A port A is 0
+	PUSH	AF
+	LD	A,0
+	OUT	(CHIP_8255_A),A
+	POP	AF
+	OUT	(MATH_DATA_PORT),A	;So the lower (data) port of the 9511 is selected
+	CALL	PUSH_DISPLAY		;Display data on HEX display push down stack
+DATA_OUT:
+	IN	A,(CHIP_8255_C)		;Wait until the pause goes back high
+	BIT	1,A
+	JR	Z,DATA_OUT
+	RET
+	
+DATA_9511_IN:
+	LD	A,0
+	OUT	(CHIP_8255_A),A
+	IN	A,(MATH_DATA_PORT)
+	PUSH	AF
+	CALL	POP_DISPLAY
+	POP	AF
+	RET
+
+	
+CTRL_9511_OUT:
+	PUSH	AF
+	LD	A,10000000B
+	OUT	(CHIP_8255_A),A
+	NOP
+	NOP
+	NOP
+	POP	AF
+	OUT	(MATH_CTRL_PORT),A
+	LD	A,0
+	OUT	(CHIP_8255_A),A		;Set back to the default data port
+DATA_OUT1:
+	IN	A,(CHIP_8255_C)		;Wait until the pause goes back high
+	BIT	1,A
+	JR	Z,DATA_OUT1
+	RET
+
+
+CTRL_9511_IN:
+	LD	A,10000000B		;Select CTRL port
+	OUT	(CHIP_8255_A),A
+	NOP
+	NOP
+	NOP
+	IN	A,(MATH_CTRL_PORT)
+	PUSH	AF
+	LD	A,0
+	OUT	(CHIP_8255_A),A		;Set back to the default data port
+	POP	AF
+	RET
+
+
+;----------------------------------------------------------------------------------
+;-------------------------- END CORE 9511 SUPPORT ROUTINES ----------------------------
+;----------------------------------------------------------------------------------
+	
+
+PUSH_DISPLAY:				;Shift HEX display one digit right
+	PUSH	AF
+	CALL	SHIFT_RIGHT
+	POP	AF	
+	LD	(HEX0_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00000001B		;Pulse Digit 0
+	OUT	(CHIP_8255_A),A	
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+	RET
+
+POP_DISPLAY:				;Shift HEX display one digit left
+	PUSH	AF
+	CALL	SHIFT_LEFT
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+	POP	AF	
+	RET
+	
+;					;There are 5 pairs of hex digits on the top of the board (numbered 0,1,2,3,4,5)
+SHIFT_RIGHT:
+	LD	A,(HEX4_STORE)		;4-->5
+	LD	(HEX5_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00100000B		;Pulse Digit 5
+	OUT	(CHIP_8255_A),A	
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+
+	LD	A,(HEX3_STORE)		;3-->4
+	LD	(HEX4_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00010000B		;Pulse Digit 4
+	OUT	(CHIP_8255_A),A	
+	LD	A,0	
+	OUT	(CHIP_8255_A),A	
+
+	LD	A,(HEX2_STORE)		;2-->3
+	LD	(HEX3_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00001000B		;Pulse Digit 3
+	OUT	(CHIP_8255_A),A	
+	LD	A,0	
+	OUT	(CHIP_8255_A),A	
+
+	LD	A,(HEX1_STORE)		;1-->2
+	LD	(HEX2_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00000100B		;Pulse Digit 2
+	OUT	(CHIP_8255_A),A	
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+			
+	LD	A,(HEX0_STORE)		;0-->1
+	LD	(HEX1_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00000010B		;Pulse Digit 1
+	OUT	(CHIP_8255_A),A	
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+	RET
+
+SHIFT_LEFT:
+	LD	A,(HEX1_STORE)		;1-->0
+	LD	(HEX0_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00000001B		;Pulse Digit 0
+	OUT	(CHIP_8255_A),A	
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+
+	LD	A,(HEX2_STORE)		;2-->1
+	LD	(HEX1_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00000010B		;Pulse Digit 1
+	OUT	(CHIP_8255_A),A	
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+
+	LD	A,(HEX3_STORE)		;3-->2
+	LD	(HEX2_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00000100B		;Pulse Digit 2
+	OUT	(CHIP_8255_A),A	
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+
+	LD	A,(HEX4_STORE)		;4-->3
+	LD	(HEX3_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00001000B		;Pulse Digit 3
+	OUT	(CHIP_8255_A),A	
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+			
+	LD	A,(HEX5_STORE)		;5-->4
+	LD	(HEX4_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00010000B		;Pulse Digit 4
+	OUT	(CHIP_8255_A),A	
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+
+	LD	A,0			;0-->5
+	LD	(HEX5_STORE),A
+	OUT	(CHIP_8255_B),A	
+	LD	A,00100000B		;Pulse Digit 5
+	OUT	(CHIP_8255_A),A	
+	LD	A,0		
+	OUT	(CHIP_8255_A),A	
+	RET
+	
+	
+RESET_9511:				;Pulse pin 22 high
+	LD	A,0
+	OUT	(CHIP_8255_B),A
+	LD	A,01000000B		;Pulse reset pin
+	OUT	(CHIP_8255_B),A
+	LD	A,0
+	OUT	(CHIP_8255_B),A
+	IN	A,(MATH_DATA_PORT)
+	IN	A,(MATH_CTRL_PORT)
+
+	LD	A,0
+	LD	(HEX5_STORE),A
+	LD	(HEX4_STORE),A
+	LD	(HEX3_STORE),A
+	LD	(HEX2_STORE),A
+	LD	(HEX1_STORE),A
+	LD	(HEX0_STORE),A
+	OUT	(CHIP_8255_B),A		;Zero all digits
+
+	OUT	(CHIP_8255_A),A		;Zero all digits
+	LD	A,00111111B		;Pulse digits 0-5
+	OUT	(CHIP_8255_A),A
+	LD	A,0
+	OUT	(CHIP_8255_A),A		;Lock all digits
+	RET
+
+WAIT_CMD_COMPLETE:
+	PUSH	HL
+	PUSH	BC
+	LD	HL,0
+	LD	B,0H
+CMD_COMPLETE1:
+	IN	A,(CHIP_8255_C)		;Wait until the CMD complete goes low.
+	BIT	0,A
+	JR	Z,CMD_OK
+	DEC	HL
+	LD	A,L
+	CP	A,H
+	JP	NZ,CMD_COMPLETE1
+	DJNZ	CMD_COMPLETE1
+	LD	DE,COMPLETE_ERR_MSG	;The 9511 Could not complwete the command 
+	CALL	PRINT_STRING
+	XOR	A			;Return Z if error
+	POP	BC
+	POP	HL
+	RET
+CMD_OK:	POP	BC
+	POP	HL
+	XOR	A			;Return NZ if no error
+	DEC	A
+	RET
+	
+	
+			
+CMD_ERROR:
+	PUSH	AF
+	LD	DE,CMD_ERR_MSG		;Did not get back the echo of the 9511 Command byte. Sent 
+	CALL	PRINT_STRING
+	LD	A,(CMD_BYTE)
+	CALL	HEXOUT
+	LD	DE,CMD_ERR1		;'H),from its stack (Got $'
+	CALL	PRINT_STRING
+	POP	AF
+	CALL	HEXOUT
+	LD	DE,CMD_ERR2		;'H)',CR,LF,LF,'$'
+	CALL	PRINT_STRING
+	JP	MAIN_LOOP
+
+		
+;					;>>>>>> A ROUTINE TO PRINT OUT A STRING @ [HL] UP TO THE FIRST '$' or 0. No Registers changed
+PRINT_STRING:
+	PUSH	AF
+	PUSH	BC
+	PUSH	HL	
+PRINT_STRING2:
+	LD	A,(DE)		
+	INC	DE		
+	CP	'$'
+	JR	Z,PRINT_STRING1
+	OR	A
+	JR	Z,PRINT_STRING1
+	LD	C,A
+	CALL	ZCO
+	JR	PRINT_STRING2
+PRINT_STRING1:
+	POP	HL
+	POP	BC
+	POP	AF
+	RET
+;					;>>>>>> Print [A] in HEX-ASCII. (No Resisters altered) 
+
+ZCONV:	AND	A,0FH			;HEX to ASCII
+	ADD	90H
+	DAA
+	ADC	40H
+	DAA
+	LD	C,A
+	CALL	ZCO
+	RET			
+
+
+GET_HL:	PUSH	BC			;>>>>>>> Return a HEX value in [HL]
+	LD	C,1			;1 paramater
+	CALL	HEXSP
+	POP	HL			;Get returned paramater from stack put there by HEXSP
+	POP	BC
+	RET
+;
+;
+HEXSP:	LD	HL,0000
+EX0:	CALL	TI
+EX1:	LD	B,A
+	CALL	NIBBLE
+	JR	C,EX2X
+	ADD	HL,HL
+	ADD	HL,HL
+	ADD	HL,HL
+	ADD	HL,HL
+	OR	L
+	LD	L,A
+	JR	EX0
+EX2X:	EX	(SP),HL
+	PUSH	HL
+	LD	A,B
+	CALL	QCHK
+	JR	NC,SF560
+	DEC	C
+	RET	Z
+SF560:	JP	NZ,ERROR
+	DEC	C
+	JR	NZ,HEXSP
+	RET 
+	
+EXF:	LD	C,01H
+	LD	HL,0000H
+	JR	EX1
+
+NIBBLE:	SUB	30H
+	RET	C
+	CP	A,17H
+	CCF
+	RET	C
+	CP	A,LF
+	CCF
+	RET	NC
+	SUB	07H
+	CP	LF
+	RET
+;
+CRLF:
+	PUSH	AF
+	PUSH	BC
+	LD	C,CR
+	CALL	ZCO
+	LD	C,LF
+	CALL	ZCO
+	POP	BC
+	POP	AF
+	RET
+
+;					;>>>>>>>>RESTORE SYSTEM AFTER ERROR
+ERROR:	LD	SP,STACK
+	LD	C,'*'
+	CALL	ZCO
+	JP	MAIN_LOOP
+;
+;
+;					;>>>>>>>>>>>>> CONVERT HEX TO ASCII & PUT IT IN [C]
+CONV:	AND	0FH
+	ADD	A,90H
+	DAA 
+	ADC	A,40H
+	DAA 
+	LD	C,A
+	RET
+;
+;
+;
+ZBITS:	PUSH	AF
+	PUSH	DE			;>>>>>>>>>>>>> DISPLAY 8 BITS OF [A] (No Resisters altered)		PUSH	BC
+	LD	E,A
+	CALL	BITS
+	LD	C,'#'
+	CALL	ZCO
+	POP	BC
+	POP	DE
+	POP	AF
+	RET
+;
+;
+UPPER:	CP	A,'a'			;must be >= lowercase a
+	RET	C			; else go back...
+	CP	A,'z'+1			;must be <= lowercase z
+	RET	NC			; else go back...
+	SUB	A,'a'-'A'		;subtract lowercase bias
+	RET
+;
+;
+BITS:	LD	B,08H			;>>>>>>>>>>>>> DISPLAY 8 BITS OF [E]
+	LD	C,' '
+	CALL	ZCO
+SF76E:	SLA	E
+	LD	A,18H
+	ADC	A,A
+	LD	C,A
+	CALL	ZCO
+	DJNZ	SF76E
+	RET 
+;
+;					;>>>>>>>>>>>>>> PRINT [HL] ON CONSOL
+PRINT_HL:	
+	LD	A,H
+	CALL	HEXOUT
+	LD	A,L
+	CALL	HEXOUT
+	RET
+
+PRINT_HLH:	
+	LD	A,H
+	CALL	HEXOUT
+	LD	A,L
+	CALL	HEXOUT
+	LD	C,'H'
+	CALL	ZCO
+	RET
+
+
+HEXOUT:	PUSH	AF			;>>>>>>>>>>>>>> PRINT [A] ON CONSOLE
+	PUSH	BC
+	PUSH	AF
+	RRCA
+	RRCA
+	RRCA
+	RRCA
+	CALL	ZCONV
+	POP	AF
+	CALL	ZCONV
+	POP	BC
+	POP	AF
+	RET
+;
+;					;>>>>>>>>>> KEYBOARD HANDELING ROUTINE (WILL NOT ECHO CR/LF)
+;					;>>>>>>>>>> IT CONVERTS LOWER CASE TO UPPER CASE FOR LOOKUP COMMANDS
+;					;>>>>>>>>>> ALSO ^C WILL FORCE A JUMP TO START OF CODE
+;					;>>>>>>>>>> ALL OTHERE CHARACTERS ARE ECHOED ON CONSOL
+TI:	CALL	ZCI		
+	CP	CR
+	RET	Z
+	CP	ESC
+	JP	Z,MONITOR
+	CP	'C'-40H			;^C TO BOOT ZFDC EEPROM
+	JP	NZ,TI1
+	LD	C,'!'
+	CALL	ZCO
+	CALL	ZCO
+	CALL	ZCO
+	JP	START
+TI1:
+	PUSH	BC
+	LD	C,A
+	CALL	ZCO
+	LD	A,C
+	POP	BC
+	CP	40H			;LC->UC
+	RET	C
+	CP	7BH
+	RET	NC
+SF754:	AND	5FH
+	RET 
+;
+;
+;
+					; Return with 2 HEX digits in [A]. If abort, Carry flag set + ESC in [A]
+GETHEX:	PUSH	BC			
+	CALL	GETCMD			;Get a character from keyboard & ECHO
+	CP	A,ESC
+	JR	Z,HEX_ABORT
+	CP	'/'			;check 0-9, A-F
+	JR	C,HEX_ABORT
+	CP	'F'+1
+	JR	NC,HEX_ABORT
+	CALL	ASBIN			;Convert to binary
+	SLA	A
+	SLA	A
+	SLA	A
+	SLA	A			;Shift to high nibble	
+	LD	B,A			;Store it
+	CALL	GETCMD			;Get 2nd character from keyboard & ECHO
+	CP	A,ESC
+	JR	Z,HEX_ABORT
+	CP	'/'			;check 0-9, A-F
+	JR	C,HEX_ABORT
+	CP	'F'+1
+	JR	NC,HEX_ABORT
+	CALL	ASBIN			;Convert to binary
+	OR	A,B			;add in the first digit
+	OR	A,A			;To return NC
+	POP	BC
+	RET
+HEX_ABORT:
+	SCF				;Set Carry flag 
+	LD	A,ESC
+	POP	BC
+	POP	AF			;Balance up stack
+	JP	MAIN_LOOP
+;
+;
+;
+GETCMD:	CALL	ZCI			;GET A CHARACTER, convert to UC, ECHO it
+	CP	A,ESC
+	RET	Z			;Don't echo an ESC
+	CALL	UPPER
+  IF NOT CPM
+	PUSH	AF			;Save it
+	PUSH	BC
+ 	LD	C,A
+	CALL	ZCO			;Echo it
+	POP	BC
+	POP	AF			;get it back
+ ENDIF
+	RET
+
+
+; ASCII TO BINARY CONVERSION ROUTINE
+ASBIN:	SUB	30H 
+	CP	0AH 
+	RET	M
+	SUB	07H 
+	RET
+
+;
+;
+;					;>>>>>>>>>>>> GET CHARACTER TEST FOR DELIMITERS >>>>>>>>>>
+PCHK:	CALL	TI
+QCHK:	CP	SPACE
+	RET	Z
+	CP	','
+	RET	Z
+	CP	CR
+	SCF
+	RET	Z
+	CCF
+	RET 
+;
+;
+;
+;
+;------------------------------------------------------------------------
+;		HARDWARE DEPENDENT STUFF
+; The only hardware port links for the above FPGA_DC board. 
+
+ZCSTS:	IN	A,(CSTAT)		;console status for Propeller/SD Systems 8024 Video board
+	AND	A,02H			;anything there
+	RET	Z			;return 0 if nothing
+	XOR	A,A
+	DEC	A			;return NZ, & 0FFH in A if something there
+	RET
+
+ZCI:	IN	A,(CSTAT)		;console input
+	AND	A,02H
+	JR	Z,ZCI
+	IN	A,(CIN)			;return with character in A
+	AND	A,7FH			;Strip parity in case ASCII keyboard sends one
+	RET
+		
+ZCO:	IN	A,(CSTAT)		;console output (arrive with character in C)
+	AND	A,04H			;Note character is in C and A on return.
+	JR	Z,ZCO
+	LD	A,C
+	OUT	(COUT),A
+	RET
+
+
+
+SIGNON			DB	'9511 Math Board Test Program.  V0.1A2 (John Monahan 2/4/2022)'
+			DB	CR,LF,'Please note all values need to be 16 bit HEX numbers.$'
+		
+MAIN_MENU:		DB	CR,LF,LF,'----- 9511 Math Board Test Program Menu -----',CR,LF,LF
+			DB	'(R)   Reset the AM9511 Chip',CR,LF
+			DB	'(+)   Add two 16 bit numbers.      (XXXXH + YYYYH=ZZZZH)',CR,LF
+			DB	'(-)   Subtract two 16 bit numbers. (XXXXH - YYYYH=ZZZZH)',CR,LF
+			DB	'(M)   Multiply 16 X 8 bit bit number. (XXXXH X YYH=ZZZZH)',CR,LF
+			DB	'(D)   Add two 32 bit numbers.      (XXXXXXXXH + YYYYYYYYH=ZZZZZZZZH)',CR,LF
+			DB	'(X)   Multiply 32 X 16 bit bit number. (XXXXXXXXH X YYYYH=ZZZZZZZZH)',CR,LF
+			DB	'(C)   Convert 32 bit number to floating format',CR,LF
+			DB	'(E)   Convert floating format to 32 bit number',CR,LF
+			DB	'(S)   Get the square root of a floating point number',CR,LF
+			DB	'(ESC) Quit',CR,LF,'$'
+		
+Prompt:			DB	CR,LF,LF,'Please enter command > $'
+MSGERR			DB	CR,LF,'Sorry, that was not a valid menu option!',CR,LF,LF,
+
+FIRST_NUMBER_MSG	DB	CR,LF,'Please enter the first 16 bit number (XXXXH+CR) $'
+SENDING_DIGIT_1		DB	CR,LF,'Sending the first high byte number $'
+SENDING_DIGIT_2		DB	CR,LF,'Sending the first low byte number $'
+SECOND_NUMBER_MSG	DB	CR,LF,'Please enter the second 16 bit number (XXXXH+CR) $'
+SENDING_DIGIT_3		DB	CR,LF,'Sending the second high byte number $'
+SENDING_DIGIT_4		DB	CR,LF,'Sending the second low byte number $'
+SECOND_8_NUMBER_MSG	DB	CR,LF,'Please enter the second 8 bit number (XXH) $'
+SECOND_16_NUMBER_MSG	DB	CR,LF,'Please enter the second 16 bit number (XXXXH) $'
+
+FIRST_32_NUMBER_MSG	DB	CR,LF,'Please enter the first 32 bit number (XXXXXXXXH) $'
+SECOND_32_NUMBER_MSG	DB	CR,LF,'Please enter the second 32 bit number (XXXXXXXXH) $'
+FIRST_FLOAT_NUMBER_MSG	DB	CR,LF,'Please enter the Floating point number XXXXXXXX $'
+
+SENDING_ADD_CMD		DB	CR,LF,'Sending the command to add two 16 bit numbers (6CH)$'
+
+RETURN_DIGIT1		DB	CR,LF,'Returned first digit= $'
+RETURN_DIGIT2		DB	CR,LF,'Returned second digit= $'
+
+RESULT_MSG1		DB	CR,LF,'Command ADD $'
+RESULT_MSG2		DB	'H + $'
+RESULT_MSG3		DB	'H = $'
+RESULT_MSG4		DB	'H.  $'
+RESULT_MSG5		DB	'H - $'
+RESULT_MSG6		DB	CR,LF,'Command SUBTRACT $'
+RESULT_MSG7		DB	'H X $'
+RESULT_MSG8		DB	CR,LF,'Command MULTIPLY $'
+RESULT_MSG9		DB	CR,LF,LF,'Command ADD two 32 Bit numbers$'
+RESULT_MSG10		DB	CR,LF,LF,'The 32 bit fixed number $'
+RESULT_MSG11		DB	' = $'
+RESULT_MSG12		DB	'H In Floating point format.$'
+RESULT_MSG13		DB	'The floating point number $'
+RESULT_MSG14		DB	'H In 32 bit fixed format.$'
+RESULT_MSG15		DB	'The Square root of floating point number',CR,LF,'$'
+RESULT_MSG16		DB	' (in floating point format).$'
+
+STATUS_BITS_MSG		DB	'(9511 Status bits = $'
+STATUS_BITS2		DB	')',CR,LF,'$'
+RESET_MSG		DB	CR,LF,'The AM9511 Chip Reset pin was pulsed low$'
+COMPLETE_ERR_MSG	DB	CR,LF,'The 9511 could not complete the command. Will abort.',CR,LF,'$'
+
+CMD_ERR_MSG		DB	CR,LF,'Did not get back the echo of the 9511 Command '
+			DB	'byte from its stack. 'CR,LF,'Sent $'
+CMD_ERR1		DB	'H, Got $'
+CMD_ERR2		DB	'H',CR,LF,LF,'$'
+
+OK_MSG			DB	CR,LF,'Addition Successful$'
+ADD_MSG1		DB	CR,LF,'XXXX+YYYY = $'
+START_CALC_MSG		DB	CR,LF,'Please enter a CR to display the result of the calculation.$'
+
+SUBTRACT_NUMBER_MSG	DB	CR,LF,'Subtract the 16 bit number (XXXXH) $'
+
+
+
+
+SP_SAVE		DW	0000H
+
+FIRST_NUMBER_3	DB	0H
+FIRST_NUMBER_2	DB	0H
+FIRST_NUMBER_1	DB	0H
+FIRST_NUMBER_0	DB	0H
+
+SECOND_NUMBER_3	DB	0H
+SECOND_NUMBER_2	DB	0H
+SECOND_NUMBER_1	DB	0H
+SECOND_NUMBER_0	DB	0H
+
+RESULT_NUMBER_3	DB	0H
+RESULT_NUMBER_2	DB	0H
+RESULT_NUMBER_1	DB	0H
+RESULT_NUMBER_0	DB	0H
+
+CMD_BYTE	DW	0H
+STATUS_BITS	DW	0H
+SECOND_RESULT_UPPER DW	0H
+
+HEX5_STORE	DB	0H		
+HEX4_STORE	DB	0H		
+HEX3_STORE	DB	0H		
+HEX2_STORE	DB	0H		
+HEX1_STORE	DB	0H		
+HEX0_STORE	DB	0H		
+
+
+		DS	200H
+STACK		DW	0000H
+
+;END
+
+
