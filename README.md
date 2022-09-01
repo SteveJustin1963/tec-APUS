@@ -207,5 +207,6 @@ Then run a terminal app to generate ascii text such as
 - https://retrocomputing.stackexchange.com/questions/6835/why-did-ti-8x-calculator-series-use-the-z80-processor
 - https://sourceforge.net/projects/realterm/files/Realterm/2.0.0.70/
 - https://www.tindie.com/products/semachthemonkey/rc2014-am9511a-apu-arithmetic-processor/
- 
+- https://github.com/z88dk/z88dk/blob/master/libsrc/_DEVELOPMENT/math/float/am9511/readme.md
+
 
