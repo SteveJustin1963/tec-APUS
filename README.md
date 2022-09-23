@@ -10,7 +10,7 @@
 
 "I played with it, Craig perfected it...John helped as well...thanks!"
 
-## Ver 10 Craig Jones  
+## Ver 2 Craig Jones  
 What can I say, I have finished a few projects this week!
 This is a AM9511A Arithmetic Processor, it has featured here previously courtesy of Stephen Justin.
 It's a predecessor of the 8087 and is a stack processor that does, amongst other things, floating point math.
@@ -36,12 +36,12 @@ I have just put the Lawrence Livermore Labs Floating Point Library on GitHub, wi
 A0 selects between the command(write)/status(read) register ($C2)and the Read/Write 'data' registers (the operand stack) ($C3). Yes it will work with other addons, I chose $c2 to be out of the way on the TEC1-F, it will need to change for the TEC, by changing the connections P7 to P1, because of the TEC's bad IO decoding. I'm not sure what the best approach is here... Yes, one 688 per APU. The 688 compares the P inputs with the Q inputs, when they are the same, the output goes low. P0 is compared against Q0 which connects to MREQ, so actually the 688 output goes low when A7 to A1 = $C2 and MREQ is high. This is really just a little 'redesign' of the RC2014 board.
 
 
-## Ver 9 Craig Jones  - 9511 APU
+## Ver 1 Craig Jones  - 9511 APU
 You cannot use two i/o selects at the same time, C/D should connect to A0, what you need is a select, that is enabled for 2 addresses; a0=0 and a0=1. Look at the serial circuit I sent you, have a look at the 138 and see that I have connected a,b,c to a1,a2, and a3. This gives 8 CS lines each with two addresses, the 6850 has the same deal. The other way to do it is like the LCD on the DAT board, connect CD to a higher address like A7.
 
 Got it to work. I'm just doing the basic integer add like John Hardy's example code and I get the right answer. The chips I have are all AM9511A-4DC (4MHz!) so I have been using them at that speed. The chip you sent me works intermittently at 4MHz, SO I am checking it at 2MHz, it may be good at a lower frequency. see markings. I used Phillip Steven's circuit, using "demand wait" mode of operating, reading the busy bit and allowing the pause output to WAIT the Z80. Need code to convert floating point to a number as an ascii string, and visa-versa, so we can see a meaningful result of the calculations. Have used Phillip Stevens Z80 conversion of the Lawrence Livermore Labs Floating Point Library from Herb Johnson, so now I can enter numbers via the terminal and use this library to do a Floating Point calculation and display the result on the terminal. Phillip also has code to use the APU, but it's a bit complicated so I will start with something simpler. 
 
-## Ver 8 Craig Jones  - 6850 Serial
+## Ver sj 7.1 Craig Jones  - 6850 Serial
 
 OK, I got the 6850 to work with the SC, there are two errors on your schematic which got transferred to the PCB. Firstly, you have an A5 net label on the A6 pin on the expansion socket so the board has A5 and A6 shorted together. Secondly, the RXCLK and TXCLK of the 6850 are connected to the net label CLK bar, but there is no CLK bar net, so those two pins are connected together but nowhere else, they should connect to CLK. Only two small errors so that's not too bad at all! For the decoding I connected A6 to M1. I don't think you actually have to have M1 connected unless you are doing IM2 interrupts and I connected PORT1 to A7 to decode the 6850 at `$40 and $41` for the CONTROL/STATUS and TDR/RDR registers respectively. I might do this on the TEC-1F as well. Now I'm going to try again to get it going on the TEC-1F before I have a go at the APU.
 
