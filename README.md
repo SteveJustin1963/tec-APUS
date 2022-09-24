@@ -18,6 +18,12 @@ Details are in the repo and there is plenty of stuff on the web about it, there 
 
 ![296695661_423670749725283_5916979048714754944_n](https://user-images.githubusercontent.com/58069246/184461064-931d17f9-8fb9-4191-a095-ee8816cb7aa0.jpg)
 
+![278338782_717753043011436_242673502688909166_n](https://user-images.githubusercontent.com/58069246/192073149-5f4fcb76-75de-4c24-807d-1306948ee3c8.jpg)
+
+
+
+
+
 ### decoding 74HC688
 Design is work in progress, a better io decode cct is needed, see Craigs notes below. Try proper decoding cct, eg 74HC688 (eg in the APU-RC2014 board), a 8 bit comparator as IO address decoder, can be decoded anywhere in the bottom 256 I/O addresses. 74HCT688 compares two 8-bit inputs and outputs an active low if both sets match. Enable is active low eg use MREQ to drive this. set inputs to address lines and to VCC, via a DIP switch dial in address you want your io peripheral to enabled on. Note interrupt modes of IOReq and M1 will be low at the same for an interrupt acknowledge, consider this when selecting io. There is a limit to the number of devices that the Z80 can drive, some systems need buffered address and data lines, not problem with CMOS processors which we all should be using. Put A0-A7 on the 'P' side, pull-up or pull-down the inputs on the 'Q' side, when they both match the one output goes low - decoding 1 address in 256. Leave off A0 and you decode 2 consecutive addresses in 256, and so on. https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 
@@ -41,6 +47,18 @@ You cannot use two i/o selects at the same time, C/D should connect to A0, what 
 
 Got it to work. I'm just doing the basic integer add like John Hardy's example code and I get the right answer. The chips I have are all AM9511A-4DC (4MHz!) so I have been using them at that speed. The chip you sent me works intermittently at 4MHz, SO I am checking it at 2MHz, it may be good at a lower frequency. see markings. I used Phillip Steven's circuit, using "demand wait" mode of operating, reading the busy bit and allowing the pause output to WAIT the Z80. Need code to convert floating point to a number as an ascii string, and visa-versa, so we can see a meaningful result of the calculations. Have used Phillip Stevens Z80 conversion of the Lawrence Livermore Labs Floating Point Library from Herb Johnson, so now I can enter numbers via the terminal and use this library to do a Floating Point calculation and display the result on the terminal. Phillip also has code to use the APU, but it's a bit complicated so I will start with something simpler. 
 
+This is my 2 stack, serial board on the bottom, APU on the top.
+Add another serial board? no probs.
+Another way is to put right angled connectors on the add-on boards and mount them vertically, using the ribbon cable as the motherboard.
+
+![278437981_567070347974637_4839388550385817706_n](https://user-images.githubusercontent.com/58069246/192073087-16f5cb5a-2c6b-4522-bb13-a87070441a20.jpg)
+
+the good thing about the IDC is that you can daisy chain the serial board(s) with the APU and make a little 'stack'  You could then use the end of the ribbon cable to connect to the TEC somehow
+
+
+
+
+
 ## Ver sj 7.1 Craig Jones  - 6850 Serial
 
 OK, I got the 6850 to work with the SC, there are two errors on your schematic which got transferred to the PCB. Firstly, you have an A5 net label on the A6 pin on the expansion socket so the board has A5 and A6 shorted together. Secondly, the RXCLK and TXCLK of the 6850 are connected to the net label CLK bar, but there is no CLK bar net, so those two pins are connected together but nowhere else, they should connect to CLK. Only two small errors so that's not too bad at all! For the decoding I connected A6 to M1. I don't think you actually have to have M1 connected unless you are doing IM2 interrupts and I connected PORT1 to A7 to decode the 6850 at `$40 and $41` for the CONTROL/STATUS and TDR/RDR registers respectively. I might do this on the TEC-1F as well. Now I'm going to try again to get it going on the TEC-1F before I have a go at the APU.
@@ -60,6 +78,14 @@ If things fail try my serial board because it has the decoder for 8 x 2 IO addre
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/263019317_280462017379491_3466954581733273683_n.jpg)
 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/262870855_463720035302369_3813373904138282086_n.jpg)
+
+
+SC Serial board
+![278781749_3084515785099816_6244488348577216924_n](https://user-images.githubusercontent.com/58069246/192073057-677a8e3a-c46c-4d5c-ad91-7f422b474628.jpg)
+
+
+
+
 
 
 ## code
