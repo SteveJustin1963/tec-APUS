@@ -10,6 +10,13 @@
 
 "I played with it, Craig perfected it...John helped as well...thanks!"
 
+
+### Ver 8 sj
+
+
+
+
+
 ### more... Craig Jones  
 What can I say, I have finished a few projects this week!
 This is a AM9511A Arithmetic Processor, it has featured here previously courtesy of Stephen Justin.
