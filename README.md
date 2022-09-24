@@ -10,7 +10,7 @@
 
 "I played with it, Craig perfected it...John helped as well...thanks!"
 
-## Ver 2 Craig Jones  
+### more... Craig Jones  
 What can I say, I have finished a few projects this week!
 This is a AM9511A Arithmetic Processor, it has featured here previously courtesy of Stephen Justin.
 It's a predecessor of the 8087 and is a stack processor that does, amongst other things, floating point math.
