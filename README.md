@@ -12,7 +12,7 @@
 
 
 ### Ver 8 sj
-
+24.9.22 wip...https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64
 
 
 
