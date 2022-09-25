@@ -13,11 +13,10 @@
 
 ### Ver 8 sj
 25.9.22 
+- ver8 minimal https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64|a5ec37e037f240f799832a3adec4c860
+- ver8 with 688 https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64|90cb26627fc44a789cd6cd08ffa07c82
 
-![image](https://user-images.githubusercontent.com/58069246/192126604-1141da1a-e04b-46fa-b32c-d039d9aa44a2.png)
-
-
-24.9.22 wip... https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64|a5ec37e037f240f799832a3adec4c860
+24.9.22 wip... 
 
 ### more... Craig Jones  
 What can I say, I have finished a few projects this week!
