@@ -87,4 +87,7 @@ LOOP FOREVER
   v
 END LOOP
 ```
+## HW; 
+- CJ's work https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
+- SJ's work https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1%7Cc5e3f76b1960488e92af095fc1e68dca
 
