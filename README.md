@@ -13,84 +13,42 @@ Goal...use with MINT and ASM code...
 
 
 
-##
-```
-                            +---------------------------+
-                            |                           |
-                            |  Load values 1 and 1      |
-                            |  into HL and DE registers |
-                            |                           |
-                            +-------------+-------------+
-                                         |
-                                         |
-                            +------------v-------------+
-                            |                           |
-                            |  Call pushData subroutine |
-                            |  with HL as argument      |
-                            |                           |
-                            +-------------+-------------+
-                                         |
-                                         |
-                            +------------v-------------+
-                            |                           |
-                            |  Call pushData subroutine |
-                            |  with DE as argument      |
-                            |                           |
-                            +-------------+-------------+
-                                         |
-                                         |
-                            +------------v-------------+
-                            |                           |
-                            |  Load command for         |
-                            |  16-bit add operation     |
-                            |  into A                   |
-                            |                           |
-                            +-------------+-------------+
-                                         |
-                                         |
-                            +------------v-------------+
-                            |                           |
-                            |  Send command to FPU      |
-                            |  via command port         |
-                            |                           |
-                            +-------------+-------------+
-                                         |
-                                         |
-                            +------------v-------------+
-                            |                           |
-                            |  Call awaitResult         |
-                            |  subroutine               |
-                            |                           |
-                            +-------------+-------------+
-                                         |
-                                         |
-                            +------------v-------------+
-                            |                           |
-                            |  Call popData subroutine  |
-                            |                           |
-                            +-------------+-------------+
-                                         |
-                                         |
-                            +------------v-------------+
-                            |                           |
-                            |  Store result in          |
-                            |  RESULT memory location   |
-                            |                           |
-                            +-------------+-------------+
-                                         |
-                                         |
-                            +------------v-------------+
-                            |                           |
-                            |  Wait here                |
-                            |                           |
-                            +-------------+-------------+
-                                         |
-                                         |
-                            +------------v-------------+
-                            |                           |
-                            |  Jump to start            |
-                            |                           |
-                            +---------------------------+
+## 9511 
+```       +---------------+
+       |               |
+       v               |
+  start +------------> |
+       |               |
+       |               v
+       |          while (1)
+       |               |
+       |               v
+       |          arg1 = 1
+       |          arg2 = 1
+       |               |
+       |               v
+       |        pushData(arg1)
+       |               |
+       |               v
+       |        pushData(arg2)
+       |               |
+       |               v
+       |       command = SADD
+       |       outb(COMMAND_PORT, command)
+       |               |
+       |               v
+       |       awaitResult()
+       |               |
+       |               v
+       |       result = popData()
+       |               |
+       |               v
+       | *((short*) 0x900) = result
+       |               |
+       |               v
+       |       return 0
+       |               |
+       +---------------+
 ```
 
 
