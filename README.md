@@ -1,7 +1,4 @@
-# (A_rithmetic P_rocessing U_nit) AM9511 + (S_erial) MC6850
-
-## "I played with it, Craig perfected it...John helped as well...thanks!"
-
+# tec-APUS   (A_rithmetic P_rocessing U_nit) AM9511 + (S_erial) MC6850
 
 ![mathsymbols](https://user-images.githubusercontent.com/58069246/171838135-cd012e8d-3afc-4fee-a1ad-d262325995d7.png)
 
@@ -10,6 +7,7 @@
 
 
 ## WIKI
+- "I played with it, Craig perfected it...John helped as well...thanks!"
 - https://github.com/SteveJustin1963/tec-APUS/wiki
 
 
