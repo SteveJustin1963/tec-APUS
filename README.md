@@ -88,6 +88,8 @@ END LOOP
 ```
 ## HW; 
 ## CJ's work 
+developed two PCBs
+
 - https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 - https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/SC-APU-R1.pdf
 - https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/SCSerial10Schematic.pdf
@@ -98,6 +100,8 @@ END LOOP
 
 
 ## SJ's work 
+combined into one small PCB
+
 - https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1%7Cc5e3f76b1960488e92af095fc1e68dca
 - 
 ![image](https://user-images.githubusercontent.com/58069246/210191831-d5100c9a-1334-4b7c-b8c3-dd557def537f.png)
