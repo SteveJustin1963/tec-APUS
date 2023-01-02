@@ -4,11 +4,95 @@
 
 
 
-(A_rithmetic P_rocessing U_nit) AM9511 + (S_erial) MC6850
- 
- Goal...use with MINT and ASM code...
+# (A_rithmetic P_rocessing U_nit) AM9511 + (S_erial) MC6850
+
+Goal...use with MINT and ASM code...
 
 "I played with it, Craig perfected it...John helped as well...thanks!"
+
+
+
+
+##
+```
+                            +---------------------------+
+                            |                           |
+                            |  Load values 1 and 1      |
+                            |  into HL and DE registers |
+                            |                           |
+                            +-------------+-------------+
+                                         |
+                                         |
+                            +------------v-------------+
+                            |                           |
+                            |  Call pushData subroutine |
+                            |  with HL as argument      |
+                            |                           |
+                            +-------------+-------------+
+                                         |
+                                         |
+                            +------------v-------------+
+                            |                           |
+                            |  Call pushData subroutine |
+                            |  with DE as argument      |
+                            |                           |
+                            +-------------+-------------+
+                                         |
+                                         |
+                            +------------v-------------+
+                            |                           |
+                            |  Load command for         |
+                            |  16-bit add operation     |
+                            |  into A                   |
+                            |                           |
+                            +-------------+-------------+
+                                         |
+                                         |
+                            +------------v-------------+
+                            |                           |
+                            |  Send command to FPU      |
+                            |  via command port         |
+                            |                           |
+                            +-------------+-------------+
+                                         |
+                                         |
+                            +------------v-------------+
+                            |                           |
+                            |  Call awaitResult         |
+                            |  subroutine               |
+                            |                           |
+                            +-------------+-------------+
+                                         |
+                                         |
+                            +------------v-------------+
+                            |                           |
+                            |  Call popData subroutine  |
+                            |                           |
+                            +-------------+-------------+
+                                         |
+                                         |
+                            +------------v-------------+
+                            |                           |
+                            |  Store result in          |
+                            |  RESULT memory location   |
+                            |                           |
+                            +-------------+-------------+
+                                         |
+                                         |
+                            +------------v-------------+
+                            |                           |
+                            |  Wait here                |
+                            |                           |
+                            +-------------+-------------+
+                                         |
+                                         |
+                            +------------v-------------+
+                            |                           |
+                            |  Jump to start            |
+                            |                           |
+                            +---------------------------+
+```
+
 
 
 ### Ver 8 sj
