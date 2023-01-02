@@ -1,19 +1,17 @@
-;
-;SC-APU.asm
+; code + Monitor
+; SC-APU.asm
 ;
 ; Craig Jones  January 2022
 
-; I found my code, It's not done but it will do the Add example with the APU or the library, 
+; "I found my code, It's not done but it will do the Add example with the APU or the library, 
 ; and should work on the tEC or the SC.
 ; The main reason to use the library is that it does the conversions, 
 ; from ASCII string to Floating point and vica-versa.
-
-
-;Ok, who wrote this crap code? oh it was me.😝
-;make it;
-;apuflag:    DS   1  
+; Ok, who wrote this crap code? oh it was me.😝
+; make it;
+; apuflag:    DS   1  
 ; reserve a byte to flag when the APU is being used $aa= apu else $00 = Use LLL library
-;change pnewline to CRLF    ;prints a CR LF
+; change pnewline to CRLF    ;prints a CR LF
 
 
 
