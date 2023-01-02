@@ -54,3 +54,37 @@
 
 ## MC6850
 
+```
+START
+  |
+  v
+INITIALIZE HARDWARE
+  |
+  v
+LOOP FOREVER
+  |
+  v
+  CHECK FOR CHARACTER IN SERIAL BUFFER
+  |
+  v
+  YES
+  |
+  v
+  READ CHARACTER FROM SERIAL BUFFER
+  |
+  v
+  PRINT "You typed: "
+  |
+  v
+  TRANSMIT CHARACTER
+  |
+  v
+  PRINT "\r\n"
+  |
+  v
+  NO
+  |
+  v
+END LOOP
+```
+
