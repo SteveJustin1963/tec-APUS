@@ -1,17 +1,11 @@
-; The program appears to be performing a series of arithmetic operations using a device called the AMD 9511 
-; floating-point unit (FPU). The FPU is a separate chip that is designed to perform high-precision 
-; floating-point arithmetic operations, which are commonly used in scientific and engineering applications.
-;
-; The program begins by loading the values 1 and 1 into the HL and DE registers, respectively. 
-; These values are then passed as arguments to the "pushData" subroutine, which stores them in the data port of the FPU. 
-; Next, the program sends the command for a 16-bit add operation to the FPU via the command port, and waits for the result
-; by calling the "awaitResult" subroutine. 
-; Finally, the program retrieves the result from the FPU's data port and stores it in the "RESULT" memory location. 
-; The program then enters a loop where it repeatedly performs these operations and displays the result.
+ 
 
 ; https://gist.github.com/jhlagado/1e13592eb960ebf51b1f03d92b513d65
 ; https://datasheet.octopart.com/C8231A-Intel-datasheet-38975267.pdf 
 ; https://www.hartetechnologies.com/manuals/AMD/AMD%209511%20FPU.pdf
+
+; coded by John Hardy
+
 
 DATA_PORT equ $10
 COMMAND_PORT equ $11
