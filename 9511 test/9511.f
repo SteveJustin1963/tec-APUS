@@ -1,8 +1,13 @@
 ; at terminal
 num, cr
+on stack
 num , cr
-op=108 \\add
-result
+on stack
+op=108 \\code for add
+on stack
+send code to 9511
+get result
+display result
 
 
 
