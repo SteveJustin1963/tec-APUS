@@ -88,6 +88,14 @@ LOOP FOREVER
 END LOOP
 ```
 ## HW; 
-- CJ's work https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
-- SJ's work https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1%7Cc5e3f76b1960488e92af095fc1e68dca
+## CJ's work https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
+
+![image](https://user-images.githubusercontent.com/58069246/210191787-76b410a8-015c-428c-a3b1-35388e360a57.png)
+![image](https://user-images.githubusercontent.com/58069246/210191877-ea986286-5a5e-45a8-9075-d14b98f471b5.png)
+
+
+
+## SJ's work https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1%7Cc5e3f76b1960488e92af095fc1e68dca
+![image](https://user-images.githubusercontent.com/58069246/210191831-d5100c9a-1334-4b7c-b8c3-dd557def537f.png)
+![image](https://user-images.githubusercontent.com/58069246/210191848-9db9e0ca-bc03-4901-93ea-28eeec302f86.png)
 
