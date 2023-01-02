@@ -1,6 +1,8 @@
-num
-num 
+; at terminal
+num, cr
+num , cr
 op=108 \\add
-convert op to command code
-out 
+result
+
+
 
