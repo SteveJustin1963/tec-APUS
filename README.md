@@ -6,9 +6,7 @@
 ![am9511 logo](https://user-images.githubusercontent.com/58069246/171838172-8b53f128-2d49-461c-bbdc-c0979105d213.png)
 
 
-## WIKI
-- "I played with it, Craig perfected it...John helped as well...thanks!"
-- https://github.com/SteveJustin1963/tec-APUS/wiki
+ 
 
 
 ## AM9511 
