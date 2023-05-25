@@ -3,84 +3,6 @@
  
 
 
-## AM9511 
-```       
-       +---------------+
-       |               |
-       v               |
-  start +------------> |
-       |               |
-       |               v
-       |          while (1)
-       |               |
-       |               v
-       |          arg1 = 1
-       |          arg2 = 1
-       |               |
-       |               v
-       |        pushData(arg1)
-       |               |
-       |               v
-       |        pushData(arg2)
-       |               |
-       |               v
-       |       command = SADD
-       |       outb(COMMAND_PORT, command)
-       |               |
-       |               v
-       |       awaitResult()
-       |               |
-       |               v
-       |       result = popData()
-       |               |
-       |               v
-       | *((short*) 0x900) = result
-       |               |
-       |               v
-       |       return 0
-       |               |
-       +---------------+
-```
-
-
-## MC6850
-
-```
-START
-  |
-  v
-INITIALIZE HARDWARE
-  |
-  v
-LOOP FOREVER
-  |
-  v
-  CHECK FOR CHARACTER IN SERIAL BUFFER
-  |
-  v
-  YES
-  |
-  v
-  READ CHARACTER FROM SERIAL BUFFER
-  |
-  v
-  PRINT "You typed: "
-  |
-  v
-  TRANSMIT CHARACTER
-  |
-  v
-  PRINT "\r\n"
-  |
-  v
-  NO
-  |
-  v
-END LOOP
- ```
-
-
-
 ## SJ's work 
 combined into one small PCB
 
@@ -237,6 +159,53 @@ See what's around. The RC2014 code looks promising. I might even start with the 
 ## Ver 0.7
 ![120720a](https://user-images.githubusercontent.com/58069246/171794754-10b2162e-6230-460b-b6b1-ebd805c65a23.png)
 
+
+## 9511 code
+- see CJ code, url ?
+- https://github.com/z88dk/z88dk/tree/master/libsrc/_DEVELOPMENT/math/float/am9511
+- https://easyeda.com/Little_Arc/MT3608
+
+
+
+## AM9511 software code loop
+
+```       
+       +---------------+
+       |               |
+       v               |
+  start +------------> |
+       |               |
+       |               v
+       |          while (1)
+       |               |
+       |               v
+       |          arg1 = 1
+       |          arg2 = 1
+       |               |
+       |               v
+       |        pushData(arg1)
+       |               |
+       |               v
+       |        pushData(arg2)
+       |               |
+       |               v
+       |       command = SADD
+       |       outb(COMMAND_PORT, command)
+       |               |
+       |               v
+       |       awaitResult()
+       |               |
+       |               v
+       |       result = popData()
+       |               |
+       |               v
+       | *((short*) 0x900) = result
+       |               |
+       |               v
+       |       return 0
+       |               |
+       +---------------+
+```
 ## 6850 code 
 Grant Searl solution. look at the loader in Searls msbasic rom. It sets up a sort of bios based on the 6850 serial io 
 ```
@@ -245,10 +214,48 @@ simple-echo.z80
 It echoes back what you sent to it. set your RAM and ROM values. downloaded as intel hex or binary. load hex into into rom with burner (covets to binary) or bin to EMU. clocks speed determines baud rate, a &.3728 Mhz clk gives standard baud rates 4800, 9600... The code divides this down  `/64 = 115,200` baud or `/16 =  460,800` baud, but a standard clock is not required to operate such as 4Mhz. simply adjust the terminal speed to aquire the right baud rate with Tera-Term. handles the control registers and with INT control, rx buffer sends a INT when the buffer is full. 
 
 
-## 9511 code
-- see CJ code, url ?
-- https://github.com/z88dk/z88dk/tree/master/libsrc/_DEVELOPMENT/math/float/am9511
-- https://easyeda.com/Little_Arc/MT3608
+## MC6850 software code loop
+
+```
+START
+  |
+  v
+INITIALIZE HARDWARE
+  |
+  v
+LOOP FOREVER
+  |
+  v
+  CHECK FOR CHARACTER IN SERIAL BUFFER
+  |
+  v
+  YES
+  |
+  v
+  READ CHARACTER FROM SERIAL BUFFER
+  |
+  v
+  PRINT "You typed: "
+  |
+  v
+  TRANSMIT CHARACTER
+  |
+  v
+  PRINT "\r\n"
+  |
+  v
+  NO
+  |
+  v
+END LOOP
+ ```
+
+
+
+
+
+
+
 
 
 ## IDE 
