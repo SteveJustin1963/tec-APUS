@@ -1,5 +1,8 @@
 # tec-APUS - AM9511 + MC6850 Integration
 
+document is a mess, working on it...
+
+
 ## Introduction
 This report discusses the integration of the AM9511 Arithmetic Processor Unit (APU) and the MC6850 Serial Communication Interface into the TEC-APUS project. The TEC-APUS project aims to enhance the mathematical processing capabilities of the TEC-1 computer by incorporating these components.
 
