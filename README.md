@@ -6,84 +6,18 @@ This report discusses the integration of the AM9511 Arithmetic Processor Unit (A
 The work related to the integration has been carried out by two individuals: SJ and CJ. SJ's work focuses on combining the components into a single small PCB, while CJ has developed two separate PCBs for the AM9511 APU and the MC6850 serial interface. This report provides an overview of their work, including schematic designs, images, and code snippets.
 
 
-## SJ's Work
-SJ has combined the AM9511 APU and MC6850 Serial Interface into a single small PCB. The PCB design can be accessed on EasyEDA using the following link: [SJ's PCB on EasyEDA](https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1%7Cc5e3f76b1960488e92af095fc1e68dca). The design allows for efficient integration of the components into the TEC-APUS project.
 
-Images of SJ's PCB design can be found at the following links:
 
-Image 1
-Image 2
-CJ's Work
+## CJ's Work
 CJ has developed two separate PCBs for the AM9511 APU and the MC6850 Serial Interface. The PCB designs and schematics can be accessed through the following GitHub repositories:
-
-AM9511 APU PCB
-MC6850 Serial Interface PCB
-MC6850 Serial Interface Schematic
-Images of CJ's PCB designs can be found at the following links:
-
-Image 1
-Image 2
-Ver 8 - SJ
-On September 25, 2022, SJ made updates to the Ver 8 design of the TEC-APUS PCB. The updated designs can be accessed on EasyEDA using the following links:
-
-Ver 8 Minimal Design
-Ver 8 with 688
-On September 24, 2022, SJ also mentioned that work was in progress for Ver 8.
-
-More Work by Craig Jones
-Craig Jones (CJ) has been actively working on several projects related to the TEC-APUS integration. Here are some highlights of his work:
-
-AM9511 APU: CJ has developed code for the AM9511 APU, including support for various operations. The code can be found in the following repository: AM9511 APU Code by CJ.
-Lawrence Livermore Labs Floating Point Library: CJ has put the Lawrence Livermore Labs Floating Point Library on GitHub, along with a demo program to run in ASM80. The library is available at LLL Floating Point Library. This library allows for computation of transcendental functions and can be compared to the results obtained from the APU.
-Schematic Updates: CJ has shared an updated schematic for the TEC-APUS, which can be accessed through the following link: TEC-APU Schematic by CJ. The schematic includes improvements and modifications for better integration and functionality.
-74HC688 Decoding: CJ suggests using a 74HC688 chip for IO decoding. This chip allows for comparison of two 8-bit inputs and outputs a signal when they match. This can be used for IO address decoding and selecting specific IO peripherals.
-Ver 1 - Craig Jones 9511 APU
-Craig Jones (CJ) has developed the Ver 1 of the 9511 APU. He mentions that the chip is a predecessor of the 8087 and is a stack processor capable of performing floating-point math operations. CJ has used code examples from John Hardy and has tested the APU at different frequencies. He also mentions using Phillip Stevens' Z80 conversion of the Lawrence Livermore Labs Floating Point Library.
-
-Images of the Ver 1 9511 APU design can be found at the following links:
-
-Image 1
-Image 2
-Decoding 74HC688
-CJ suggests using the 74HC688 chip for IO decoding. The chip compares two 8-bit inputs and outputs a low signal when they match. By utilizing the IO address lines and enabling it with signals such as MREQ, specific IO peripherals can be selected. CJ provides details on how to use the 74HC688 for IO address decoding and suggests using it in the TEC-APUS project.
-
-Lawrence Livermore Labs Floating Point Library
-CJ has put the Lawrence Livermore Labs Floating Point Library on GitHub, along with a demo program to run in ASM80. The library is designed to compute transcendental functions. CJ suggests using the library to compare the results obtained from the APU. The GitHub repository for the library can be accessed at LLL Floating Point Library.
-
-Schematic and Design Updates
-CJ has shared updated schematics and designs for the TEC-APUS project. The Ver 2 schematic can be found here, and subsequent versions (Ver 3, Ver 4, Ver 5, Ver 6, Ver 7) can be viewed in the respective images provided in the description.
-
-6850 Serial Integration
-CJ has also worked on integrating the MC6850 Serial Communication Interface into the project. He has developed a PCB for the 6850 serial interface, along with the necessary schematics and code. The GitHub repository for the 6850 serial interface PCB can be accessed at SC-6850 Serial.
-
-Images of CJ's 6850 serial interface board can be found at the following links:
-
-Image 1
-Image 2
-Image 3
-Image 4
-Code Examples
-Various code examples related to the AM9511 APU and MC6850 Serial Interface have been mentioned in the project updates. The code repositories provided by CJ and SJ contain the necessary code snippets for implementing the functionalities of these components.
-
-IDE and EPROM Emulator
-SJ has recommended using ASM80 and OshonSoft IDEs for development. Additionally, an EPROM emulator board developed by Ben is suggested for programming and testing the code on the TEC-APUS project.
-
-Wiring and Terminal
-To connect the TEC-APUS to a terminal, a USB-to-TTL cable is recommended. The cable provides the necessary TTL-to-USB bridging and allows for communication with the TEC-APUS. Terminal applications such as PuTTY or Tera Term can be used for interacting with the TEC-APUS.
-
-Conclusion
-The integration of the AM9511 APU and MC6850 Serial Interface into the TEC-APUS project has been progressing well. The contributions from SJ and CJ have led to the development of PCB designs, schematics, and code snippets to enable the integration of these components. The TEC-APUS project aims to enhance the mathematical processing capabilities of the TEC-1 computer, and the work done by SJ and CJ contributes significantly to this goal.
-
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 
-
-
-## SJ's work 
-combined into one small PCB
-
+## SJ's Work
+SJ has combined the AM9511 APU and MC6850 Serial Interface into a single small PCB.  The design allows for efficient integration of the components into the TEC-APUS project.
+The PCB design can be accessed on EasyEDA using the following link:
 - https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1%7Cc5e3f76b1960488e92af095fc1e68dca
 - 
 ![image](https://user-images.githubusercontent.com/58069246/210191831-d5100c9a-1334-4b7c-b8c3-dd557def537f.png)
