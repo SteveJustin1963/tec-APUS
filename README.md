@@ -6,8 +6,8 @@ This report discusses the integration of the AM9511 Arithmetic Processor Unit (A
 The work related to the integration has been carried out by two individuals: SJ and CJ. SJ's work focuses on combining the components into a single small PCB, while CJ has developed two separate PCBs for the AM9511 APU and the MC6850 serial interface. This report provides an overview of their work, including schematic designs, images, and code snippets.
 
 
-SJ's Work
-SJ has combined the AM9511 APU and MC6850 Serial Interface into a single small PCB. The PCB design can be accessed on EasyEDA using the following link: SJ's PCB on EasyEDA. The design allows for efficient integration of the components into the TEC-APUS project.
+## SJ's Work
+SJ has combined the AM9511 APU and MC6850 Serial Interface into a single small PCB. The PCB design can be accessed on EasyEDA using the following link: [SJ's PCB on EasyEDA](https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1%7Cc5e3f76b1960488e92af095fc1e68dca). The design allows for efficient integration of the components into the TEC-APUS project.
 
 Images of SJ's PCB design can be found at the following links:
 
