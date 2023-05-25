@@ -1,5 +1,5 @@
-# tec-APUS   (A_rithmetic P_rocessing U_nit) AM9511 + (S_erial) MC6850
-
+# tec-APUS = AM9511 + MC6850
+maths +serial
  
 
 
