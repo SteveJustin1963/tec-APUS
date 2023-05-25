@@ -1,7 +1,4 @@
-# tec-APUS = AM9511 + MC6850
-maths +serial
- 
-
+# tec-APUS - AM9511 + MC6850 Integration
 
  
 
@@ -80,7 +77,7 @@ LOOP FOREVER
   |
   v
 END LOOP
- 
+ ```
 
 
 
