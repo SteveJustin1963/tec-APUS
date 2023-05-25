@@ -8,10 +8,7 @@ The work related to the integration has been carried out by two individuals: SJ 
 
 
 
-## CJ's Work
-CJ has developed two separate PCBs for the AM9511 APU and the MC6850 Serial Interface. The PCB designs and schematics can be accessed through the following GitHub repositories:
-
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ 
 
 
 
@@ -23,8 +20,17 @@ The PCB design can be accessed on EasyEDA using the following link:
 ![image](https://user-images.githubusercontent.com/58069246/210191831-d5100c9a-1334-4b7c-b8c3-dd557def537f.png)
 ![image](https://user-images.githubusercontent.com/58069246/210191848-9db9e0ca-bc03-4901-93ea-28eeec302f86.png)
 
-## CJ's work 
-developed two PCBs
+
+ ### Ver 8 sj
+25.9.22 
+- ver8 minimal https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64|a5ec37e037f240f799832a3adec4c860
+- ver8 with 688 https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64|90cb26627fc44a789cd6cd08ffa07c82
+
+
+
+
+## CJ's Work
+CJ has developed two separate PCBs for the AM9511 APU and the MC6850 Serial Interface. 
 
 - https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 - https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/SC-APU-R1.pdf
@@ -35,32 +41,25 @@ developed two PCBs
 
  
  
- ### Ver 8 sj
-25.9.22 
-- ver8 minimal https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64|a5ec37e037f240f799832a3adec4c860
-- ver8 with 688 https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64|90cb26627fc44a789cd6cd08ffa07c82
 
-24.9.22 wip... 
+## update - What can I say, I have finished a few projects this week!
 
-### more... Craig Jones  
-What can I say, I have finished a few projects this week!
 This is a AM9511A Arithmetic Processor, it has featured here previously courtesy of Stephen Justin.
 It's a predecessor of the 8087 and is a stack processor that does, amongst other things, floating point math.
-Details are in the repo and there is plenty of stuff on the web about it, there is a RC2014 version by Philip Stevens that he did a couple of years ago, and he has also added support for it in the Z88DK environment.  https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
+Details are in the repo and there is plenty of stuff on the web about it, there is a RC2014 version by Philip Stevens that he did a couple of years ago, and he has also added support for it in the Z88DK environment. 
+
+https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 
 ![296695661_423670749725283_5916979048714754944_n](https://user-images.githubusercontent.com/58069246/184461064-931d17f9-8fb9-4191-a095-ee8816cb7aa0.jpg)
 
 ![278338782_717753043011436_242673502688909166_n](https://user-images.githubusercontent.com/58069246/192073149-5f4fcb76-75de-4c24-807d-1306948ee3c8.jpg)
 
 
-
-
-
-### decoding 74HC688
+## update decoding 74HC688
 Design is work in progress, a better io decode cct is needed, see Craigs notes below. Try proper decoding cct, eg 74HC688 (eg in the APU-RC2014 board), a 8 bit comparator as IO address decoder, can be decoded anywhere in the bottom 256 I/O addresses. 74HCT688 compares two 8-bit inputs and outputs an active low if both sets match. Enable is active low eg use MREQ to drive this. set inputs to address lines and to VCC, via a DIP switch dial in address you want your io peripheral to enabled on. Note interrupt modes of IOReq and M1 will be low at the same for an interrupt acknowledge, consider this when selecting io. There is a limit to the number of devices that the Z80 can drive, some systems need buffered address and data lines, not problem with CMOS processors which we all should be using. Put A0-A7 on the 'P' side, pull-up or pull-down the inputs on the 'Q' side, when they both match the one output goes low - decoding 1 address in 256. Leave off A0 and you decode 2 consecutive addresses in 256, and so on. https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 
 
-### 10.3.22 - Lawrence Livermore Labs Floating Point Library
+### update - Lawrence Livermore Labs Floating Point Library
 - https://github.com/feilipu/LLL-Floating-Point
  
 LLL code is used to compute transcendental functions and then you can compare to apu results. 
