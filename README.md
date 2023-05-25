@@ -80,17 +80,7 @@ LOOP FOREVER
   |
   v
 END LOOP
-```
-## HW; 
-## CJ's work 
-developed two PCBs
-
-- https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
-- https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/SC-APU-R1.pdf
-- https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/SCSerial10Schematic.pdf
-- 
-![image](https://user-images.githubusercontent.com/58069246/210191787-76b410a8-015c-428c-a3b1-35388e360a57.png)
-![image](https://user-images.githubusercontent.com/58069246/210191877-ea986286-5a5e-45a8-9075-d14b98f471b5.png)
+ 
 
 
 
@@ -102,8 +92,18 @@ combined into one small PCB
 ![image](https://user-images.githubusercontent.com/58069246/210191831-d5100c9a-1334-4b7c-b8c3-dd557def537f.png)
 ![image](https://user-images.githubusercontent.com/58069246/210191848-9db9e0ca-bc03-4901-93ea-28eeec302f86.png)
 
+## CJ's work 
+developed two PCBs
 
-\\\\\\\\\\
+- https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
+- https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/SC-APU-R1.pdf
+- https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/SCSerial10Schematic.pdf
+- 
+![image](https://user-images.githubusercontent.com/58069246/210191787-76b410a8-015c-428c-a3b1-35388e360a57.png)
+![image](https://user-images.githubusercontent.com/58069246/210191877-ea986286-5a5e-45a8-9075-d14b98f471b5.png)
+
+ 
+ 
  ### Ver 8 sj
 25.9.22 
 - ver8 minimal https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64|a5ec37e037f240f799832a3adec4c860
