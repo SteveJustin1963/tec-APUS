@@ -4,9 +4,9 @@ document is a mess, working on it...
 
 
 ## Introduction
-This report discusses the integration of the AM9511 Arithmetic Processor Unit (APU) and the MC6850 Serial Communication Interface into the TEC-APUS project. The TEC-APUS project aims to enhance the mathematical processing capabilities of the TEC-1 computer by incorporating these components.
+This report has been put together from notes and chat fragments that discusses the integration of the AM9511 Arithmetic Processor Unit (APU) and the MC6850 Serial Communication Interface into the TEC-APUS project. The TEC-APUS project aims to enhance the mathematical processing capabilities of the TEC-1 computer and Southern Cross Computer by incorporating these components.
 
-The work related to the integration has been carried out by two individuals: SJ and CJ. SJ's work focuses on combining the components into a single small PCB, while CJ has developed two separate PCBs for the AM9511 APU and the MC6850 serial interface. This report provides an overview of their work, including schematic designs, images, and code snippets. John Hardy also provided advice and test code.
+The work related to the integration has been carried out by two individuals: SJ and Craig Jones. SJ's work focuses on combining the components into a single small PCB, while CJ has developed two separate PCBs for the AM9511 APU and the MC6850 serial interface to work with both SBC. This report provides an overview of their work, including schematic designs, images, and code snippets. John Hardy also provided advice and test code.
 
 
 
@@ -15,8 +15,8 @@ The work related to the integration has been carried out by two individuals: SJ 
 My goal has been to combined the AM9511 APU and MC6850 Serial Interface into a single small PCB and called it APUS.  My design allows for efficient integration of the two components into a single TEC-APUS project.
 
 ## 6850 code 
-- ask JH, `simple-echo.z80` . It echoes back what you sent to it. set your RAM and ROM values. downloaded as intel hex or binary. load hex into into rom with burner (covets to binary) or bin to EMU. clocks speed determines baud rate, a &.3728 Mhz clk gives standard baud rates 4800, 9600... The code divides this down  `/64 = 115,200` baud or `/16 =  460,800` baud, but a standard clock is not required to operate such as 4Mhz. simply adjust the terminal speed to aquire the right baud rate with Tera-Term. handles the control registers and with INT control, rx buffer sends a INT when the buffer is full. 
-- Grant Searl solution. look at the loader in Searls msbasic rom. It sets up a sort of bios based on the 6850 serial io 
+- JH, `simple-echo.z80` . "...It echoes back what you sent to it. set your RAM and ROM values. downloaded as intel hex or binary. load hex into into rom with burner (covets to binary) or bin to EMU. clocks speed determines baud rate, a &.3728 Mhz clk gives standard baud rates 4800, 9600... The code divides this down  `/64 = 115,200` baud or `/16 =  460,800` baud, but a standard clock is not required to operate such as 4Mhz. simply adjust the terminal speed to aquire the right baud rate with Tera-Term. handles the control registers and with INT control, rx buffer sends a INT when the buffer is full. 
+- "see...Grant Searl solution. look at the loader in Searls msbasic rom. It sets up a sort of bios based on the 6850 serial io 
 
 ## 9511 code
 - ask JH and CJ for code help
@@ -44,7 +44,7 @@ The PCB design can be accessed on EasyEDA using the following link:
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/x1.jpg)
 
 - https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1|c5e3f76b1960488e92af095fc1e68dca
-- 2 errors on 6850 cct now corrected (see below)
+- 2 errors on 6850 cct now corrected (see below), thanks to CJ 
 - update pcb files for fix..done
 - last batch of pcbs had this error; easy to fix
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/errata-1.png)
@@ -86,8 +86,8 @@ The PCB design can be accessed on EasyEDA using the following link:
 
 ## ===================SJ end=========================
 
-## ===================CJ's Work=========================
-I asked CJ to help... CJ tested my board ver 8 but he subsequnetly developed his two separate PCBs for the AM9511 APU and the MC6850 Serial Interface. 
+## ===================Craig Jones Work=========================
+I asked CJ to help... CJ tested my board ver 8 but he subsequnetly developed his two separate PCBs for the AM9511 APU and the MC6850 Serial Interface, well done. 
 
 - https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 - https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/SC-APU-R1.pdf
@@ -99,7 +99,7 @@ I asked CJ to help... CJ tested my board ver 8 but he subsequnetly developed his
  
  
 
-## update - What can I say, I have finished a few projects this week!
+## update - "...What can I say, I have finished a few projects this week!
 
 This is a AM9511A Arithmetic Processor, it has featured here previously courtesy of Stephen Justin.
 It's a predecessor of the 8087 and is a stack processor that does, amongst other things, floating point math.
