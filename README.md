@@ -11,7 +11,7 @@ The work related to the integration has been carried out by two individuals: SJ 
 
 
 
-## ================== SJ's Work======================
+ 
 My goal has been to combined the AM9511 APU and MC6850 Serial Interface into a single small PCB and called it APUS.  My design allows for efficient integration of the two components into a single TEC-APUS project.
 
 ## 6850 code 
@@ -84,9 +84,9 @@ The PCB design can be accessed on EasyEDA using the following link:
 ## Ver 0.7
 ![120720a](https://user-images.githubusercontent.com/58069246/171794754-10b2162e-6230-460b-b6b1-ebd805c65a23.png)
 
-## ===================SJ end=========================
+ 
 
-## ===================Craig Jones Work=========================
+##  Craig Jones 
 I asked CJ to help... CJ tested my board ver 8 but he subsequnetly developed his two separate PCBs for the AM9511 APU and the MC6850 Serial Interface, well done. 
 
 - https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
