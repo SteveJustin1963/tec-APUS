@@ -296,6 +296,23 @@ Then run a terminal app to generate ascii text such as
 
 ## alternative parts
 - CM603 Gold / Ceramic Pravetz ACIA Interface Adapter 1MHz IC MC6850P Motorola. about $12
+
+## Iterate
+### More serria ports
+- MC68681 duel port
+
+### diff maths chip
+
+1. **Analog Devices ADSP-218x Series**: Analog Devices offers a range of 8-bit fixed-point DSPs in their ADSP-218x series. These DSPs are known for their versatility and cost-effectiveness. They come with a variety of peripherals and are suitable for applications like audio processing and simple control systems.
+
+2. **Texas Instruments MSP430**: While the MSP430 family is primarily known as a low-power microcontroller line, some models offer DSP-like capabilities, especially in the MSP430FR2xx and MSP430FR4xx series. They are cost-effective and can perform basic DSP operations for applications with tight power constraints.
+
+3. **Renesas RL78/F13**: Renesas offers the RL78/F13 series of microcontrollers with DSP instructions and features. These microcontrollers are cost-effective and suitable for various control and signal processing applications.
+
+4. **Silicon Labs EFM8 and EFR32 Series**: Silicon Labs offers the EFM8 and EFR32 series of microcontrollers, which include DSP instructions. These microcontrollers are designed for cost-sensitive applications and can perform basic signal processing tasks.
+
+5. **Custom FPGA or CPLD Solution**: If you have specific DSP requirements, you might consider using an FPGA or CPLD (Complex Programmable Logic Device) and creating a custom digital signal processing solution tailored to your needs. This approach offers flexibility but requires expertise in FPGA/CPLD design.
+
  
 
 ## what other solutions are there....other io ports for the tec-1
