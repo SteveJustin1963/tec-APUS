@@ -15,22 +15,18 @@ This report provides an overview of their work, including schematic designs, ima
 - "see...Grant Searl solution. look at the loader in Searls msbasic rom. It sets up a sort of bios based on the 6850 serial io 
 
 ## 9511 code
-- ask JH and CJ for code help
-- other urls ?
 - https://github.com/z88dk/z88dk/tree/master/libsrc/_DEVELOPMENT/math/float/am9511
 - https://easyeda.com/Little_Arc/MT3608
 
 
 ## HW
-The PCB design can be accessed on EasyEDA using the following link:
 - https://easyeda.com/editor#id=8384393150b147a79c794b78886917d1%7Cc5e3f76b1960488e92af095fc1e68dca
-- 
+
 ![image](https://user-images.githubusercontent.com/58069246/210191831-d5100c9a-1334-4b7c-b8c3-dd557def537f.png)
 ![image](https://user-images.githubusercontent.com/58069246/210191848-9db9e0ca-bc03-4901-93ea-28eeec302f86.png)
 
 
 ## SJ Ver 8
-25.9.22 
 - ver8 minimal https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64|a5ec37e037f240f799832a3adec4c860
 - ver8 with 688 https://easyeda.com/editor#id=ace1308a3daa441a8ffa8288a8463d64|90cb26627fc44a789cd6cd08ffa07c82
  
@@ -41,12 +37,12 @@ developed his two separate PCBs for the AM9511 APU and the MC6850 Serial Interfa
 - https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 - https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/SC-APU-R1.pdf
 - https://github.com/SteveJustin1963/tec-APUS/blob/master/schem/SCSerial10Schematic.pdf
-- 
+ 
 ![image](https://user-images.githubusercontent.com/58069246/210191787-76b410a8-015c-428c-a3b1-35388e360a57.png)
 ![image](https://user-images.githubusercontent.com/58069246/210191877-ea986286-5a5e-45a8-9075-d14b98f471b5.png)
 
  
- https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
+https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 
 ![296695661_423670749725283_5916979048714754944_n](https://user-images.githubusercontent.com/58069246/184461064-931d17f9-8fb9-4191-a095-ee8816cb7aa0.jpg)
 
@@ -54,11 +50,11 @@ developed his two separate PCBs for the AM9511 APU and the MC6850 Serial Interfa
 
 
 ## update decoding 74HC688
-. https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
+https://github.com/crsjones/Southern-Cross-Computer-z80/tree/main/SC-APU
 
 
 ## update - Lawrence Livermore Labs Floating Point Library
-- https://github.com/feilipu/LLL-Floating-Point
+https://github.com/feilipu/LLL-Floating-Point
  
 LLL code is used to compute transcendental functions and then you can compare to apu results. 
 
