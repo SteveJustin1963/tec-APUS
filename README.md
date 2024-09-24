@@ -1,6 +1,6 @@
 # tec-APUS - AM9511 + MC6850 Integration
 
-My goal has been to combined the AM9511 APU and MC6850 Serial Interface into a single small PCB and called it APUS.  My design allows for efficient integration of the two components into a single TEC-APUS project. The TEC-APUS project aims to enhance the mathematical processing capabilities of the TEC-1 computer and Southern Cross Computer by incorporating these components.
+My goal has been to combine the AM9511 APU and MC6850 Serial Interface into a single small PCB and called it APUS.  My design allows for efficient integration of the two components into a single TEC-APUS project. The TEC-APUS project aims to enhance the mathematical processing capabilities of the TEC-1 computer and Southern Cross Computer by incorporating these components.
 
 work carried out by SJ and Craig Jones. SJ's work focuses on combining the components into a single small PCB, while CJ has developed two separate PCBs for the AM9511 APU and the MC6850 serial interface to work with both SBC. 
 This report provides an overview of their work, including schematic designs, images, and code snippets. John Hardy also provided advice and test code.
@@ -11,7 +11,7 @@ This report provides an overview of their work, including schematic designs, ima
  
 
 ## 6850 code 
-- JH, `simple-echo.z80` . "...It echoes back what you sent to it. set your RAM and ROM values. downloaded as intel hex or binary. load hex into into rom with burner (covets to binary) or bin to EMU. clocks speed determines baud rate, a &.3728 Mhz clk gives standard baud rates 4800, 9600... The code divides this down  `/64 = 115,200` baud or `/16 =  460,800` baud, but a standard clock is not required to operate such as 4Mhz. simply adjust the terminal speed to aquire the right baud rate with Tera-Term. handles the control registers and with INT control, rx buffer sends a INT when the buffer is full. 
+- JH, `simple-echo.z80` . "...It echoes back what you sent to it. set your RAM and ROM values. downloaded as intel hex or binary. load hex into rom with burner (covets to binary) or bin to EMU. clocks speed determines baud rate, a &.3728 Mhz clk gives standard baud rates 4800, 9600... The code divides this down  `/64 = 115,200` baud or `/16 =  460,800` baud, but a standard clock is not required to operate such as 4Mhz. simply adjust the terminal speed to acquire the right baud rate with Tera-Term. handles the control registers and with INT control, rx buffer sends a INT when the buffer is full. 
 - "see...Grant Searl solution. look at the loader in Searls msbasic rom. It sets up a sort of bios based on the 6850 serial io 
 
 ## 9511 code
