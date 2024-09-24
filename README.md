@@ -2,7 +2,7 @@
 
 My goal has been to combine the AM9511 APU and MC6850 Serial Interface into a single small PCB and called it APUS.  My design allows for efficient integration of the two components into a single TEC-APUS project. The TEC-APUS project aims to enhance the mathematical processing capabilities of the TEC-1 computer and Southern Cross Computer by incorporating these components.
 
-work carried out by SJ and Craig Jones. SJ's work focuses on combining the components into a single small PCB, while CJ has developed two separate PCBs for the AM9511 APU and the MC6850 serial interface to work with both SBC and TEC1 with supporting software.
+work carried out by SJ and Craig Jones. SJ's work focuses on combining the components into a single small PCB, while CJ has developed two separate PCBs for the AM9511 APU and the MC6850 serial interface to work with both the SBC and TEC1 with supporting software.
 
 This report provides an overview of their work, including schematic designs, images, and code snippets. John Hardy also provided advice and test code.
 
