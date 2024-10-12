@@ -61,74 +61,50 @@ START
 ///////////////////////////
 
 #10 d!
-#11 c !
-#12 s !
+#11 c!
+#12 s!
 #80 b!
-#1E e !
+#1E e!
 #6C a!
 
-// Variables
-:R 0 0 ;  
-// 16-bit R storage (high and low)
-:E 0 ;     
-// 8-bit Estorage
+:R 0 0 ;
+:E 0 ;
 
-// Iialize arguments
 :I
-  1 a !  
-// Set arg1 to 1
-  1 b !  
-// Set arg2 to 1
+  1 a!
+  1 b!
 ;
 
-// S arguments in FPU
 :S
-  a d/O      
-// Push arg1 lower byte
-  a } d/O    
-// Push arg1 higher byte (shift right for high byte)
-  b d/O      
-// Push arg2 lower byte
-  b } d/O    
-// Push arg2 higher byte (shift right for high byte)
+  a d/O
+  a } d/O
+  b d/O
+  b } d/O
 ;
 
-// Send A command to FPU
 :A
-  ac /O
+  a c/O
 ;
 
-// W until FPU is not busy
 :W
-  /U ( s /I b& /W )  
-// Loop until bbit is clear
+  /U ( s /I b& /W )
 ;
 
-// S any Ecode
 :O
-  s /I e & { E!  
-// Mask status, shift left, S
+  s /I e & { E!
 ;
 
-// P R from FPU and S it
 :P
-  d/I l !      
-// Get lower byte
-  d/I h !      
-// Get higher byte
-  h 8 { l + R !    
-// Combine bytes (shift left high byte) and S in R
+  d/I l!
+  d/I h!
+  h 8 { l + R!
 ;
 
-// Main program
 :T
-  I S A W EP  
-// Execute main logic
-  /U ( /K )  
-// InfIe W for key input
+  I S A W E P
+  /U ( /K )
 ;
 
-// Run the program
 T
 
 
