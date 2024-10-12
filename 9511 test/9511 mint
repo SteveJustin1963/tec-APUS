@@ -69,41 +69,13 @@ START
 
 :R 0 0 ;
 :E 0 ;
-
-:I
-  1 a!
-  1 b!
-;
-
-:S
-  a d/O
-  a } d/O
-  b d/O
-  b } d/O
-;
-
-:A
-  a c/O
-;
-
-:W
-  /U ( s /I b& /W )
-;
-
-:O
-  s /I e & { E!
-;
-
-:P
-  d/I l!
-  d/I h!
-  h 8 { l + R!
-;
-
-:T
-  I S A W E P
-  /U ( /K )
-;
+:I 1 a! 1 b! ;
+:S a d/O a } d/O b d/O b } d/O ;
+:A a c/O ;
+:W /U ( s /I b& /W ) ;
+:O s /I e & { E! ;
+:P d/I l! d/I h! h 8 { l + R! ;
+:T I S A W E P /U ( /K ) ;
 
 T
 
