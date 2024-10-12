@@ -200,3 +200,144 @@ SIGNON2:       .BYTE     CR,LF
                .BYTE     "Cold or warm start (C or W)? ",0
               
 .END
+
+
+
+
+////////////////////////////////////////////////
+
+//mint 2
+// Constants
+#3F SER_BUFSIZE !  // Set serial buffer size to 63 (3F in hex)
+#30 SER_FULLSIZE !  // Set full size threshold to 48 (30 in hex)
+5 SER_EMPTYSIZE !  // Set empty size threshold to 5
+
+#D6 RTS_HIGH !  // Set RTS high value to D6 hex
+#96 RTS_LOW !  // Set RTS low value to 96 hex
+
+#2000 serBuf !  // Set serial buffer address to 2000 hex
+serBuf SER_BUFSIZE + serInPtr !  // Calculate and set serInPtr address
+serInPtr 2 + serRdPtr !  // Calculate and set serRdPtr address
+serRdPtr 2 + serBufUsed !  // Calculate and set serBufUsed address
+serBufUsed 1 + basicStarted !  // Calculate and set basicStarted address
+#20ED TEMPSTACK !  // Set temporary stack address to 20ED hex
+
+#D CR !  // Set carriage return ASCII value
+#A LF !  // Set line feed ASCII value
+#C CS !  // Set clear screen ASCII value
+
+// Initialize
+:INIT
+  TEMPSTACK SP !  // Set stack pointer to TEMPSTACK
+  serBuf serInPtr !  // Initialize serInPtr
+  serBuf serRdPtr !  // Initialize serRdPtr
+  0 serBufUsed !  // Initialize serBufUsed to 0
+  RTS_LOW #80 /O  // Output RTS_LOW to port 80 hex
+  /T INT !  // Enable interrupts
+  SIGNON1 PRINT  // Print SIGNON1 message
+  basicStarted /K  // Get value of basicStarted
+  `Y` = (  // If basicStarted equals 'Y'
+    SIGNON2 PRINT  // Print SIGNON2 message
+    CORW  // Call CORW function
+  ) /E (  // Else
+    COLDSTART  // Call COLDSTART function
+  )
+;
+
+// Print function
+:PRINT
+  /U (  // Unlimited loop
+    " 0 = /W  // Break if character is 0
+    /C  // Print character
+    1+  // Move to next character
+  )
+;
+
+// Cold/Warm start choice
+:CORW
+  /U (  // Unlimited loop
+    /K  // Get keyboard input
+    #DF &  // Convert to uppercase (AND with 11011111 binary)
+    " `C` = (  // If input is 'C'
+      /C CR /C LF /C  // Print newline
+      COLDSTART  // Call COLDSTART
+    ) /E (  // Else
+      `W` = (  // If input is 'W'
+        /C CR /C LF /C  // Print newline
+        #0153 /X  // Execute code at 0153 hex (BASIC warm start)
+      )
+    )
+  )
+;
+
+// Cold start function
+:COLDSTART
+  `Y` basicStarted !  // Set basicStarted flag to 'Y'
+  #0150 /X  // Execute code at 0150 hex (BASIC cold start)
+;
+
+// Serial interrupt handler
+:serialInt
+  #80 /I 1 & (  // Check if interrupt is due to read buffer full
+    #81 /I  // Read character from port 81 hex
+    serBufUsed / SER_BUFSIZE < (  // If buffer is not full
+      serInPtr / "  // Duplicate current serInPtr
+      1+ #FF &  // Increment and mask with FF
+      (serBuf SER_BUFSIZE +) #FF & = (  // If at end of buffer
+        serBuf  // Wrap to start of buffer
+      )
+      serInPtr !  // Update serInPtr
+      serInPtr / !  // Store character in buffer
+      serBufUsed / 1+ serBufUsed !  // Increment serBufUsed
+      SER_FULLSIZE = (  // If buffer is full
+        RTS_HIGH #80 /O  // Set RTS high
+      )
+    )
+  )
+;
+
+// Receive character function
+:RXA
+  /U (  // Unlimited loop
+    serBufUsed / 0 > /W  // Wait until buffer has data
+    serRdPtr / "  // Duplicate current serRdPtr
+    1+ #FF &  // Increment and mask with FF
+    (serBuf SER_BUFSIZE +) #FF & = (  // If at end of buffer
+      serBuf  // Wrap to start of buffer
+    )
+    serRdPtr !  // Update serRdPtr
+    serBufUsed / 1- serBufUsed !  // Decrement serBufUsed
+    SER_EMPTYSIZE = (  // If buffer is near empty
+      RTS_LOW #80 /O  // Set RTS low
+    )
+    serRdPtr / /K  // Return character from buffer
+  )
+;
+
+// Transmit character function
+:TXA
+  /U (  // Unlimited loop
+    #80 /I 2 & /W  // Wait until transmit buffer is empty
+    #81 /O  // Output character to port 81 hex
+  )
+;
+
+// Check for character function
+:CKINCHAR
+  serBufUsed / 0 >  // Return true if buffer has data
+;
+
+// Sign-on messages
+:SIGNON1
+  CS /C  // Clear screen
+  `Z80 SBC By Grant Searle` CR /C LF /C
+;
+
+:SIGNON2
+  CR /C LF /C
+  `Cold or warm start (C or W)? `
+;
+
+// Main program
+INIT  // Call initialization function
+/////////////////////////////////////////////////////////////////
