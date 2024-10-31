@@ -146,7 +146,15 @@ we need to
 ```
 
 ### custom
-i have a cusom connection port on the top right of my tec1-d . i have wired as such
+i have a cusom connection port on the top right of my tec1-d . 
+note the hole on end of board
 
 ![image](https://github.com/user-attachments/assets/13f3907e-2836-4eba-b23a-412243bed83e)
+
+underside
+
+![image](https://github.com/user-attachments/assets/ea0e532a-b3dc-42ff-952c-04bb87454830)
+
+
+
 
