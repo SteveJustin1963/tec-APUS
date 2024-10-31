@@ -97,156 +97,51 @@ See what's around. The RC2014 code looks promising. I might even start with the 
 ![](https://github.com/SteveJustin1963/tec-APUS/blob/master/pics/271732275_4710190225767426_3493303551305514214_n.jpg)
 
 
-## AM9511 software code loop
+   
 
-```       
-       +---------------+
-       |               |
-       v               |
-  start +------------> |
-       |               |
-       |               v
-       |          while (1)
-       |               |
-       |               v
-       |          arg1 = 1
-       |          arg2 = 1
-       |               |
-       |               v
-       |        pushData(arg1)
-       |               |
-       |               v
-       |        pushData(arg2)
-       |               |
-       |               v
-       |       command = SADD
-       |       outb(COMMAND_PORT, command)
-       |               |
-       |               v
-       |       awaitResult()
-       |               |
-       |               v
-       |       result = popData()
-       |               |
-       |               v
-       | *((short*) 0x900) = result
-       |               |
-       |               v
-       |       return 0
-       |               |
-       +---------------+
-```
 
-## MC6850 software code loop
+
+###   AM9511 with MINT
+ MINT math is imited, 9511  adds ability like floating-point , trigonometric ,  logarithms ... more efficient than using software in MINT.
+we need to 
+- 9511 uses specific I/O ports so MINT can read/write via these ports
+- MINT routines to send commands and data to the 9511 and retrieve results
 
 ```
-START
-  |
-  v
-INITIALIZE HARDWARE
-  |
-  v
-LOOP FOREVER
-  |
-  v
-  CHECK FOR CHARACTER IN SERIAL BUFFER
-  |
-  v
-  YES
-  |
-  v
-  READ CHARACTER FROM SERIAL BUFFER
-  |
-  v
-  PRINT "You typed: "
-  |
-  v
-  TRANSMIT CHARACTER
-  |
-  v
-  PRINT "\r\n"
-  |
-  v
-  NO
-  |
-  v
-END LOOP
- ```
-## =======================end cj============================
+// define ports
+#10 p! // Data port at 0x10
+#11 q! // Status port at 0x11
 
+// Write function 
+:W p /O ; // Write to data port
 
+// Read function
+:R p /I ; // Read from data port
 
+// Check status
+:S q /I ; // Read status port
 
-### Integration of AM9511 with MINT
-If you add an AM9511 (Arithmetic Processing Unit) to MINT, it can greatly enhance the capabilities of your system by offloading complex mathematical operations like floating-point arithmetic, trigonometric functions, and logarithms to the AM9511, which is more efficient than using software-based calculations in MINT. Here's how you could integrate and utilize the AM9511 with MINT:
+// Multiply using AM9511
+:M 
+  2 W     // Send multiply command (0x02)
+  S 0 = ( // Wait for ready status
+    S 0 = (S 0 =())
+  )
+  W       // Write first operand
+  S 0 = ( // Wait for ready
+    S 0 = (S 0 =())
+  )
+  W       // Write second operand
+  S 0 = ( // Wait for ready
+    S 0 = (S 0 =())
+  )
+  R       // Read result
+;
 
-
-1. **Set Up Communication**:
-   - The AM9511 communicates with the CPU through specific I/O ports. You’ll need to set up these ports in MINT to read from and write to the AM9511.
-
-2. **Define MINT Routines to Access the AM9511**:
-   - Write MINT routines to send commands and data to the AM9511 and retrieve results.
-
-### Example MINT Code for Using the AM9511
-
-#### Step 1: Set Up the I/O Ports
-
-```mint
-VAR PORT-DATA   // Define the data port for communication
-VAR PORT-STATUS // Define the status port to check the AM9511 state
-
-:PORT-DATA 0x10 PORT-DATA !     // Assume 0x10 as data port
-:PORT-STATUS 0x11 PORT-STATUS ! // Assume 0x11 as status port
-```
-
-- **`PORT-DATA`** and **`PORT-STATUS`**: These are placeholders for the ports used to communicate with the AM9511. Adjust these based on your actual setup.
-
-#### Step 2: Define MINT Routines for Communication
-
-```mint
-:WRITE-TO-AM9511 ( n -- )
-    /A PORT-DATA ! ;          // Write a value to the AM9511
-
-:READ-FROM-AM9511 ( -- n )
-    PORT-DATA ? /R ;          // Read a value from the AM9511
-
-:CHECK-STATUS ( -- n )
-    PORT-STATUS ? /R ;        // Check the status of the AM9511
-```
-
-- **`WRITE-TO-AM9511`**: Sends a value to the AM9511 through the data port.
-- **`READ-FROM-AM9511`**: Reads a value from the AM9511 through the data port.
-- **`CHECK-STATUS`**: Reads the status port to determine if the AM9511 is ready or busy.
-
-#### Step 3: Implement Mathematical Operations
-
-Here’s an example of how to use the AM9511 for a multiplication operation:
-
-```mint
-:MULTIPLY ( a b -- result )
-    0x02 WRITE-TO-AM9511      // Send multiplication opcode (adjust based on AM9511’s opcodes)
-    /S                        // Wait until the AM9511 is ready
-    WRITE-TO-AM9511           // Send the first operand
-    /S
-    WRITE-TO-AM9511           // Send the second operand
-    /S
-    READ-FROM-AM9511 ;        // Retrieve the result
-```
-
-- **`MULTIPLY`**: Sends the multiplication opcode and the operands to the AM9511. The `/S` waits until the status port indicates that the AM9511 is ready to proceed before sending/receiving more data.
-
-### Example Usage
-
-```mint
-:CALCULATE
-    10 5 MULTIPLY /K          // Multiply 10 by 5 using the AM9511 and display the result
+// Test calculation function
+:T
+  `Testing AM9511 multiply:` /N
+  10 5 M . /N // Multiply 10 by 5 and print result
 ;
 ```
-
-### Advantages of Integrating AM9511 with MINT
-
-1. **Performance**: The AM9511 can perform arithmetic operations faster than MINT’s software-based solutions, especially for complex operations like floating-point math.
-2. **Offloading Calculations**: Using the AM9511 allows MINT to handle other tasks while the arithmetic unit processes calculations in parallel.
-3. **Precision**: The AM9511 supports higher precision for mathematical operations, enhancing the capabilities of your MINT programs.
-
-/////////////
+ 
