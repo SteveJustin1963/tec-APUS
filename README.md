@@ -144,4 +144,9 @@ we need to
   10 5 M . /N // Multiply 10 by 5 and print result
 ;
 ```
- 
+
+### custom
+i have a cusom connection port on the top right of my tec1-d . i have wired as such
+
+![image](https://github.com/user-attachments/assets/13f3907e-2836-4eba-b23a-412243bed83e)
+
