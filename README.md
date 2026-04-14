@@ -160,3 +160,7 @@ underside
 # test
 - https://github.com/SteveJustin1963/TEC1-code/tree/main/2D_heat_equation
 - 
+# 6502
+- https://github.com/ceharris/am9511-6502
+
+  
